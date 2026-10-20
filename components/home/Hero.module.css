@@ -1,0 +1,13 @@
+.hero { padding: 3rem 0 2rem; }
+.headline { max-width: 14ch; margin: 0 0 1rem; font-size: clamp(2.5rem, 9vw, 5.5rem); line-height: 1; letter-spacing: -0.035em; }
+.promise { max-width: 36rem; margin: 0 0 1.5rem; font-size: 1.25rem; color: var(--color-muted); }
+.button {
+  display: inline-block;
+  padding: 0.75rem 1.4rem;
+  font-weight: 700;
+  color: var(--color-accent-contrast);
+  background: var(--color-accent);
+  border-radius: var(--radius);
+  text-decoration: none;
+}
+.button:hover { filter: brightness(1.1); }

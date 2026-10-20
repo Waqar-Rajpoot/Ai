@@ -1,38 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Tools for Everyday People
 
-## Getting Started
+A fully static Next.js site: a school, a publisher and a review desk for AI models.
+Every page and figure is written by hand, dated and sourced. See `AI_Tools.pdf` (Project Blueprint v3.1).
 
-First, run the development server:
+## Setup
 
 ```bash
+npm install
+npm install -D vitest
+cp .env.example .env.local   # then fill in the values
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Script | What it does |
+| --- | --- |
+| `npm run dev` | Start the dev server |
+| `npm run build` | Static export to `out/` |
+| `npm run typecheck` | `tsc --noEmit` (add: `"typecheck": "tsc --noEmit"`) |
+| `npm test` | Run the `lib/` tests (add: `"test": "vitest run"`) |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment variables
 
-## Learn More
+Read only through `lib/config/env.ts`. See `.env.example`.
 
-To learn more about Next.js, take a look at the following resources:
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | yes | Canonical URLs and sitemap |
+| `NEXT_PUBLIC_SITE_NAME` | yes | Logo, titles, footer |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | yes | Contact page |
+| `NEXT_PUBLIC_NEWSLETTER_ACTION_URL` | no | External newsletter signup form |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Folder structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+app/          Routes only. Pages compose components.
+components/   UI: layout/, shared/, home/ (more per feature in later phases)
+lib/          Pure, typed logic, data and config. Never imports components/ or app/.
+  config/     env.ts (only reader of process.env), siteConfig, navLinks, thresholds
+  shared/     levels, breadcrumbs, metadata, sitemap
+  pages/      Heading outlines of trust, legal and utility pages
+  home/       Home page copy
+types/        Shared types
+```
 
-## Deploy on Vercel
+Rules: components never hold calculation logic; `lib/` never imports from `components/` or `app/`;
+`app/` files import `lib/` only for metadata and static params.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Naming
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-git status 
-
+Components and component files `PascalCase`; logic files and functions `camelCase`;
+constants `UPPER_SNAKE_CASE`; types `PascalCase`; CSS Modules match their component;
+routes and content files `kebab-case`.

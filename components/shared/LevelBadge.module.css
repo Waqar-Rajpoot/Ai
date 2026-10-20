@@ -1,0 +1,25 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.15rem 0.65rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+}
+.badge::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--badge-color, var(--color-muted));
+}
+.badge[data-badge="1"] { --badge-color: #2f9e5b; }
+.badge[data-badge="2"] { --badge-color: #2f7fd1; }
+.badge[data-badge="3"] { --badge-color: #d98a1f; }
+.badge[data-badge="4"] { --badge-color: #c2452f; }
+.badge[data-badge="all-levels"] { --badge-color: var(--color-accent); }
+.badge[data-badge="trust"] { --badge-color: #8a63d2; }

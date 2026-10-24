@@ -1,0 +1,6 @@
+.nav { max-width: var(--site-width); margin: 0 auto; padding: 0.75rem 1.25rem 0; font-size: 0.875rem; }
+.list { display: flex; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; }
+.item { color: var(--color-muted); }
+.item + .item::before { content: "/"; padding: 0 0.5rem; color: var(--color-border); }
+.item a { color: var(--color-muted); }
+.item a:hover { color: var(--color-accent); }

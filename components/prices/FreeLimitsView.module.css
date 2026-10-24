@@ -1,0 +1,7 @@
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; margin: -1rem 0 1.5rem; color: var(--color-muted); }
+.prose { max-width: 46rem; margin: 0.25rem 0 0; }
+.blocks { display: grid; gap: 0 2rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); }
+.timeline { max-width: 46rem; margin: 0; padding: 0 0 0 1.25rem; border-left: 3px solid var(--color-border); list-style: none; }
+.change { position: relative; padding-bottom: 1rem; }
+.change::before { content: ""; position: absolute; left: -1.7rem; top: 0.55rem; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--color-accent); }
+.change p { margin: 0.1rem 0 0; }

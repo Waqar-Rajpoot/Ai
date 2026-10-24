@@ -1,0 +1,5 @@
+.list { max-width: 46rem; }
+.item { border-top: 1px solid var(--color-border); }
+.item:last-child { border-bottom: 1px solid var(--color-border); }
+.question { padding: 0.9rem 0; font-weight: 700; cursor: pointer; }
+.answer { margin: 0 0 1rem; color: var(--color-muted); }

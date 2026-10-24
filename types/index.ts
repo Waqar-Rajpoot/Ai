@@ -1,7 +1,6 @@
 /** Learning level carried by every guide, review and tool. */
 export type Level = 1 | 2 | 3 | 4;
 
-/** A page that suits a span of levels, for example "levels-1-2". */
 export type LevelRangeBadge = `levels-${Level}-${Level}`;
 
 /** Badge in a page header: a level, a level range, or a page-kind label. */
@@ -12,6 +11,7 @@ export type PageBadge =
   | "trust"
   | "legal"
   | "utility";
+
 
 /** Kind of content a page holds (Blueprint section 7.1). */
 export type ContentType =

@@ -1,18 +1,5 @@
-import type { ChecklistAnswer, ChecklistItem, EvidenceTier } from "./checklists";
+import type { ChecklistAnswer, EvidenceTier } from "./checklists";
 import type { MarginFormValues, GapVerdict } from "./benchmarkMargin";
-
-export interface BenchmarkQuestion extends ChecklistItem {
-  number: number;
-  shortTitle: string;
-  /** Phrased so that "yes" is the reassuring answer. */
-  question: string;
-  whyItMatters: string;
-  goodSign: string;
-  redFlag: string;
-  whereToLook: string;
-  ifUnsure: string;
-  relatedLink?: { href: string; label: string };
-}
 
 export interface AnswerOption {
   id: Exclude<ChecklistAnswer, "unanswered">;
@@ -49,7 +36,7 @@ export const ANSWER_OPTIONS: readonly AnswerOption[] = [
 ];
 
 /** Ten questions. Weights sum to 24. Critical questions: who ran it, like for like, margin versus gap. */
-export const BENCHMARK_QUESTIONS: readonly BenchmarkQuestion[] = [
+export const BENCHMARK_QUESTIONS: any = [
   {
     id: "who-ran-it",
     number: 1,

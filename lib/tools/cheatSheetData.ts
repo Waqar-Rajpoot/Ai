@@ -1,0 +1,296 @@
+import type { ChecklistGroup } from "./checklists";
+import { AGENT_CHECKLIST_STORAGE_KEY } from "./cheatSheetConstants";
+import type { CheatSheet } from "./cheatSheets";
+
+const AGENT_GROUPS: readonly ChecklistGroup[] = [
+  {
+    id: "ap-before",
+    title: "Before you connect anything",
+    summary: "Most agent mistakes start with access that was broader than the job needed.",
+    items: [
+      { id: "ap-define-job", priority: "essential", text: "I can describe in one sentence what the agent is for.", why: "A vague job leads to broad access and surprising behaviour.", how: "Write \"Sort my inbox into three folders\", not \"Help with email\"." },
+      { id: "ap-least-access", priority: "essential", text: "The agent has the least access that does the job, and read-only where possible.", why: "An agent can only damage what it can reach.", how: "Connect one folder or one mailbox first. Read every permission it asks for.", guide: { href: "/learn/power-user/mcp-and-connectors", label: "MCP and connectors" } },
+      { id: "ap-no-secrets", priority: "essential", text: "No passwords, keys or recovery codes sit in prompts, files or notes the agent can read.", why: "Anything an agent can read can end up in its output or in a tool call.", how: "Keep keys in environment variables or a secrets manager, and rotate any key that was pasted." },
+      { id: "ap-separate-account", priority: "recommended", text: "I test with a separate account or a sample folder before using real data.", why: "Mistakes on test data are free.", how: "Copy ten harmless files or create a test mailbox." },
+      { id: "ap-named-owner", priority: "recommended", text: "One named person owns the agent and its access.", why: "A job everyone shares is a job nobody does.", how: "Write the owner's name next to the agent in your tool list." },
+    ],
+  },
+  {
+    id: "ap-actions",
+    title: "Actions that need a person",
+    summary: "Some actions cannot be undone. A person should approve them.",
+    items: [
+      { id: "ap-approve-actions", priority: "essential", text: "A person approves anything that sends, pays, posts, publishes or deletes before it happens.", why: "Agents can misread a task, and a sent email cannot be unsent.", how: "Keep approval prompts on. Do not switch them off to save time." },
+      { id: "ap-spend-limit", priority: "essential", text: "Spending, usage and rate limits are set.", why: "A loop or a long task can run up a large bill.", how: "Set a monthly cap and an alert in the provider's billing settings." },
+      { id: "ap-no-irreversible", priority: "essential", text: "Deletes and overwrites are switched off, or go to a bin or backup first.", why: "A backup turns a disaster into an annoyance.", how: "Back up the folder, or give the agent copy access only." },
+    ],
+  },
+  {
+    id: "ap-untrusted",
+    title: "Untrusted content",
+    summary: "Web pages, emails and files can contain hidden instructions. This is called prompt injection.",
+    items: [
+      { id: "ap-untrusted-content", priority: "essential", text: "I treat web pages, emails, documents and tool results as untrusted, because instructions can hide in them.", why: "An agent can follow instructions planted in content it reads.", how: "Do not let an agent that holds sensitive data read unknown content unsupervised.", guide: { href: "/learn/expert/prompt-injection-agent-security", label: "Prompt injection and agent security" } },
+      { id: "ap-no-data-plus-web", priority: "essential", text: "An agent that can read private data cannot also send data to unknown destinations without approval.", why: "Reading plus sending is how data leaks.", how: "Use separate agents for private files and for browsing the web." },
+      { id: "ap-trusted-sources", priority: "recommended", text: "I allow only named websites and tools where the setup lets me.", why: "A short allow-list is easier to defend than the open web.", how: "List the three or four sites the job needs and block the rest." },
+      { id: "ap-trusted-connectors", priority: "recommended", text: "I install connectors and plug-ins only from makers I trust, and I check their permissions.", why: "A connector is code with access to your accounts.", how: "Check the publisher and what it can read and change." },
+    ],
+  },
+  {
+    id: "ap-watch",
+    title: "Watching and stopping",
+    summary: "You need to see what it did and be able to stop it quickly.",
+    items: [
+      { id: "ap-logs", priority: "essential", text: "I can see a log of what the agent did.", why: "Without a record you cannot find or fix a mistake.", how: "Turn on activity history, or have the agent write a summary of every action." },
+      { id: "ap-stop", priority: "essential", text: "I know how to stop the agent and revoke its access in under a minute.", why: "Speed matters when something goes wrong.", how: "Find the revoke or disconnect screen now, before you need it." },
+      { id: "ap-test-first", priority: "recommended", text: "I tested it on ten real tasks, including a few tricky ones, before trusting it.", why: "Agents fail in ways chatbots do not.", how: "Use the same method as your personal test set.", guide: { href: "/learn/power-user/build-your-own-ai-test-set", label: "Build your own AI test set" } },
+      { id: "ap-review-logs", priority: "recommended", text: "I review the log on a schedule, weekly at first.", why: "Small errors repeat quietly.", how: "Put a recurring reminder in your calendar." },
+    ],
+  },
+  {
+    id: "ap-after",
+    title: "When the job ends",
+    summary: "Access you forget about is access someone else can find.",
+    items: [
+      { id: "ap-revoke", priority: "essential", text: "When the job ends or someone leaves the team, I remove the agent's access the same day.", why: "Forgotten connections are an easy way in.", how: "Add AI connectors to your leaver and project-closing checklists." },
+      { id: "ap-rotate", priority: "recommended", text: "I rotate keys and tokens the agent has seen.", why: "A key that was exposed once stays risky.", how: "Create a new key, switch over, then delete the old one." },
+      { id: "ap-recheck-updates", priority: "recommended", text: "I re-check permissions after any update that adds features.", why: "Updates can add access you did not choose.", how: "Read the release notes and the permission screen." },
+    ],
+  },
+];
+
+/** The four sheets, in picker order. */
+export const CHEAT_SHEETS: readonly CheatSheet[] = [
+  {
+    id: "prompt-formula",
+    title: "Prompt formula cheat sheet",
+    shortTitle: "Prompt formula",
+    levels: [1],
+    whoFor: "Anyone who wants clearer answers from a chatbot.",
+    summary: "Five parts that turn a vague request into a clear one: role, task, context, format and limits.",
+    blocks: [
+      {
+        kind: "steps",
+        id: "five-parts",
+        heading: "The five parts",
+        intro: "You do not need all five every time. Add the ones your answer is missing.",
+        items: [
+          { title: "Role", detail: "Say who the AI should act as. Example: a patient maths tutor for a 14-year-old. It sets tone and level, and matters most for advice and writing." },
+          { title: "Task", detail: "Say what you want done, using one clear verb: summarise, compare, rewrite, quiz me, plan." },
+          { title: "Context", detail: "Give what the AI cannot guess: who it is for, your goal, background, or the text to work on. Remove private details first." },
+          { title: "Format", detail: "Say what the answer should look like: a table, five bullets, 150 words, plain English, a numbered plan." },
+          { title: "Limits", detail: "Say what to avoid or stay inside: a word count, topics to skip, \"use only the text I pasted\", \"say if you are unsure\"." },
+        ],
+      },
+      {
+        kind: "template",
+        id: "formula-template",
+        heading: "Fill-in prompt",
+        intro: "Fill in the boxes, check the preview, then copy it. Leave a box empty to keep that part as a reminder.",
+        text: "You are [ROLE].\n\nTask: [TASK]\n\nContext: [CONTEXT]\n\nFormat: [FORMAT]\n\nLimits: [LIMITS]",
+        longFields: ["TASK", "CONTEXT", "LIMITS"],
+      },
+      {
+        kind: "table",
+        id: "weak-vs-strong",
+        heading: "Weak prompt, better prompt",
+        columns: ["Weak", "Better", "What changed"],
+        rows: [
+          ["Help me with my essay.", "You are a writing tutor. Read the essay I paste below and list three ways to make the argument clearer. Do not rewrite it. Keep each point under 40 words.", "Role, task, format and limits added. The AI coaches instead of taking over."],
+          ["Tell me about taxes.", "Explain in plain English how a freelancer in my country usually pays tax on side income. List the questions I should ask an accountant. Say where the rules differ by country.", "A real situation, a clear output and an honest limit. It prepares you for a professional."],
+          ["Write an email.", "Write a polite email of under 120 words asking my landlord to fix a heater. Mention that I first reported it on Monday. Friendly but firm tone.", "Length, facts and tone are stated, so there is less to fix afterwards."],
+        ],
+      },
+      {
+        kind: "steps",
+        id: "follow-ups",
+        heading: "Follow-up phrases that work",
+        items: [
+          { title: "Make it shorter", detail: "Cuts length without starting again." },
+          { title: "Explain it as if I am new to this", detail: "Lowers the level and defines terms." },
+          { title: "Ask me questions before you answer", detail: "Lets the AI collect the context you forgot." },
+          { title: "What in this answer might be wrong, and how can I check it?", detail: "Surfaces weak points. It does not replace checking." },
+          { title: "Give me the strongest argument against this", detail: "Counters the tendency of chatbots to agree with you." },
+          { title: "Use only the text I pasted, and say if the answer is not in it", detail: "Reduces invented details when you work from a document." },
+        ],
+      },
+      {
+        kind: "steps",
+        id: "before-send",
+        heading: "Before you press send",
+        items: [
+          { title: "Remove private details", detail: "Swap names, ID numbers and addresses for placeholders. Never paste passwords or card numbers." },
+          { title: "Check your task has one verb", detail: "Two jobs in one prompt often means one gets done badly." },
+          { title: "Decide how you will check the answer", detail: "Facts, numbers and quotes need a second source." },
+        ],
+      },
+    ],
+  },
+  {
+    id: "model-choice",
+    title: "Model-choice sheet",
+    shortTitle: "Model choice",
+    levels: [2, 3],
+    whoFor: "Anyone choosing which AI model or plan to use for a task, or deciding whether to pay.",
+    summary: "Match the task to a type of model, start cheap, and move up only when a test fails.",
+    blocks: [
+      {
+        kind: "steps",
+        id: "three-questions",
+        heading: "Three questions before you pick",
+        items: [
+          { title: "What is the task?", detail: "Quick answers, long documents, code, research and multi-step agent work need different strengths." },
+          { title: "What must stay private?", detail: "Sensitive material points to a business plan with stronger terms, or to a model that runs on your own computer." },
+          { title: "What does a mistake cost?", detail: "The higher the cost, the more you check, and the more a stronger model may be worth paying for." },
+        ],
+      },
+      {
+        kind: "table",
+        id: "task-to-model",
+        heading: "Task to model type",
+        columns: ["Task", "What matters most", "Start with", "Where to check on this site"],
+        rows: [
+          ["Everyday questions, emails, summaries", "Speed and low cost", "A fast, low-cost model", "Best for: cheap and fast"],
+          ["Hard maths, science and research", "Reasoning quality", "A top reasoning model, with higher effort only when needed", "Best for: overall"],
+          ["Coding help", "Accuracy on your language and tools", "A strong everyday coding model; step up for hard agentic work", "Best for: coding"],
+          ["Multi-step agent work", "Reliability over many steps", "A top model, with approvals switched on", "Best for: agents"],
+          ["Long documents", "Context window and recall of distant pages", "A model with a large context window, then test a question about a late page", "Model directory"],
+          ["Private or sensitive documents", "Where your data goes", "A business plan with clear terms, or an open-weight model run locally", "Privacy matrix, Best for: local"],
+          ["Images and video", "Feature support, not just model quality", "Whichever app lists the feature you need", "Feature matrix, Best for: image and video"],
+          ["Bulk work, many tasks a month", "Cost per task", "The cheapest model that passes your own test", "API costs, API cost calculator"],
+        ],
+      },
+      {
+        kind: "table",
+        id: "directory-picks",
+        heading: "Directory picks (snapshot)",
+        intro: "Taken from our model directory. A score is a shortlist, not a verdict, so run your own test.",
+        columns: ["Model", "Maker", "Best for, per our directory"],
+        rows: [
+          ["Claude Opus 5.5", "Anthropic", "All-round flagship"],
+          ["GPT-6.1 Sol", "OpenAI", "Best value near the frontier"],
+          ["GPT-6 Astra", "OpenAI", "Maths, science, research"],
+          ["Claude Fable 5.1", "Anthropic", "Hardest agentic coding"],
+          ["Claude Sonnet 5.5", "Anthropic", "Everyday coding and knowledge work"],
+          ["Gemini 4 Argon", "Google", "Complex reasoning"],
+          ["Gemini 3.8 Flash", "Google", "Fast, cheap multimodal"],
+          ["Claude Haiku 5.5", "Anthropic", "High-volume, low-cost"],
+          ["MiMo-V2.6-Pro", "Xiaomi", "Top open-weight model, MIT licence"],
+          ["Qwen3.8 27B", "Alibaba", "Best single-GPU local model"],
+        ],
+      },
+      {
+        kind: "steps",
+        id: "pick-in-four",
+        heading: "Pick in four steps",
+        items: [
+          { title: "Write down ten real tasks", detail: "Use work you actually do, including a few tricky ones." },
+          { title: "Start with the cheapest model that might work", detail: "Run all ten and score each answer yourself." },
+          { title: "Move up only where it failed", detail: "Test the next model on the failed tasks, not on all ten." },
+          { title: "Record the cost per task", detail: "Price per token is not the whole story. A cheap model that needs three tries can cost more." },
+        ],
+      },
+      {
+        kind: "note",
+        id: "model-note",
+        heading: "Good to know",
+        text: "More thinking effort usually costs more and is not always better. A subscription is not an API: the plans you chat with and the pay-per-use API that developers call are priced separately.",
+      },
+    ],
+  },
+  {
+    id: "resume-prompt",
+    title: "Resume and interview prompt templates",
+    shortTitle: "Resume prompts",
+    levels: [2],
+    whoFor: "Job seekers who want AI help with a resume, bullet points and interview practice, without inventing anything.",
+    summary: "Three fill-in prompts: tailor a resume to a job post, practise an interview, and turn rough notes into bullets.",
+    blocks: [
+      {
+        kind: "steps",
+        id: "resume-before",
+        heading: "Before you start",
+        items: [
+          { title: "Remove contact and ID details", detail: "Delete your phone number, home address, ID numbers and dates of birth before pasting. You can add them back yourself." },
+          { title: "Give it facts only", detail: "The AI can only be trusted with achievements and numbers you supply. Tell it not to add any." },
+          { title: "You are the final editor", detail: "Every claim in the finished resume must be true and something you can talk about in an interview." },
+        ],
+      },
+      {
+        kind: "template",
+        id: "resume-tailor",
+        heading: "Tailor my resume to a job post",
+        text: "You are an experienced recruiter and resume editor.\n\nTask: Compare my resume with the job post below. List the five most relevant skills or achievements I already have, and suggest rewrites of my bullet points that match the job. Use only facts that are in my resume. Do not invent experience, numbers, employers or qualifications. If something the job needs is missing, say so and ask me about it.\n\nTarget role: [JOB TITLE]\nType of company: [COMPANY TYPE]\nMy experience: [YEARS OF EXPERIENCE]\n\nJob post:\n[JOB POST]\n\nMy resume (contact details removed):\n[MY RESUME]\n\nFormat: a table with three columns: job requirement, evidence from my resume, suggested bullet. Then list three gaps I should address honestly.\nLimits: plain English, no buzzwords, each bullet under 25 words.",
+        longFields: ["JOB POST", "MY RESUME"],
+      },
+      {
+        kind: "template",
+        id: "resume-bullets",
+        heading: "Turn my notes into resume bullets",
+        text: "Rewrite my notes about my work below as resume bullet points. Start each bullet with a strong verb, keep the numbers I gave, and do not add numbers, results or tools that are not in my notes. If a note is too vague, ask me one question instead of guessing.\n\nMy role: [JOB TITLE]\nMy notes:\n[MY NOTES]\n\nFormat: three bullets per note.\nLimits: under 25 words each, plain English.",
+        longFields: ["MY NOTES"],
+      },
+      {
+        kind: "template",
+        id: "mock-interview",
+        heading: "Run a mock interview",
+        text: "You are an interviewer for a [JOB TITLE] role at a [COMPANY TYPE]. Run a mock interview with me.\n\nRules: Ask one question at a time and wait for my answer. After each answer, give me a score out of 5, one thing I did well and one thing to improve, then ask the next question. Ask [NUMBER OF QUESTIONS] questions in total: some about past behaviour, some specific to the role, and one about a gap in my background. Do not give model answers unless I ask.\n\nStart now with the first question.",
+      },
+      {
+        kind: "steps",
+        id: "resume-check",
+        heading: "Check before you send",
+        items: [
+          { title: "Every fact is true", detail: "Compare each bullet with your real history. Delete anything you cannot defend." },
+          { title: "Every number is yours", detail: "AI can write convincing numbers. Only keep the ones you supplied." },
+          { title: "Names, dates and titles match", detail: "Check employers, dates and job titles against your records." },
+          { title: "It sounds like you", detail: "Read it aloud. If you would not say it, change it." },
+          { title: "Check the employer's AI rules", detail: "Some applications ask you to disclose AI help." },
+        ],
+      },
+      {
+        kind: "note",
+        id: "resume-risk",
+        heading: "What can go wrong",
+        text: "AI can invent achievements that look believable. An invented claim can end an interview or a job offer. Generic wording is the other risk: if every bullet starts the same way, edit it until it reads like your own work.",
+      },
+    ],
+  },
+  {
+    id: "agent-permissions",
+    title: "Agent permission checklist",
+    shortTitle: "Agent permissions",
+    levels: [3],
+    whoFor: "Anyone connecting an AI agent, connector or automation to email, files, calendars or code, and the people responsible for them.",
+    summary: "A tickable checklist for deciding what an agent may read, change and send, and how to watch and stop it.",
+    blocks: [
+      {
+        kind: "table",
+        id: "permission-levels",
+        heading: "Four permission levels",
+        intro: "Start at the lowest level that does the job. Move up only when you have a reason.",
+        columns: ["Level", "What the agent can do", "Good for", "Main risk"],
+        rows: [
+          ["1. Read only", "Look at files, mail or pages and report back", "Summaries, search, research", "It can still reveal what it read"],
+          ["2. Draft only", "Prepare an email, reply or edit for you to approve", "Writing, scheduling, code suggestions", "You may approve without reading"],
+          ["3. Act with approval", "Do an action after you press approve", "Sending, booking, publishing", "Approval fatigue"],
+          ["4. Act alone", "Do actions with no approval", "Low-stakes, reversible tasks only", "Mistakes happen before you see them"],
+        ],
+      },
+      {
+        kind: "checklist",
+        id: "agent-checklist",
+        heading: "The checklist",
+        intro: "Essential items cover the biggest risks. Your ticks are saved in this browser only.",
+        groups: AGENT_GROUPS,
+        storageKey: AGENT_CHECKLIST_STORAGE_KEY,
+      },
+      {
+        kind: "note",
+        id: "agent-note",
+        heading: "Good to know",
+        text: "The checklist lowers risk and does not remove it. Agent tools change quickly, so read the permission screen each time and trust the provider's own documentation over any summary.",
+      },
+    ],
+  },
+];

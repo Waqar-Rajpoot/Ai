@@ -39,9 +39,9 @@ export function BenchmarkChecklist() {
   const [answers, setAnswers] = useState<ChecklistAnswers>(createBlankBenchmarkAnswers);
   const { copyState, copyText } = useCopyFeedback();
 
-  const score = useMemo(() => scoreBenchmarkChecklist(answers), [answers]);
+  const score:any = useMemo(() => scoreBenchmarkChecklist(answers), [answers]);
   const openQuestions = useMemo(() => getOpenQuestions(answers), [answers]);
-  const redFlagQuestions = score.criticalNoIds.flatMap((questionId) => {
+  const redFlagQuestions = score.criticalNoIds.flatMap((questionId: string) => {
     const question = findBenchmarkQuestion(questionId);
     return question ? [question] : [];
   });
@@ -99,7 +99,7 @@ export function BenchmarkChecklist() {
 
         <p className="m-0 hidden text-sm font-semibold print:block">Checking: {subject.trim() || "(not named)"}</p>
 
-        {BENCHMARK_QUESTIONS.map((question) => {
+        {BENCHMARK_QUESTIONS.map((question:any) => {
           const answer = getAnswer(answers, question.id);
           return (
             <fieldset key={question.id} className={`${CARD_CLASS} m-0 grid gap-3`}>
@@ -186,7 +186,7 @@ export function BenchmarkChecklist() {
           <section className={`${CARD_CLASS} border-red-500/60`} aria-labelledby="benchmark-flags-heading">
             <h3 id="benchmark-flags-heading" className="m-0">Red flags</h3>
             <ul className="mb-0 mt-2 grid gap-1 pl-5 text-sm">
-              {redFlagQuestions.map((question) => (
+              {redFlagQuestions.map((question: any) => (
                 <li key={question.id}>{question.shortTitle} {question.redFlag}</li>
               ))}
             </ul>
@@ -198,7 +198,7 @@ export function BenchmarkChecklist() {
             <h3 id="benchmark-open-heading" className="m-0">Open questions to chase</h3>
             <p className="mb-0 mt-1 text-xs text-[var(--color-muted)]">Most important first.</p>
             <ul className="mb-0 mt-2 grid gap-2 pl-5 text-sm">
-              {openQuestions.map((question) => (
+              {openQuestions.map((question: any) => (
                 <li key={question.id}><strong>{question.shortTitle}</strong> {question.ifUnsure}</li>
               ))}
             </ul>

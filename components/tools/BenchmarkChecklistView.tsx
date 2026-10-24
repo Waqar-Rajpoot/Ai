@@ -143,7 +143,7 @@ export function BenchmarkChecklistView() {
                 </tr>
               </thead>
               <tbody>
-                {BENCHMARK_QUESTIONS.map((question) => (
+                {BENCHMARK_QUESTIONS.map((question: any) => (
                   <tr key={question.id} className="border-t border-[var(--color-border)]">
                     <td className="p-3 align-top tabular-nums">{question.number}</td>
                     <th scope="row" className="p-3 text-left align-top font-semibold">

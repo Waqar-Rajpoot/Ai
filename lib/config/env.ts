@@ -26,3 +26,8 @@ export const env = {
   /** External signup form. Undefined until the newsletter is set up. */
   newsletterActionUrl: process.env.NEXT_PUBLIC_NEWSLETTER_ACTION_URL || undefined,
 } as const;
+
+
+/** External newsletter signup form URL. Null when not set, so the page shows "Signup is not open yet". */
+export const NEWSLETTER_ACTION_URL: string | null =
+  process.env.NEXT_PUBLIC_NEWSLETTER_ACTION_URL?.trim() || null;

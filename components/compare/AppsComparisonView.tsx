@@ -56,10 +56,10 @@ const PAGE_LINKS: readonly { id: string; label: string }[] = [
 /** Article 13: ChatGPT vs Claude vs Gemini vs Grok as consumer products. */
 export function AppsComparisonView() {
   const scoresAsOf = formatIsoDate(DIRECTORY_SCORES_AS_OF);
-  const freePlans = CONSUMER_PLANS.filter((plan) => plan.audience === "free");
-  const heavyPlans = CONSUMER_PLANS.filter((plan) => plan.audience === "heavy");
-  const adsPlans = CONSUMER_PLANS.filter((plan) => plan.adsNote !== undefined);
-  const appsWithoutPlans = APPS.filter((app) => getPlansForApp(CONSUMER_PLANS, app.id).length === 0);
+  const freePlans = CONSUMER_PLANS.filter((plan: any) => plan.audience === "free");
+  const heavyPlans = CONSUMER_PLANS.filter((plan: any) => plan.audience === "heavy");
+  const adsPlans = CONSUMER_PLANS.filter((plan: any) => plan.adsNote !== undefined);
+  const appsWithoutPlans = APPS.filter((app: any) => getPlansForApp(app.id).length === 0);
 
   return (
     <div className="mx-auto w-[min(100%-2.5rem,var(--site-width))] pb-16 pt-8">
@@ -142,7 +142,7 @@ export function AppsComparisonView() {
 
         <h3 className="mb-3 mt-8">What the free plans say</h3>
         <ul className="m-0 grid list-none gap-3 p-0 sm:grid-cols-2">
-          {freePlans.map((plan) => (
+          {freePlans.map((plan:any) => (
             <li key={plan.id}>
               <div className={`${CARD_CLASS} h-full`}>
                 <strong className="block">{plan.name}</strong>
@@ -178,8 +178,8 @@ export function AppsComparisonView() {
               </tr>
             </thead>
             <tbody>
-              {heavyPlans.map((plan) => {
-                const usageValues = getUsageValues(CONSUMER_PLANS, plan);
+              {heavyPlans.map((plan:any) => {
+                const usageValues = getUsageValues(plan.id);
                 return (
                   <tr key={plan.id} className="border-t border-[var(--color-border)]">
                     <th scope="row" className="p-3 align-top">{plan.name}</th>
@@ -189,7 +189,7 @@ export function AppsComparisonView() {
                         <>{plan.notes} The source gives no multiples.</>
                       ) : (
                         <ul className="m-0 grid list-none gap-1 p-0">
-                          {usageValues.map((value) => (
+                          {usageValues.map((value:any) => (
                             <li key={value.monthlyDollars}>
                               {formatPlanDollars(value.monthlyDollars)}: {value.usageMultiple}x {value.baseName ? `${value.baseName} usage` : "usage"}
                               {value.priceMultiple !== null
@@ -258,7 +258,7 @@ export function AppsComparisonView() {
         <div className={CARD_CLASS}>
           {adsPlans.length > 0 ? (
             <ul className="m-0 grid gap-1 pl-5">
-              {adsPlans.map((plan) => (
+              {adsPlans.map((plan:any) => (
                 <li key={plan.id}>
                   <strong>{plan.name}:</strong> {plan.adsNote}
                 </li>
@@ -333,7 +333,7 @@ export function AppsComparisonView() {
       <Section id="sources" title="Sources, dates and labels" intro="Where each number on this page came from, and when.">
         <div className={CARD_CLASS}>
           <ul className="m-0 grid gap-2 pl-5">
-            {PLAN_SNAPSHOTS.map((snapshot) => {
+            {PLAN_SNAPSHOTS.map((snapshot:any) => {
               const app = APPS.find((candidate) => candidate.id === snapshot.appId);
               return (
                 <li key={snapshot.appId}>

@@ -31,7 +31,7 @@ export function scoreBenchmarkChecklist(answers: ChecklistAnswers): ChecklistSco
 }
 
 export function findBenchmarkQuestion(questionId: string): BenchmarkQuestion | undefined {
-  return BENCHMARK_QUESTIONS.find((question) => question.id === questionId);
+  return BENCHMARK_QUESTIONS.find((question:any) => question.id === questionId);
 }
 
 /** Questions answered "no" or "not sure", most important first. */

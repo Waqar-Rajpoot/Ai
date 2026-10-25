@@ -20,3 +20,13 @@ export function describeDaysFromToday(daysLeft: number): string {
   const unit = count === 1 ? "day" : "days";
   return daysLeft > 0 ? `in ${count} ${unit}` : `${count} ${unit} ago`;
 }
+
+
+export function daysSince(isoDate: string, now: Date): number {
+  return -calendarDaysUntil(isoDate, now);
+}
+
+export function describeDaysAgo(days: number): string {
+  if (days <= 0) return "today";
+  return days === 1 ? "1 day ago" : `${days} days ago`;
+}

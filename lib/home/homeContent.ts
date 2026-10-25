@@ -47,7 +47,7 @@ export const READER_PATHS: readonly LinkItem[] = [
 /** The four learning levels, in order, for "Start here by level". */
 export const LEVEL_STEPS: readonly (LinkItem & { readonly level: number })[] =
   LEVEL_ORDER.map((level) => ({
-    level,
+    level: LEVEL_DEFINITIONS[level].number,
     label: LEVEL_DEFINITIONS[level].name,
     href: getLevelHref(level),
     description: LEVEL_DEFINITIONS[level].reader,

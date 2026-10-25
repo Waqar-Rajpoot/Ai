@@ -1,4 +1,4 @@
-import type { ChecklistAnswer, EvidenceTier } from "./checklists";
+import type { ChecklistAnswer, ChecklistGuideLink, EvidenceTier, ScoredQuestion } from "./checklists";
 import type { MarginFormValues, GapVerdict } from "./benchmarkMargin";
 
 export interface AnswerOption {
@@ -267,3 +267,32 @@ export const GAP_VERDICT_COPY: Record<GapVerdict, GapVerdictCopy> = {
     body: "These two scores cannot be told apart on this evidence. Treat the models as tied on this test, and do not rank them by it.",
   },
 };
+
+
+/** One of the ten questions on the benchmark reading checklist. */
+export interface BenchmarkQuestion {
+  /** Stable id. Answers are saved against it, so do not rename lightly. */
+  id: string;
+  /** Position in the list, 1 to 10. */
+  number: number;
+  shortTitle: string;
+  question: string;
+  /** Importance. Higher counts for more in the score. */
+  weight: number;
+  /** A "no" on a critical question is a red flag and caps the rating at "moderate". */
+  isCritical: boolean;
+  whyItMatters: string;
+  goodSign: string;
+  redFlag: string;
+  whereToLook: string;
+  ifUnsure: string;
+  relatedLink?: ChecklistGuideLink;
+}
+
+/**
+ * Converts questions to the shape scoreChecklist expects. The scorer reads `critical`,
+ * while this data uses `isCritical`, so always score through this helper.
+ */
+export function toScoredQuestions(questions: readonly BenchmarkQuestion[]): ScoredQuestion[] {
+  return questions.map(({ id, weight, isCritical }) => ({ id, weight, critical: isCritical }));
+}

@@ -130,7 +130,7 @@ export function SubscriptionCostCalculator() {
             <select value={planToAddId} onChange={(event) => setPlanToAddId(event.target.value)} className={`${INPUT_CLASS} mt-1`}>
               {PROVIDERS.map((provider) => (
                 <optgroup key={provider} label={provider}>
-                  {PAID_CONSUMER_PLANS.filter((plan) => plan.provider === provider).map((plan) => (
+                  {PAID_CONSUMER_PLANS.filter((plan: any    ) => plan.provider === provider).map((plan: any) => (
                     <option key={plan.id} value={plan.id}>{plan.label}: {plan.priceNote}</option>
                   ))}
                 </optgroup>

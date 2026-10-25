@@ -598,3 +598,64 @@ export function estimateForPreset(
     kvBytesPerElement,
   });
 }
+
+
+
+// ---- Simple memory estimate (used by the local model memory estimator and the open vs closed page) ----
+
+export interface MemoryPrecisionOption {
+  id: string;
+  label: string;
+  bytesPerParameter: number;
+}
+
+export interface LocalModelMemoryInput {
+  parametersInBillions: number;
+  bytesPerParameter: number;
+}
+
+export type MemoryProblemReason = "not-a-number" | "out-of-range" | "invalid-bytes";
+
+export type LocalModelMemoryResult =
+  | { ok: true; weightsGigabytes: number; estimatedGigabytes: number }
+  | { ok: false; reason: MemoryProblemReason };
+
+/** Starting text for the model size box. Same value the full estimator starts with. */
+export const MEMORY_STARTING_PARAMETERS: string = DEFAULT_PARAMETERS_TEXT;
+
+/** The precision selected at first. Same choice the full estimator starts with. */
+export const DEFAULT_PRECISION_ID: string = DEFAULT_FORM_VALUES.precisionId;
+
+/** Working space on top of the weights: 1 plus the safety margin the full estimator uses. */
+export const MEMORY_OVERHEAD_FACTOR: number = 1 + RUNTIME_MARGIN_FRACTION;
+
+/** The precision choices, with bytes per parameter worked out from the bits per weight. */
+export const PRECISION_OPTIONS: readonly MemoryPrecisionOption[] = PRECISIONS.map((option) => ({
+  id: option.id,
+  label: option.label,
+  bytesPerParameter: convertBitsToBytes(option.bitsPerWeight),
+}));
+
+export const MEMORY_PROBLEM_MESSAGES: Record<MemoryProblemReason, string> = {
+  "not-a-number": `Enter the model size as a number of billions, for example ${MEMORY_STARTING_PARAMETERS}.`,
+  "out-of-range": `Model size must be from ${MIN_PARAMETERS_BILLIONS} to ${MAX_PARAMETERS_BILLIONS.toLocaleString("en-US")} billion parameters.`,
+  "invalid-bytes": "Choose a precision from the list.",
+};
+
+/** Weights, plus working space, for a model of a given size and precision. Blank or invalid sizes return a reason. */
+export function calculateLocalModelMemory(input: LocalModelMemoryInput): LocalModelMemoryResult {
+  const { parametersInBillions, bytesPerParameter } = input;
+  if (!Number.isFinite(parametersInBillions)) return { ok: false, reason: "not-a-number" };
+  if (parametersInBillions < MIN_PARAMETERS_BILLIONS || parametersInBillions > MAX_PARAMETERS_BILLIONS) {
+    return { ok: false, reason: "out-of-range" };
+  }
+  if (!Number.isFinite(bytesPerParameter) || bytesPerParameter <= 0) return { ok: false, reason: "invalid-bytes" };
+
+  const weightsGigabytes = estimateWeightsGb(parametersInBillions, bytesPerParameter);
+  return { ok: true, weightsGigabytes, estimatedGigabytes: weightsGigabytes * MEMORY_OVERHEAD_FACTOR };
+}
+
+/** Same formatting as formatGb: "5.8 GB", "0.13 GB" or "142 GB". */
+export function formatGigabytes(valueGigabytes: number): string {
+  return formatGb(valueGigabytes);
+}

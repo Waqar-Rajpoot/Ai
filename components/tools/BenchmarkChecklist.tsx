@@ -45,7 +45,7 @@ export function BenchmarkChecklist() {
     const question = findBenchmarkQuestion(questionId);
     return question ? [question] : [];
   });
-  const tierKey = score.tier ?? "incomplete";
+  const tierKey: EvidenceTier | "incomplete" = score.tier ?? "incomplete";
   const tierCopy = TIER_COPY[tierKey];
 
   function setAnswer(questionId: string, answer: ChecklistAnswer) {

@@ -4,12 +4,6 @@ export type Audience = "personal" | "work" | "api";
 export type AudienceFilter = "all" | Audience;
 export type PrivacyTopic = "training" | "retention" | "deletion" | "location";
 
-/**
- * "trains-by-default": content can be used to improve models unless you opt out.
- * "your-choice": a setting decides, and you choose at sign-up or can change it.
- * "no-training": not used for training by default.
- * "unclear": sources conflict or do not say.
- */
 export type TrainingLevel = "trains-by-default" | "your-choice" | "no-training" | "unclear";
 
 export interface SourceLink {

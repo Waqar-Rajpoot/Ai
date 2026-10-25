@@ -1,27 +1,31 @@
+"use client";
+
 import { FOCUS_RING } from "@/components/shared/pageStyles";
 
-interface PlainTechnicalToggleProps {
-  isTechnical: boolean;
-  onChange: (isTechnical: boolean) => void;
-}
+export type ReadingMode = "plain" | "technical";
 
-const OPTIONS: readonly { isTechnical: boolean; label: string }[] = [
-  { isTechnical: false, label: "Plain" },
-  { isTechnical: true, label: "Technical" },
+const OPTIONS: readonly { id: ReadingMode; label: string }[] = [
+  { id: "plain", label: "Plain" },
+  { id: "technical", label: "Technical" },
 ];
 
-/** Switches a page between the plain-English layer and the “go deeper” layer. */
-export function PlainTechnicalToggle({ isTechnical, onChange }: PlainTechnicalToggleProps) {
+interface PlainTechnicalToggleProps {
+  mode: ReadingMode;
+  onChange: (mode: ReadingMode) => void;
+}
+
+/** Switches a page between plain-English and technical detail. Controlled, so any page can own the state. */
+export function PlainTechnicalToggle({ mode, onChange }: PlainTechnicalToggleProps) {
   return (
-    <div role="group" aria-label="Reading level" className="inline-flex rounded-full border border-[var(--color-border)] p-1">
+    <div role="group" aria-label="Reading level" className="inline-flex rounded-full border border-[var(--color-border)] p-0.5">
       {OPTIONS.map((option) => (
         <button
-          key={option.label}
+          key={option.id}
           type="button"
-          aria-pressed={isTechnical === option.isTechnical}
-          onClick={() => onChange(option.isTechnical)}
+          aria-pressed={mode === option.id}
+          onClick={() => onChange(option.id)}
           className={`rounded-full px-4 py-1 text-sm font-semibold transition motion-reduce:transition-none ${FOCUS_RING} ${
-            isTechnical === option.isTechnical ? "bg-[image:var(--gradient-accent)] text-white" : ""
+            mode === option.id ? "bg-[image:var(--gradient-accent)] text-white" : "text-[var(--color-muted)] hover:text-[var(--color-text)]"
           }`}
         >
           {option.label}

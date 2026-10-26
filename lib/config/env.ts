@@ -38,3 +38,5 @@ export const NEWSLETTER_ACTION_URL: string | null =
 export function getNewsletterActionUrl(): string | null {
   return process.env.NEXT_PUBLIC_NEWSLETTER_ACTION_URL?.trim() || null;
 }
+
+export const CONTACT_EMAIL: string = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "";

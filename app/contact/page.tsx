@@ -1,11 +1,13 @@
-import { StaticPage } from "@/components/shared/StaticPage";
-import { STATIC_PAGES } from "@/lib/pages/staticPages";
-import { buildPageMetadata } from "@/lib/shared/metadata";
+import type { Metadata } from "next";
+import { ContactView } from "@/components/contact/ContactView";
 
-const page = STATIC_PAGES.contact;
-
-export const metadata = buildPageMetadata(page);
+export const metadata: Metadata = {
+  title: "Contact us",
+  description:
+    "Ask a question, report a wrong price or fact, suggest a comparison, or reach us as press, a sponsor or a model maker. Opens your own email app.",
+  alternates: { canonical: "/contact" },
+};
 
 export default function ContactPage() {
-  return <StaticPage page={page} />;
+  return <ContactView />;
 }

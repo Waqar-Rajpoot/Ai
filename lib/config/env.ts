@@ -31,3 +31,10 @@ export const env = {
 /** External newsletter signup form URL. Null when not set, so the page shows "Signup is not open yet". */
 export const NEWSLETTER_ACTION_URL: string | null =
   process.env.NEXT_PUBLIC_NEWSLETTER_ACTION_URL?.trim() || null;
+
+
+
+  /** External newsletter sign-up form URL, or null when it is not set. */
+export function getNewsletterActionUrl(): string | null {
+  return process.env.NEXT_PUBLIC_NEWSLETTER_ACTION_URL?.trim() || null;
+}

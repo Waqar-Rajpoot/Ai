@@ -1,11 +1,13 @@
-import { StaticPage } from "@/components/shared/StaticPage";
-import { STATIC_PAGES } from "@/lib/pages/staticPages";
-import { buildPageMetadata } from "@/lib/shared/metadata";
+import type { Metadata } from "next";
+import { SourcePolicyView } from "@/components/about/SourcePolicyView";
 
-const page = STATIC_PAGES.sourcePolicy;
-
-export const metadata = buildPageMetadata(page);
+export const metadata: Metadata = {
+  title: "Source policy: where our numbers come from",
+  description:
+    "How we choose sources, label vendor-reported and independent numbers, and resolve conflicts. Includes a source checker, a map of what backs each page and our update deadlines.",
+  alternates: { canonical: "/about/source-policy" },
+};
 
 export default function SourcePolicyPage() {
-  return <StaticPage page={page} />;
+  return <SourcePolicyView />;
 }

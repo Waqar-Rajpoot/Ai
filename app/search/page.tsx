@@ -1,12 +1,20 @@
-import { SearchView } from "@/components/layout/SearchView";
-import { buildPageMetadata } from "@/lib/shared/metadata";
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import { SearchFallback } from "@/components/search/SearchFallback";
+import { SearchView } from "@/components/search/SearchView";
 
-export const metadata = buildPageMetadata({
+export const metadata: Metadata = {
   title: "Search",
-  description: "Search guides, the glossary, reviews and tools.",
-  route: "/search",
-});
+  description: "Search guides, glossary terms, model reviews, tools, prices and news.",
+  alternates: { canonical: "/search" },
+  // Search result pages are not worth indexing, but links on them should still be followed.
+  robots: { index: false, follow: true },
+};
 
 export default function SearchPage() {
-  return <SearchView />;
+  return (
+    <Suspense fallback={<SearchFallback />}>
+      <SearchView />
+    </Suspense>
+  );
 }

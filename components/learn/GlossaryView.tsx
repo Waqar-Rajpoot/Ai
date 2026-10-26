@@ -22,7 +22,7 @@ const VIEW_MODES: readonly { id: GlossaryViewMode; label: string }[] = [
 
 const LEVEL_FILTERS: readonly { id: GlossaryLevelFilter; label: string }[] = [
   { id: "all", label: "All levels" },
-  ...GLOSSARY_LEVELS.map((info) => ({ id: info.level, label: `Level ${info.level}` })),
+  ...GLOSSARY_LEVELS.map((info: any) => ({ id: info.level, label: `Level ${info.level}` })),
 ];
 
 const INPUT_CLASS = `w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-[var(--color-text)] ${FOCUS_RING}`;
@@ -37,7 +37,7 @@ function chipClass(isActive: boolean): string {
 function TermGrid({ terms }: { terms: readonly GlossaryTerm[] }) {
   return (
     <ul className="m-0 grid list-none gap-4 p-0 md:grid-cols-2">
-      {terms.map((entry) => (
+      {terms.map((entry: any) => (
         <li key={entry.id}>
           <GlossaryTermCard term={entry} />
         </li>

@@ -1,9 +1,8 @@
 import Link from "next/link";
-import type { GlossaryTerm } from "@/lib/learn/glossaryTerms";
 import { CARD_CLASS, FOCUS_RING } from "./learnStyles";
 
 /** One glossary entry. The id makes each term linkable, for example /learn/glossary#token. */
-export function GlossaryTermCard({ term }: { term: GlossaryTerm }) {
+export function GlossaryTermCard({ term }: { term: any }) {
   return (
     <article id={term.id} className={`${CARD_CLASS} h-full scroll-mt-24`}>
       <div className="flex items-start justify-between gap-3">

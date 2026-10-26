@@ -1,11 +1,13 @@
-import { StaticPage } from "@/components/shared/StaticPage";
-import { STATIC_PAGES } from "@/lib/pages/staticPages";
-import { buildPageMetadata } from "@/lib/shared/metadata";
+import type { Metadata } from "next";
+import { CorrectionsView } from "@/components/trust/CorrectionsView";
 
-const page = STATIC_PAGES.corrections;
-
-export const metadata = buildPageMetadata(page);
+export const metadata: Metadata = {
+  title: "Corrections policy and log: report an error",
+  description:
+    "How to report an error on this site, how fast we respond, how we fix and label corrections, and a public log of every substantive correction with dates and what changed.",
+  alternates: { canonical: "/about/corrections" },
+};
 
 export default function CorrectionsPage() {
-  return <StaticPage page={page} />;
+  return <CorrectionsView />;
 }

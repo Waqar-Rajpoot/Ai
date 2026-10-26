@@ -1,11 +1,13 @@
-import { StaticPage } from "@/components/shared/StaticPage";
-import { STATIC_PAGES } from "@/lib/pages/staticPages";
-import { buildPageMetadata } from "@/lib/shared/metadata";
+import type { Metadata } from "next";
+import { PrivacyPolicyView } from "@/components/legal/PrivacyPolicyView";
 
-const page = STATIC_PAGES.privacyPolicy;
-
-export const metadata = buildPageMetadata(page);
+export const metadata: Metadata = {
+  title: "Privacy policy",
+  description:
+    "What AI Tools for Everyday People collects, why, who else is involved, how long we keep it, and your choices. Our tools run in your browser, and there are no accounts.",
+  alternates: { canonical: "/privacy-policy" },
+};
 
 export default function PrivacyPolicyPage() {
-  return <StaticPage page={page} />;
+  return <PrivacyPolicyView />;
 }

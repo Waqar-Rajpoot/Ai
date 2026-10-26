@@ -1,11 +1,13 @@
-import { StaticPage } from "@/components/shared/StaticPage";
-import { STATIC_PAGES } from "@/lib/pages/staticPages";
-import { buildPageMetadata } from "@/lib/shared/metadata";
+import type { Metadata } from "next";
+import { TermsView } from "@/components/legal/TermsView";
 
-const page = STATIC_PAGES.terms;
-
-export const metadata = buildPageMetadata(page);
+export const metadata: Metadata = {
+  title: "Terms of use",
+  description:
+    "The rules for using AI Tools for Everyday People: using the site, general information not advice, affiliate and sponsor notice, and how terms change. Plain English and full wording.",
+  alternates: { canonical: "/terms" },
+};
 
 export default function TermsPage() {
-  return <StaticPage page={page} />;
+  return <TermsView />;
 }

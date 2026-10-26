@@ -1,11 +1,13 @@
-import { StaticPage } from "@/components/shared/StaticPage";
-import { STATIC_PAGES } from "@/lib/pages/staticPages";
-import { buildPageMetadata } from "@/lib/shared/metadata";
+import type { Metadata } from "next";
+import { AboutView } from "@/components/about/AboutView";
 
-const page = STATIC_PAGES.about;
-
-export const metadata = buildPageMetadata(page);
+export const metadata: Metadata = {
+  title: "About AI Tools for Everyday People: who we are and how we work",
+  description:
+    "Who runs the site, what we cover, how we keep prices and tests current, how the site is funded, and how to reach us. Dated, sourced and independent.",
+  alternates: { canonical: "/about" },
+};
 
 export default function AboutPage() {
-  return <StaticPage page={page} />;
+  return <AboutView />;
 }

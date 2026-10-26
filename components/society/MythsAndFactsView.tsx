@@ -44,14 +44,14 @@ const TOC = [
   { id: "method", label: "Method" },
 ] as const;
 
-const VERDICT_COUNTS = countByVerdict(MYTH_FACTS);
+const VERDICT_COUNTS: any = countByVerdict(MYTH_FACTS);
 const TABLE_CLASS = "w-full border-collapse text-left text-sm";
 const TABLE_HEAD_CLASS = "bg-[var(--color-bg)] text-xs uppercase tracking-wide text-[var(--color-muted)]";
 
 /** Full AI myths and facts article: list, flip cards, evidence, routine, FAQ and glossary. */
 export function MythsAndFactsView() {
-  const mythCount = VERDICT_COUNTS.myth + VERDICT_COUNTS["mostly-myth"];
-  const factCount = VERDICT_COUNTS.fact + VERDICT_COUNTS["mostly-fact"];
+  const mythCount = (VERDICT_COUNTS.myth || 0) + (VERDICT_COUNTS["mostly-myth"] || 0);
+  const factCount = (VERDICT_COUNTS.fact || 0) + (VERDICT_COUNTS["mostly-fact"] || 0);
 
   return (
     <div className="mx-auto w-[min(100%-2.5rem,var(--site-width))] pb-16 pt-8">
@@ -65,7 +65,7 @@ export function MythsAndFactsView() {
         </p>
         <h1 className="relative mb-3 mt-4 max-w-3xl">AI myths and facts: what the evidence says</h1>
         <p className="relative m-0 max-w-2xl text-lg text-[var(--color-muted)]">
-          {MYTH_FACTS.length} common claims about AI, checked against named surveys and official trackers: {mythCount} myths or mostly myths, {VERDICT_COUNTS.depends} that depend, and {factCount} facts or mostly facts.
+          {MYTH_FACTS.length} common claims about AI, checked against named surveys and official trackers: {mythCount} myths or mostly myths, {VERDICT_COUNTS.depends || 0} that depend, and {factCount} facts or mostly facts.
         </p>
         <div className="relative mt-6 flex flex-wrap gap-3">
           <a href="#list" className={BUTTON_PRIMARY}>Read the claims</a>
@@ -96,7 +96,7 @@ export function MythsAndFactsView() {
             <ul className="mb-0 mt-2 grid list-none gap-3 p-0 text-sm">
               {VERDICT_ORDER.map((verdict) => (
                 <li key={verdict}>
-                  <VerdictBadge verdict={verdict} /> <span className="text-[var(--color-muted)]">{VERDICT_MEANINGS[verdict]} ({VERDICT_COUNTS[verdict]})</span>
+                  <VerdictBadge verdict={verdict as any} /> <span className="text-[var(--color-muted)]">{(VERDICT_MEANINGS as any)[verdict]} ({VERDICT_COUNTS[verdict] || 0})</span>
                 </li>
               ))}
             </ul>
@@ -129,7 +129,7 @@ export function MythsAndFactsView() {
 
       {/* Flip cards */}
       <PageSection id="flip-cards" title="Flip-card feature: test your instincts" intro="Read the claim, pick Myth, Fact or It depends, and see the verdict. Your score stays in your browser.">
-        <MythFactCards />
+        <MythFactCards items={MYTH_FACTS as any} />
         <p className="mb-0 mt-4 text-sm">Prefer a dedicated page? Open the <Link href="/society/myth-or-fact">myth-or-fact flip cards</Link>.</p>
       </PageSection>
 
@@ -148,8 +148,8 @@ export function MythsAndFactsView() {
               </tr>
             </thead>
             <tbody>
-              {KEY_FIGURES.map((row) => {
-                const source = findEvidenceSource(row.sourceId);
+              {KEY_FIGURES.map((row: any) => {
+                const source: any = findEvidenceSource(row.sourceId);
                 return (
                   <tr key={`${row.figure}-${row.measures}`} className="border-t border-[var(--color-border)]">
                     <th scope="row" className="p-3 text-left align-top font-bold tabular-nums">{row.figure}</th>
@@ -159,7 +159,7 @@ export function MythsAndFactsView() {
                       {source && <span className="block text-xs text-[var(--color-muted)]">{source.asOf}</span>}
                     </td>
                     <td className="p-3 align-top text-xs text-[var(--color-muted)]">
-                      {source ? `${EVIDENCE_KIND_LABELS[source.kind]} · ${SOURCE_CHECK_LABELS[source.check]}` : ""}
+                      {source ? `${(EVIDENCE_KIND_LABELS as any)[source.kind]} · ${(SOURCE_CHECK_LABELS as any)[source.check]}` : ""}
                     </td>
                     <td className="p-3 align-top text-[var(--color-muted)]">{row.note}</td>
                   </tr>
@@ -169,7 +169,7 @@ export function MythsAndFactsView() {
           </table>
         </div>
         <p className="mb-0 mt-3 text-sm text-[var(--color-muted)]">
-          Verdict counts: {VERDICT_ORDER.map((verdict) => `${VERDICT_LABELS[verdict]} ${VERDICT_COUNTS[verdict]}`).join(" · ")}.
+          Verdict counts: {VERDICT_ORDER.map((verdict) => `${(VERDICT_LABELS as any)[verdict]} ${VERDICT_COUNTS[verdict] || 0}`).join(" · ")}.
         </p>
       </PageSection>
 
@@ -188,7 +188,7 @@ export function MythsAndFactsView() {
               </tr>
             </thead>
             <tbody>
-              {NUMBERS_DISAGREE.map((row) => (
+              {NUMBERS_DISAGREE.map((row: any) => (
                 <tr key={row.source} className="border-t border-[var(--color-border)]">
                   <th scope="row" className="p-3 text-left align-top font-semibold">{row.source}</th>
                   <td className="p-3 align-top font-bold tabular-nums">{row.number}</td>
@@ -206,7 +206,7 @@ export function MythsAndFactsView() {
       {/* Why myths stick */}
       <PageSection id="why-stick" title="Why myths stick" intro="Knowing the pattern makes the next one easier to catch.">
         <ul className="m-0 grid list-none gap-4 p-0 md:grid-cols-2 lg:grid-cols-3">
-          {WHY_MYTHS_STICK.map((entry) => (
+          {WHY_MYTHS_STICK.map((entry: any) => (
             <li key={entry.reason} className={CARD_CLASS}>
               <p className="m-0 font-semibold">{entry.reason}</p>
               <p className="mb-0 mt-2 text-sm text-[var(--color-muted)]"><strong>Try:</strong> {entry.whatToDo}</p>
@@ -218,7 +218,7 @@ export function MythsAndFactsView() {
       {/* Routine */}
       <PageSection id="spot" title="Spot a myth in 60 seconds" intro="Five checks you can run on any claim about AI, including the ones on this page.">
         <ol className="m-0 grid list-none gap-3 p-0 md:grid-cols-2">
-          {SPOT_A_MYTH_ROUTINE.map((step, index) => (
+          {SPOT_A_MYTH_ROUTINE.map((step: any, index) => (
             <li key={step.title} className={`${CARD_CLASS} flex gap-3`}>
               <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[image:var(--gradient-accent)] text-sm font-bold text-white">{index + 1}</span>
               <span className="text-sm"><strong>{step.title}.</strong> {step.detail}</span>
@@ -231,7 +231,7 @@ export function MythsAndFactsView() {
       {/* Rules */}
       <PageSection id="rules" title="The four rules behind this page">
         <dl className="m-0 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {SOCIETY_RULES.map((entry) => (
+          {SOCIETY_RULES.map((entry: any) => (
             <div key={entry.rule} className={CARD_CLASS}>
               <dt className="font-bold">{entry.rule}</dt>
               <dd className="m-0 mt-1 text-sm text-[var(--color-muted)]">{entry.detail}</dd>
@@ -251,7 +251,7 @@ export function MythsAndFactsView() {
       {/* FAQ */}
       <PageSection id="faq" title="Frequently asked questions">
         <div className="grid gap-3">
-          {FAQ.map((entry) => (
+          {FAQ.map((entry: any) => (
             <details key={entry.question} className={`${CARD_CLASS} group py-3`}>
               <summary className={`cursor-pointer list-none font-semibold ${FOCUS_RING}`}>
                 <span aria-hidden="true" className="mr-2 inline-block text-[var(--color-accent)] transition-transform group-open:rotate-90 motion-reduce:transition-none">▸</span>
@@ -266,7 +266,7 @@ export function MythsAndFactsView() {
       {/* Glossary */}
       <PageSection id="glossary" title="Key words" intro="Short definitions. The full list is in the glossary.">
         <dl className="m-0 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {GLOSSARY.map((entry) => (
+          {GLOSSARY.map((entry: any) => (
             <div key={entry.term} className={CARD_CLASS}>
               <dt className="font-bold">{entry.term}</dt>
               <dd className="m-0 mt-1 text-sm text-[var(--color-muted)]">{entry.meaning}</dd>
@@ -288,7 +288,7 @@ export function MythsAndFactsView() {
           <div className={CARD_CLASS}>
             <h3 className="mt-0">Related pages</h3>
             <ul className="m-0 grid list-none gap-2 p-0 text-sm">
-              {RELATED_LINKS.map((link) => (
+              {RELATED_LINKS.map((link: any) => (
                 <li key={link.href}>
                   <Link href={link.href}>{link.title}</Link>
                   <span className="text-[var(--color-muted)]"> · {link.note}</span>

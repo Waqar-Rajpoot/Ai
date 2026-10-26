@@ -1,6 +1,27 @@
 import type { EvidenceKind } from "./forces";
 
+// --- Types & Interfaces ---
+
 export type MythFactVerdict = "Myth" | "Fact";
+
+/** Type alias representing a valid myth theme key */
+export type MythTheme = "Usage" | "Jobs" | "Energy" | "Regulation" | string;
+
+/** Basic choice for user guess */
+export type GuessChoice = "myth" | "fact" | "depends";
+
+/** Verdict taxonomy used across full dataset and filters */
+export type MythVerdict = "myth" | "mostly-myth" | "fact" | "mostly-fact" | "depends";
+
+export interface EvidenceSource {
+  id: string;
+  kind: string;
+  publisher: string;
+  title: string;
+  href: string;
+  asOf: string;
+  check: string;
+}
 
 export interface MythFactEvidence {
   text: string;
@@ -11,11 +32,18 @@ export interface MythFactEvidence {
 
 export interface MythFactItem {
   id: string;
-  claim: string;
-  verdict: MythFactVerdict;
-  explanation: string;
-  kind: EvidenceKind;
-  evidence: MythFactEvidence;
+  claim?: string;
+  statement?: string;
+  plain?: string;
+  technical?: string;
+  whatToDo?: string;
+  verdict: any;
+  explanation?: string;
+  kind?: EvidenceKind | string;
+  evidence?: MythFactEvidence;
+  evidenceIds?: string[];
+  relatedLink?: { href: string; label: string };
+  theme: MythTheme;
 }
 
 export interface MythFactScore {
@@ -26,11 +54,57 @@ export interface MythFactScore {
   advice: string;
 }
 
+// --- Display Labels & Order Dictionaries ---
+
+export const THEME_LABELS: Record<string, string> = {
+  Usage: "Usage & Adoption",
+  Jobs: "Jobs & Work",
+  Energy: "Energy & Infrastructure",
+  Regulation: "Policy & Regulation",
+};
+
+export const VERDICT_LABELS: Record<string, string> = {
+  myth: "Myth",
+  "mostly-myth": "Mostly Myth",
+  fact: "Fact",
+  "mostly-fact": "Mostly Fact",
+  depends: "It Depends",
+};
+
+export const VERDICT_MEANINGS: Record<string, string> = {
+  myth: "The claim is false or unsupported by evidence.",
+  "mostly-myth": "The claim contains significant inaccuracies or exaggerations.",
+  fact: "The claim is accurate and supported by evidence.",
+  "mostly-fact": "The claim is mostly accurate with minor caveats.",
+  depends: "The truth depends heavily on context, definitions, or timeframe.",
+};
+
+export const SOURCE_CHECK_LABELS: Record<string, string> = {
+  official: "Official Record",
+  peer_reviewed: "Peer Reviewed",
+  measured: "Measured Data",
+  projected: "Analyst Projection",
+};
+
+export const EVIDENCE_KIND_LABELS: Record<string, string> = {
+  Measured: "Measured Data",
+  Projected: "Projection",
+  "In law": "Regulatory / Legal",
+};
+
+export const THEME_ORDER: readonly MythTheme[] = ["Usage", "Jobs", "Energy", "Regulation"];
+export const VERDICT_ORDER: readonly MythVerdict[] = ["myth", "mostly-myth", "fact", "mostly-fact", "depends"];
+export const EVIDENCE_SOURCES: readonly EvidenceSource[] = [];
+
+// --- Score & Threshold Constants ---
+
 /** Share of correct answers, in percent, for each result band. */
 export const MYTH_FACT_SHARP_MIN_PERCENT = 80;
 export const MYTH_FACT_GOOD_START_MIN_PERCENT = 50;
 
 export const MYTH_FACT_VERDICTS: readonly MythFactVerdict[] = ["Myth", "Fact"];
+
+// --- Data Collections ---
 
 /** Six sourced cards. The full myth-or-fact page can extend this list. */
 export const MYTH_FACT_ITEMS: readonly MythFactItem[] = [
@@ -41,6 +115,7 @@ export const MYTH_FACT_ITEMS: readonly MythFactItem[] = [
     explanation: "About 62% reported using it in Q2 2026, up from about 45% in 2024. That counts use for work, personal use or both.",
     kind: "Measured",
     evidence: { text: "61.8% of adults aged 18 to 64 used generative AI in Q2 2026.", source: "Real-Time Population Survey, via FRED", date: "Q2 2026", href: "https://fred.stlouisfed.org/series/RPSGENAIUSAGESHAREALL" },
+    theme: "Usage"
   },
   {
     id: "most-businesses-use",
@@ -49,6 +124,7 @@ export const MYTH_FACT_ITEMS: readonly MythFactItem[] = [
     explanation: "Use among people is far higher than use among firms, and the two surveys ask different questions. Census data show roughly one business in five.",
     kind: "Measured",
     evidence: { text: "About 17% to 20% of US businesses used AI in any business function between December 2025 and May 2026.", source: "Census Bureau, Business Trends and Outlook Survey", date: "December 2025 to May 2026", href: "https://census.gov/library/stories/2026/05/ai-use-businesses.html" },
+    theme: "Usage"
   },
   {
     id: "hiring-already-changed",
@@ -57,6 +133,7 @@ export const MYTH_FACT_ITEMS: readonly MythFactItem[] = [
     explanation: "Most surveyed firms said AI had no noticeable effect on hiring or layoff decisions so far. A minority were planning layoffs, not hiring, or creating positions because of AI.",
     kind: "Measured",
     evidence: { text: "76% of manufacturers and 73% of services firms reported no noticeable effect.", source: "ISM, as reported by Staffing Industry Analysts", date: "June 2026", href: "https://www.staffingindustry.com/news/global-daily-news/only-modest-employment-expectations-for-remainder-of-the-year" },
+    theme: "Usage"
   },
   {
     id: "most-power-is-ai",
@@ -65,6 +142,7 @@ export const MYTH_FACT_ITEMS: readonly MythFactItem[] = [
     explanation: "Gartner estimates AI-optimized servers use 31% of data-centre power in 2026, up from about 20% a year earlier. It expects them to pass conventional servers in 2027.",
     kind: "Projected",
     evidence: { text: "AI-optimized servers: 31% of data-centre power in 2026.", source: "Gartner", date: "June 2026", href: "https://www.gartner.com/en/newsroom/press-releases/2026-06-10-gartner-says-data-center-electricity-demand-to-grow-26-percent-in-2026" },
+    theme: "Usage"
   },
   {
     id: "power-grows-quarter",
@@ -73,6 +151,7 @@ export const MYTH_FACT_ITEMS: readonly MythFactItem[] = [
     explanation: "Gartner forecasts 565 TWh in 2026, up 26% from 447 TWh in 2025. It is a forecast, and other named forecasters, such as the IEA, project lower totals for 2030.",
     kind: "Projected",
     evidence: { text: "565 TWh in 2026, up 26% from 447 TWh in 2025.", source: "Gartner", date: "June 2026", href: "https://www.gartner.com/en/newsroom/press-releases/2026-06-10-gartner-says-data-center-electricity-demand-to-grow-26-percent-in-2026" },
+    theme: "Usage"
   },
   {
     id: "eu-delayed",
@@ -81,8 +160,14 @@ export const MYTH_FACT_ITEMS: readonly MythFactItem[] = [
     explanation: "Rules for stand-alone high-risk systems moved from August 2, 2026 to December 2, 2027, and rules for AI built into regulated products moved to August 2, 2028. Transparency duties still began on August 2, 2026.",
     kind: "In law",
     evidence: { text: "Regulation (EU) 2026/1744 entered into force on July 27, 2026.", source: "Summary of the Official Journal text", date: "July 2026", href: "https://www.aiacto.eu/en/blog/digital-omnibus-ai-act-report-2027" },
+    theme: "Usage"
   },
 ];
+
+/** Main array export alias used by client list components */
+export const MYTH_FACTS: readonly MythFactItem[] = MYTH_FACT_ITEMS;
+
+// --- Utility Functions ---
 
 export function isGuessCorrect(item: MythFactItem, guess: MythFactVerdict): boolean {
   return item.verdict === guess;

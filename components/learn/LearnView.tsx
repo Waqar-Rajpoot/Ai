@@ -120,16 +120,19 @@ export function LearnView() {
       <Section id="glossary" title="Glossary" intro={`${GLOSSARY_TERM_COUNT} plain-English definitions, each tagged by level and linked to the guide that explains it.`}>
         <div className={`${CARD_CLASS} flex flex-wrap items-center justify-between gap-4`}>
           <ul className="m-0 flex list-none flex-wrap gap-2 p-0">
-            {glossaryShortcutTerms.map((entry) => (
-              <li key={entry.id}>
-                <Link
-                  href={`/learn/glossary#${entry.id}`}
-                  className={`rounded-full border border-[var(--color-border)] px-3 py-1 text-sm text-[var(--color-text)] no-underline transition hover:border-[var(--color-accent)] motion-reduce:transition-none ${FOCUS_RING}`}
-                >
-                  {entry.term}
-                </Link>
-              </li>
-            ))}
+            {glossaryShortcutTerms.map((entry: any) => {
+              const termIdentifier = entry.slug || entry.id || entry.term;
+              return (
+                <li key={termIdentifier}>
+                  <Link
+                    href={`/learn/glossary#${termIdentifier}`}
+                    className={`rounded-full border border-[var(--color-border)] px-3 py-1 text-sm text-[var(--color-text)] no-underline transition hover:border-[var(--color-accent)] motion-reduce:transition-none ${FOCUS_RING}`}
+                  >
+                    {entry.term}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
           <Link href="/learn/glossary" className={BUTTON_OUTLINE}>Open the glossary</Link>
         </div>

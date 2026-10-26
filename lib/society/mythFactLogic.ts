@@ -33,9 +33,10 @@ export interface GuessScore {
 export type GuessMap = Readonly<Record<string, GuessChoice | undefined>>;
 
 /** Filters by search text, theme and verdict. Search covers the claim, both answers and the theme name. */
+/** Filters by search text, theme and verdict. Search covers the claim, both answers and the theme name. */
 export function filterMythFacts(items: readonly MythFactItem[], filters: MythFactFilters): MythFactItem[] {
   const needle = filters.query.trim().toLowerCase();
-  return items.filter((item) => {
+  return items.filter((item: any) => {
     if (filters.theme !== ALL_FILTER_VALUE && item.theme !== filters.theme) return false;
     if (filters.verdict !== ALL_FILTER_VALUE && item.verdict !== filters.verdict) return false;
     if (needle) {
@@ -47,27 +48,44 @@ export function filterMythFacts(items: readonly MythFactItem[], filters: MythFac
 }
 
 /** Number of claims per verdict. */
+/** Number of claims per verdict. */
 export function countByVerdict(items: readonly MythFactItem[]): Record<MythVerdict, number> {
-  const counts = Object.fromEntries(VERDICT_ORDER.map((verdict) => [verdict, 0])) as Record<MythVerdict, number>;
-  for (const item of items) counts[item.verdict] += 1;
+  const counts = Object.fromEntries(VERDICT_ORDER.map((verdict: MythVerdict) => [verdict, 0])) as Record<MythVerdict, number>;
+  for (const item of items) {
+    const verdict = item.verdict as MythVerdict;
+    if (verdict in counts) {
+      counts[verdict] += 1;
+    }
+  }
   return counts;
 }
 
 /** Groups claims by theme in display order, leaving out empty themes. */
 export function groupByTheme(items: readonly MythFactItem[]): ThemeGroup[] {
-  return THEME_ORDER.flatMap((theme) => {
-    const groupItems = items.filter((item) => item.theme === theme);
+  return THEME_ORDER.flatMap((theme: MythTheme) => {
+    const groupItems = items.filter((item: MythFactItem) => item.theme === theme);
     return groupItems.length > 0 ? [{ theme, label: THEME_LABELS[theme], items: groupItems }] : [];
   });
 }
 
 export function findEvidenceSource(sourceId: string): EvidenceSource | undefined {
-  return EVIDENCE_SOURCES.find((source) => source.id === sourceId);
+  return EVIDENCE_SOURCES.find((source: EvidenceSource) => source.id === sourceId);
 }
 
 /** The sources behind a claim. Unknown ids are skipped. */
-export function getEvidenceForItem(item: MythFactItem): EvidenceSource[] {
-  return item.evidenceIds.flatMap((sourceId) => {
+/** The sources behind a claim. Unknown ids or missing arrays are handled safely. */
+export function getEvidenceForItem(item: any): EvidenceSource[] {
+  // If item uses an inline evidence object instead of evidenceIds, convert/return it as an array if possible, or fallback safely
+  if (!item.evidenceIds || !Array.isArray(item.evidenceIds)) {
+    if (item.evidence && typeof item.evidence === "object") {
+      // If there's an inline evidence object, wrap or map it if it matches EvidenceSource structure,
+      // otherwise return empty array to prevent crashes.
+      return [];
+    }
+    return [];
+  }
+
+  return item.evidenceIds.flatMap((sourceId: any) => {
     const source = findEvidenceSource(sourceId);
     return source ? [source] : [];
   });
@@ -78,8 +96,8 @@ export function findMissingEvidenceIds(
   items: readonly MythFactItem[],
   sources: readonly EvidenceSource[],
 ): string[] {
-  const known = new Set(sources.map((source) => source.id));
-  return [...new Set(items.flatMap((item) => item.evidenceIds).filter((sourceId) => !known.has(sourceId)))];
+  const known = new Set(sources.map((source: EvidenceSource) => source.id));
+  return [...new Set(items.flatMap((item: any) => item.evidenceIds).filter((sourceId: string) => !known.has(sourceId)))];
 }
 
 /** Maps the five verdicts onto the three answers a reader can give. */

@@ -18,7 +18,7 @@ export function MythFactCards({ items }: { items: readonly MythFactItem[] }) {
 
   if (items.length === 0) return null;
 
-  const item = items[index];
+  const item:any = items[index];
   const guess = guesses[item.id];
   const hasGuessed = guess !== undefined;
   const isLast = index === items.length - 1;

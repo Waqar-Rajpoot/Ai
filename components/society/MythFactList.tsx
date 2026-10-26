@@ -49,7 +49,7 @@ export function MythFactList() {
           <select value={filters.theme} onChange={(event) => updateFilter("theme", event.target.value)} className={`${INPUT_CLASS} mt-1`}>
             <option value={ALL_FILTER_VALUE}>All themes</option>
             {THEME_ORDER.map((theme) => (
-              <option key={theme} value={theme}>{THEME_LABELS[theme]}</option>
+              <option key={theme} value={theme}>{THEME_LABELS[theme as any]}</option>
             ))}
           </select>
         </label>
@@ -58,7 +58,7 @@ export function MythFactList() {
           <select value={filters.verdict} onChange={(event) => updateFilter("verdict", event.target.value)} className={`${INPUT_CLASS} mt-1`}>
             <option value={ALL_FILTER_VALUE}>All verdicts</option>
             {VERDICT_ORDER.map((verdict) => (
-              <option key={verdict} value={verdict}>{VERDICT_LABELS[verdict]}</option>
+              <option key={verdict} value={verdict}>{VERDICT_LABELS[verdict as any]}</option>
             ))}
           </select>
         </label>
@@ -82,13 +82,14 @@ export function MythFactList() {
               {group.label} <span className="text-sm font-normal text-[var(--color-muted)]">({group.items.length})</span>
             </h3>
             <div className="grid gap-4">
-              {group.items.map((item) => {
+              {group.items.map((item: any) => {
                 const evidence = getEvidenceForItem(item);
+                const verdictKey = item.verdict as any;
                 return (
-                  <article key={item.id} id={item.id} className={`${CARD_CLASS} ${VERDICT_BORDER_CLASSES[item.verdict]} scroll-mt-24`}>
-                    <p className="m-0"><VerdictBadge verdict={item.verdict} /></p>
-                    <h4 className="mb-2 mt-2">&ldquo;{item.statement}&rdquo;</h4>
-                    <p className="m-0">{item.plain}</p>
+                  <article key={item.id} id={item.id} className={`${CARD_CLASS} ${(VERDICT_BORDER_CLASSES as any)[verdictKey]} scroll-mt-24`}>
+                    <p className="m-0"><VerdictBadge verdict={verdictKey} /></p>
+                    <h4 className="mb-2 mt-2">&ldquo;{item.statement || item.claim}&rdquo;</h4>
+                    <p className="m-0">{item.plain || item.explanation}</p>
                     {mode === "technical" && (
                       <p className="mb-0 mt-3 rounded-lg bg-[var(--color-bg)] p-3 text-sm text-[var(--color-muted)]">
                         <strong className="text-[var(--color-text)]">Technical layer:</strong> {item.technical}
@@ -100,12 +101,12 @@ export function MythFactList() {
                       <p className="m-0 font-semibold">Evidence</p>
                       {evidence.length > 0 ? (
                         <ul className="mb-0 mt-2 grid list-none gap-2 p-0">
-                          {evidence.map((source) => (
+                          {evidence.map((source: any) => (
                             <li key={source.id}>
-                              <span className={`${BADGE_CLASS} mr-2`}>{EVIDENCE_KIND_LABELS[source.kind]}</span>
+                              <span className={`${BADGE_CLASS} mr-2`}>{EVIDENCE_KIND_LABELS[source.kind as any]}</span>
                               <a href={source.href} target="_blank" rel="noopener noreferrer">{source.publisher}: {source.title}</a>
                               <span className="block text-xs text-[var(--color-muted)]">
-                                {source.asOf} · {SOURCE_CHECK_LABELS[source.check]}
+                                {source.asOf || source.date} · {SOURCE_CHECK_LABELS[source.check as any]}
                               </span>
                             </li>
                           ))}

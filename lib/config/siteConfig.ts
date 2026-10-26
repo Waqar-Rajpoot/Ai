@@ -9,3 +9,6 @@ export const SITE_CONFIG = {
   description:
     "Learn AI from first steps to expert topics, compare named models with dated tests, and stay current on prices and rules.",
 } as const;
+
+/** Alias so files can import `siteConfig`. It is the same object as `SITE_CONFIG`. */
+export const siteConfig = SITE_CONFIG;

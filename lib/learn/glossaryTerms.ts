@@ -1,6 +1,7 @@
 import type { LevelType } from "@/lib/shared/levels";
 
 export interface GlossaryTerm {
+  id?: string;
   term: string;
   /** Anchor used on the glossary page, for example "context-window". */
   slug: string;
@@ -99,3 +100,6 @@ export const GLOSSARY_LEVELS: readonly GlossaryLevelInfo[] = [
   { level: "powerUser", number: 3, name: "Power user and builder", audience: "freelancers, analysts, developers and team leads", hubHref: "/learn/power-user" },
   { level: "expert", number: 4, name: "Expert", audience: "developers, researchers, and IT or compliance leads", hubHref: "/learn/expert" },
 ];
+
+
+export type GlossaryLevel = LevelType; // Added to fix missing export

@@ -1,9 +1,12 @@
 "use client";
 
-import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
+import { createContext, useContext, useMemo, useState, type ReactNode, type Dispatch, type SetStateAction } from "react";
 import { FOCUS_RING } from "@/components/learn/learnStyles";
 
 export type DepthMode = "plain" | "technical";
+
+/** Re-exported alias so components importing ReadingMode don't break. */
+export type ReadingMode = DepthMode;
 
 interface DepthContextValue {
   mode: DepthMode;
@@ -24,9 +27,35 @@ export function DepthProvider({ children }: { children: ReactNode }) {
   return <DepthContext.Provider value={value}>{children}</DepthContext.Provider>;
 }
 
-/** The Plain / Technical switch. */
-export function PlainTechnicalToggle() {
-  const { mode, setMode } = useContext(DepthContext);
+interface PlainTechnicalToggleProps {
+  mode?: ReadingMode | boolean;
+  isTechnical?: boolean;
+  onChange?: ((mode: ReadingMode) => void) | Dispatch<SetStateAction<boolean>> | ((isTechnical: boolean) => void);
+}
+
+/** The Plain / Technical switch. Handles Context-based, controlled props, and boolean setters. */
+export function PlainTechnicalToggle({ mode: propMode, isTechnical, onChange }: PlainTechnicalToggleProps = {}) {
+  const context = useContext(DepthContext);
+  
+  // Resolve current mode to "plain" or "technical"
+  let currentMode: DepthMode = context.mode;
+  if (typeof isTechnical === "boolean") {
+    currentMode = isTechnical ? "technical" : "plain";
+  } else if (typeof propMode === "boolean") {
+    currentMode = propMode ? "technical" : "plain";
+  } else if (propMode) {
+    currentMode = propMode;
+  }
+
+  const handleModeChange = (newMode: ReadingMode) => {
+    if (onChange) {
+      if (typeof onChange === "function") {
+        (onChange as any)(newMode === "technical");
+      }
+    } else {
+      context.setMode(newMode);
+    }
+  };
 
   return (
     <div>
@@ -35,10 +64,10 @@ export function PlainTechnicalToggle() {
           <button
             key={option.value}
             type="button"
-            aria-pressed={mode === option.value}
-            onClick={() => setMode(option.value)}
+            aria-pressed={currentMode === option.value}
+            onClick={() => handleModeChange(option.value)}
             className={`rounded-full px-4 py-1.5 text-sm transition motion-reduce:transition-none ${FOCUS_RING} ${
-              mode === option.value ? "bg-[image:var(--gradient-accent)] font-semibold text-white" : "text-[var(--color-text)]"
+              currentMode === option.value ? "bg-[image:var(--gradient-accent)] font-semibold text-white" : "text-[var(--color-text)]"
             }`}
           >
             {option.label}

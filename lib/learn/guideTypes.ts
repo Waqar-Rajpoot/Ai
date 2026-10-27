@@ -6,15 +6,16 @@
 /** Learning level a guide belongs to. Extend as later levels are published. */
 export type GuideLevel = "foundations" | "practitioner" | "power-user" | "expert";
 
-/** Label shown on cards and at the top of the page. */
-export type GuideKind = "guide" | "safety";
+/** Label shown on cards and at the top of the page. "opinion" guides also show an opinion note. */
+export type GuideKind = "guide" | "safety" | "opinion";
 
 /** Who published the source. Vendor-reported claims are labelled as such on the page. */
 export type SourceKind =
   | "government"
   | "intergovernmental"
   | "vendor-reported"
-  | "research";
+  | "research"
+  | "university-guide";
 
 /** One official source behind a claim. Every source carries a verification date. */
 export interface GuideSource {
@@ -76,7 +77,7 @@ export interface GuideRecord {
   readonly level: GuideLevel;
   readonly kind: GuideKind;
   readonly title: string;
-  /** Meta description, 120 to 160 characters. */
+  /** Meta description, 90 to 160 characters (see `GUIDE_RULES`). */
   readonly metaDescription: string;
   /** One sentence shown on hub cards. */
   readonly cardSummary: string;

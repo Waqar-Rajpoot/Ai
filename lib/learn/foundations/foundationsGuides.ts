@@ -8,7 +8,7 @@ import { writeBetterPrompts } from "./guides/writeBetterPrompts";
 
 /**
  * Every Level 1 guide, in blueprint order (articles 1 to 6).
- * To add a guide: create a record in ./guides, add it here, run `npm run check:guides`.
+ * To add a guide: create a record in ./guides, add it here, run `npx tsx scripts/checkGuides.ts`.
  * To hide a guide, set `published: false`. Its card then shows "Coming soon" and its route 404s.
  */
 export const FOUNDATIONS_GUIDES: readonly GuideRecord[] = [

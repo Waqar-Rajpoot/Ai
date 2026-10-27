@@ -278,15 +278,15 @@ export const GOVERNANCE_NOTE =
   "General information, not legal advice. The rules apply in stages, so check the EU AI Act timeline for current dates, and the official text or a qualified adviser for your own case.";
 
 export const EXPERT_GUIDES: readonly ExpertGuideCard[] = [
-  { number: 26, title: "Run an AI model on your own computer", summary: "Hardware and memory, quantization, choosing a local model, and the privacy gains and limits.", href: "/learn/expert/run-ai-on-your-own-computer", kind: "Guide", minutes: 9, isPublished: false },
-  { number: 27, title: "How to read an AI benchmark: what the numbers hide", summary: "What benchmarks measure, vendor-reported versus independent, arena votes, contamination and margins.", href: "/learn/expert/how-to-read-ai-benchmark", kind: "Explainer", minutes: 9, isPublished: false },
-  { number: 28, title: "Prompt injection and agent security for everyday teams", summary: "What prompt injection is, data leakage, agent permissions and containment steps.", href: "/learn/expert/prompt-injection-agent-security", kind: "Safety", minutes: 8, isPublished: false },
-  { number: 29, title: "The EU AI Act for everyday users and small businesses", summary: "Who it applies to, the dates that matter, and AI literacy and transparency duties.", href: "/learn/expert/eu-ai-act-for-everyday-users", kind: "Explainer", minutes: 8, isPublished: false },
+  { number: 26, title: "Run an AI model on your own computer", summary: "Hardware and memory, quantization, choosing a local model, and the privacy gains and limits.", href: "/learn/expert/run-ai-on-your-own-computer", kind: "Guide", minutes: 9, isPublished: true },
+  { number: 27, title: "How to read an AI benchmark: what the numbers hide", summary: "What benchmarks measure, vendor-reported versus independent, arena votes, contamination and margins.", href: "/learn/expert/how-to-read-ai-benchmark", kind: "Explainer", minutes: 9, isPublished: true },
+  { number: 28, title: "Prompt injection and agent security for everyday teams", summary: "What prompt injection is, data leakage, agent permissions and containment steps.", href: "/learn/expert/prompt-injection-agent-security", kind: "Safety", minutes: 8, isPublished: true },
+  { number: 29, title: "The EU AI Act for everyday users and small businesses", summary: "Who it applies to, the dates that matter, and AI literacy and transparency duties.", href: "/learn/expert/eu-ai-act-for-everyday-users", kind: "Explainer", minutes: 8, isPublished: true },
 ];
 
 /** Article 25 is built under Compare and linked here so no page exists twice. */
 export const EXPERT_LINKED_EXPLAINER: readonly ExpertGuideCard[] = [
-  { number: 25, title: "Open-weight vs closed models", summary: "Definitions, cost, privacy, licences and hardware, and which to choose.", href: "/compare/open-vs-closed", kind: "Explainer", minutes: 8, isPublished: false },
+  { number: 25, title: "Open-weight vs closed models", summary: "Definitions, cost, privacy, licences and hardware, and which to choose.", href: "/compare/open-vs-closed", kind: "Explainer", minutes: 8, isPublished: true },
 ];
 
 export const EXPERT_WHAT_CAN_GO_WRONG: readonly string[] = [

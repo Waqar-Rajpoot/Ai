@@ -235,21 +235,21 @@ export const POLICY_CARDS: readonly TopicCard[] = [
 ];
 
 export const PRACTITIONER_GUIDES: readonly PractitionerGuideCard[] = [
-  { number: 7, title: "How to fact-check AI answers", summary: "A five-step routine, checking sources and quotes, and extra care for health, legal and money.", href: "/learn/practitioner/fact-check-ai-answers", kind: "Guide", minutes: 7, isPublished: false },
-  { number: 8, title: "How to use AI to study without cheating", summary: "Ask for steps and quizzes, not finished answers. School policies and how to disclose.", href: "/learn/practitioner/use-ai-to-study-without-cheating", kind: "Guide", minutes: 6, isPublished: false },
-  { number: 9, title: "How to summarize a PDF or long document with AI", summary: "Length limits, scans, tables and charts, and asking about a distant page.", href: "/learn/practitioner/summarize-pdf-with-ai", kind: "Guide", minutes: 6, isPublished: false },
-  { number: 10, title: "How to use AI for email and writing at work", summary: "Drafting and tone, fixed formats, keeping client data private and disclosure at work.", href: "/learn/practitioner/ai-for-email-and-writing-at-work", kind: "Guide", minutes: 6, isPublished: false },
-  { number: 11, title: "How to write a resume and prepare for interviews with AI", summary: "A resume prompt template, tailoring to a job post and mock interview prompts.", href: "/learn/practitioner/ai-resume-and-interview-prep", kind: "Guide", minutes: 8, isPublished: false },
-  { number: 12, title: "Deep research modes: how to use them and check the sources", summary: "Writing a research brief, checking the sources it gives, and cost and limits.", href: "/learn/practitioner/deep-research-modes", kind: "Guide", minutes: 7, isPublished: false },
-  { number: 16, title: "Is AI worth paying for? Our honest answer", summary: "Who should stay free, who should pay, and subscription versus API.", href: "/learn/practitioner/is-ai-worth-paying-for", kind: "Opinion", minutes: 6, isPublished: false },
-  { number: 30, title: "Where AI helps and where it fails (our testing)", summary: "Our test tasks, where it helped, where it failed, with test date and settings.", href: "/learn/practitioner/where-ai-helps-and-fails", kind: "Opinion", minutes: 8, isPublished: false },
+  { number: 7, title: "How to fact-check AI answers", summary: "A five-step routine, checking sources and quotes, and extra care for health, legal and money.", href: "/learn/practitioner/fact-check-ai-answers", kind: "Guide", minutes: 7, isPublished: true },
+  { number: 8, title: "How to use AI to study without cheating", summary: "Ask for steps and quizzes, not finished answers. School policies and how to disclose.", href: "/learn/practitioner/use-ai-to-study-without-cheating", kind: "Guide", minutes: 6, isPublished: true },
+  { number: 9, title: "How to summarize a PDF or long document with AI", summary: "Length limits, scans, tables and charts, and asking about a distant page.", href: "/learn/practitioner/summarize-pdf-with-ai", kind: "Guide", minutes: 6, isPublished: true },
+  { number: 10, title: "How to use AI for email and writing at work", summary: "Drafting and tone, fixed formats, keeping client data private and disclosure at work.", href: "/learn/practitioner/ai-for-email-and-writing-at-work", kind: "Guide", minutes: 6, isPublished: true },
+  { number: 11, title: "How to write a resume and prepare for interviews with AI", summary: "A resume prompt template, tailoring to a job post and mock interview prompts.", href: "/learn/practitioner/ai-resume-and-interview-prep", kind: "Guide", minutes: 8, isPublished: true },
+  { number: 12, title: "Deep research modes: how to use them and check the sources", summary: "Writing a research brief, checking the sources it gives, and cost and limits.", href: "/learn/practitioner/deep-research-modes", kind: "Guide", minutes: 7, isPublished: true },
+  { number: 16, title: "Is AI worth paying for? Our honest answer", summary: "Who should stay free, who should pay, and subscription versus API.", href: "/learn/practitioner/is-ai-worth-paying-for", kind: "Opinion", minutes: 6, isPublished: true },
+  { number: 30, title: "Where AI helps and where it fails (our testing)", summary: "Our test tasks, where it helped, where it failed, with test date and settings.", href: "/learn/practitioner/where-ai-helps-and-fails", kind: "Opinion", minutes: 8, isPublished: true },
 ];
 
 /** Articles 13 to 15 are built under Compare and linked here so no page exists twice. */
 export const PRACTITIONER_LINKED_COMPARISONS: readonly PractitionerGuideCard[] = [
-  { number: 13, title: "ChatGPT vs Claude vs Gemini vs Grok", summary: "The four consumer apps side by side: plans, limits, features and privacy.", href: "/compare/apps", kind: "Comparison", minutes: 8, isPublished: false },
-  { number: 14, title: "Best AI model right now, by job", summary: "Ranked by task, with the test date and the reasoning shown.", href: "/compare/best/by-job", kind: "Roundup", minutes: 6, isPublished: false },
-  { number: 15, title: "Best AI tools for students", summary: "Study-focused picks, with who should skip each.", href: "/compare/best/students", kind: "Roundup", minutes: 6, isPublished: false },
+  { number: 13, title: "ChatGPT vs Claude vs Gemini vs Grok", summary: "The four consumer apps side by side: plans, limits, features and privacy.", href: "/compare/apps", kind: "Comparison", minutes: 8, isPublished: true },
+  { number: 14, title: "Best AI model right now, by job", summary: "Ranked by task, with the test date and the reasoning shown.", href: "/compare/best/by-job", kind: "Roundup", minutes: 6, isPublished: true },
+  { number: 15, title: "Best AI tools for students", summary: "Study-focused picks, with who should skip each.", href: "/compare/best/students", kind: "Roundup", minutes: 6, isPublished: true },
 ];
 
 /** Sources already vetted on the Foundations page that also back Level 2 claims. */

@@ -259,18 +259,18 @@ export const ROUTING_ROWS: readonly RoutingRow[] = [
 ];
 
 export const POWER_USER_GUIDES: readonly PowerUserGuideCard[] = [
-  { number: 17, title: "Context windows, tokens and memory explained", summary: "Tokens versus words, what a window holds, and memory versus context.", href: "/learn/power-user/context-windows-tokens-memory", kind: "Explainer", minutes: 7, isPublished: false },
-  { number: 18, title: "Reasoning models and effort settings: when thinking longer helps", summary: "What reasoning models do, when more effort helps, and when it only costs more.", href: "/learn/power-user/reasoning-models-effort-settings", kind: "Explainer", minutes: 7, isPublished: false },
-  { number: 19, title: "RAG explained: making AI answer from your documents", summary: "Retrieval in plain English, embeddings, when RAG beats a long prompt, and failure modes.", href: "/learn/power-user/rag-explained", kind: "Explainer", minutes: 8, isPublished: false },
-  { number: 20, title: "AI agents explained: what they can do and how they fail", summary: "Coding and computer-use agents, long-running tasks and how agents fail.", href: "/learn/power-user/ai-agents-explained", kind: "Explainer", minutes: 8, isPublished: false },
-  { number: 21, title: "MCP and connectors: giving AI access to your tools safely", summary: "What MCP is, connectors in practice, permissions and a safe setup checklist.", href: "/learn/power-user/mcp-and-connectors", kind: "Explainer", minutes: 7, isPublished: false },
-  { number: 22, title: "AI API pricing for non-engineers: cost per task, not per token", summary: "Input and output tokens, caching, batch pricing and a worked example.", href: "/learn/power-user/ai-api-pricing-for-non-engineers", kind: "Guide", minutes: 8, isPublished: false },
-  { number: 23, title: "Build your own AI test set in one afternoon", summary: "Pick 10 tasks, build a scoring sheet, run and record, and plan re-tests.", href: "/learn/power-user/build-your-own-ai-test-set", kind: "Guide", minutes: 8, isPublished: false },
+  { number: 17, title: "Context windows, tokens and memory explained", summary: "Tokens versus words, what a window holds, and memory versus context.", href: "/learn/power-user/context-windows-tokens-memory", kind: "Explainer", minutes: 7, isPublished: true },
+  { number: 18, title: "Reasoning models and effort settings: when thinking longer helps", summary: "What reasoning models do, when more effort helps, and when it only costs more.", href: "/learn/power-user/reasoning-models-effort-settings", kind: "Explainer", minutes: 7, isPublished: true },
+  { number: 19, title: "RAG explained: making AI answer from your documents", summary: "Retrieval in plain English, embeddings, when RAG beats a long prompt, and failure modes.", href: "/learn/power-user/rag-explained", kind: "Explainer", minutes: 8, isPublished: true },
+  { number: 20, title: "AI agents explained: what they can do and how they fail", summary: "Coding and computer-use agents, long-running tasks and how agents fail.", href: "/learn/power-user/ai-agents-explained", kind: "Explainer", minutes: 8, isPublished: true },
+  { number: 21, title: "MCP and connectors: giving AI access to your tools safely", summary: "What MCP is, connectors in practice, permissions and a safe setup checklist.", href: "/learn/power-user/mcp-and-connectors", kind: "Explainer", minutes: 7, isPublished: true },
+  { number: 22, title: "AI API pricing for non-engineers: cost per task, not per token", summary: "Input and output tokens, caching, batch pricing and a worked example.", href: "/learn/power-user/ai-api-pricing-for-non-engineers", kind: "Guide", minutes: 8, isPublished: true },
+  { number: 23, title: "Build your own AI test set in one afternoon", summary: "Pick 10 tasks, build a scoring sheet, run and record, and plan re-tests.", href: "/learn/power-user/build-your-own-ai-test-set", kind: "Guide", minutes: 8, isPublished: true },
 ];
 
 /** Article 24 is built under Compare and linked here so no page exists twice. */
 export const POWER_USER_LINKED_HEAD_TO_HEAD: readonly PowerUserGuideCard[] = [
-  { number: 24, title: "Claude Opus 5.5 vs GPT-6.1 Sol: ten everyday tasks", summary: "Two models, the same ten tasks, one test day, and cost per task.", href: "/compare/vs/claude-opus-5-5-vs-gpt-6-1-sol", kind: "Head-to-head", minutes: 10, isPublished: false },
+  { number: 24, title: "Claude Opus 5.5 vs GPT-6.1 Sol: ten everyday tasks", summary: "Two models, the same ten tasks, one test day, and cost per task.", href: "/compare/vs/claude-opus-5-5-vs-gpt-6-1-sol", kind: "Head-to-head", minutes: 10, isPublished: true },
 ];
 
 export const POWER_USER_SOURCES: readonly SourceEntry[] = [

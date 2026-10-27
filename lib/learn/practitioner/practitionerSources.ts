@@ -1,0 +1,173 @@
+import type { GuideSource } from "../guideTypes";
+
+/**
+ * Sources for the Practitioner guides. One record per source, so a re-check
+ * updates every guide that cites it. `verifiedOn` is the day each page was
+ * opened and the claims made from it were confirmed.
+ * Sources shared with Level 1 (for example the NCSC post) stay in
+ * `foundationsSources.ts` and are imported by the guides that need them.
+ */
+const VERIFIED_ON = "2026-10-27";
+
+export const PRACTITIONER_SOURCES = {
+  siftMethod: {
+    id: "sift-method",
+    title: "SIFT method (Stop, Investigate the source, Find better coverage, Trace claims)",
+    publisher: "UC Merced Library",
+    url: "https://libguides.ucmerced.edu/news/evaluation/sift-method",
+    kind: "university-guide",
+    verifiedOn: VERIFIED_ON,
+  },
+  stanfordLateralReading: {
+    id: "stanford-lateral-reading",
+    title: "It doesn't take long to learn how to spot misinformation online, Stanford study finds",
+    publisher: "Stanford Graduate School of Education",
+    url: "https://ed.stanford.edu/news/it-doesn-t-take-long-learn-how-spot-misinformation-online-stanford-study-finds",
+    kind: "research",
+    verifiedOn: VERIFIED_ON,
+  },
+  ebuNewsIntegrity: {
+    id: "ebu-news-integrity",
+    title: "Largest study of its kind shows AI assistants misrepresent news content 45% of the time",
+    publisher: "VRT, a public broadcaster in the EBU and BBC study (October 2025)",
+    url: "https://communication.vrt.be/largest-study-of-its-kind-shows-ai-assistants-misrepresent-news-content-45-of-the-time-regardless-of-language-or-territory",
+    kind: "research",
+    verifiedOn: VERIFIED_ON,
+  },
+  stanfordLegalHallucination: {
+    id: "stanford-legal-hallucination",
+    title: "Hallucination-Free? Assessing the Reliability of Leading AI Legal Research Tools (Journal of Empirical Legal Studies, 2025)",
+    publisher: "Stanford researchers (Magesh and others)",
+    url: "https://nlp.stanford.edu/~manning/papers/Magesh-Hallucination%E2%80%90Free-2025.pdf",
+    kind: "research",
+    verifiedOn: VERIFIED_ON,
+  },
+  geminiSources: {
+    id: "gemini-sources",
+    title: "View related sources & double-check responses from Gemini Apps",
+    publisher: "Google Gemini Apps Help",
+    url: "https://support.google.com/gemini/answer/14143489",
+    kind: "vendor-reported",
+    verifiedOn: VERIFIED_ON,
+  },
+  bastaniGuardrails: {
+    id: "bastani-guardrails",
+    title: "Without guardrails, generative AI can harm education (on Bastani and others, PNAS 2025)",
+    publisher: "Knowledge at Wharton",
+    url: "https://knowledge.wharton.upenn.edu/article/without-guardrails-generative-ai-can-harm-education",
+    kind: "research",
+    verifiedOn: VERIFIED_ON,
+  },
+  openaiStudyMode: {
+    id: "openai-study-mode",
+    title: "ChatGPT study mode",
+    publisher: "OpenAI Help Center",
+    url: "https://help.openai.com/en/articles/11780217-chatgpt-study-mode",
+    kind: "vendor-reported",
+    verifiedOn: VERIFIED_ON,
+  },
+  anthropicClaudeForEducation: {
+    id: "anthropic-claude-for-education",
+    title: "Introducing Claude for Education",
+    publisher: "Anthropic",
+    url: "https://www.anthropic.com/news/introducing-claude-for-education",
+    kind: "vendor-reported",
+    verifiedOn: VERIFIED_ON,
+  },
+  liangDetectorBias: {
+    id: "liang-detector-bias",
+    title: "GPT detectors are biased against non-native English writers",
+    publisher: "arXiv (Liang, Yuksekgonul, Mao, Wu and Zou)",
+    url: "https://arxiv.org/abs/2304.02819",
+    kind: "research",
+    verifiedOn: VERIFIED_ON,
+  },
+  claudeUploads: {
+    id: "claude-uploads",
+    title: "Uploading files to Claude",
+    publisher: "Anthropic Help Center",
+    url: "https://support.claude.com/en/articles/8241126-uploading-files-to-claude",
+    kind: "vendor-reported",
+    verifiedOn: VERIFIED_ON,
+  },
+  openaiFileUploads: {
+    id: "openai-file-uploads",
+    title: "File Uploads FAQ",
+    publisher: "OpenAI Help Center",
+    url: "https://help.openai.com/en/articles/8555545-file-uploads-faq",
+    kind: "vendor-reported",
+    verifiedOn: VERIFIED_ON,
+  },
+  liuLostInTheMiddle: {
+    id: "liu-lost-in-the-middle",
+    title: "Lost in the Middle: How Language Models Use Long Contexts (preprint)",
+    publisher: "arXiv (Liu and others)",
+    url: "https://arxiv.org/abs/2307.03172",
+    kind: "research",
+    verifiedOn: VERIFIED_ON,
+  },
+  noyZhangWriting: {
+    id: "noy-zhang-writing",
+    title: "Experimental Evidence on the Productivity Effects of Generative Artificial Intelligence (working paper version)",
+    publisher: "MIT, Noy and Zhang",
+    url: "https://economics.mit.edu/sites/default/files/inline-files/Noy_Zhang_1_0.pdf",
+    kind: "research",
+    verifiedOn: VERIFIED_ON,
+  },
+  topResumeSurveyViaChamber: {
+    id: "topresume-survey-chamber",
+    title: "Hiring and AI-written job applications (reports a TopResume survey of 600 US hiring managers, August 2025)",
+    publisher: "CO— by the U.S. Chamber of Commerce",
+    url: "https://uschamber.com/co/run/human-resources/hiring-ai-job-applications",
+    kind: "vendor-reported",
+    verifiedOn: VERIFIED_ON,
+  },
+  ftcJobScams: {
+    id: "ftc-job-scams",
+    title: "How to spot a job scam (September 2025)",
+    publisher: "US Federal Trade Commission",
+    url: "https://consumer.ftc.gov/consumer-alerts/2025/09/how-spot-job-scam",
+    kind: "government",
+    verifiedOn: VERIFIED_ON,
+  },
+  openaiDeepResearchFaq: {
+    id: "openai-deep-research-faq",
+    title: "Deep research in ChatGPT FAQ",
+    publisher: "OpenAI Help Center",
+    url: "https://help.openai.com/en/articles/10500283-deep-research-faq",
+    kind: "vendor-reported",
+    verifiedOn: VERIFIED_ON,
+  },
+  geminiDeepResearch: {
+    id: "gemini-deep-research",
+    title: "Use Deep Research in Gemini Apps",
+    publisher: "Google Gemini Apps Help",
+    url: "https://support.google.com/gemini/answer/15719111",
+    kind: "vendor-reported",
+    verifiedOn: VERIFIED_ON,
+  },
+  claudeResearch: {
+    id: "claude-research",
+    title: "Use Research on Claude",
+    publisher: "Anthropic Help Center",
+    url: "https://support.claude.com/en/articles/11088861-use-research-on-claude",
+    kind: "vendor-reported",
+    verifiedOn: VERIFIED_ON,
+  },
+  claudePaidPlan: {
+    id: "claude-paid-plan",
+    title: "What is the Pro plan?",
+    publisher: "Anthropic Help Center",
+    url: "https://support.claude.com/en/articles/8325606-what-is-the-pro-plan",
+    kind: "vendor-reported",
+    verifiedOn: VERIFIED_ON,
+  },
+  metrDeveloperStudy: {
+    id: "metr-developer-study",
+    title: "Measuring the impact of early-2025 AI on experienced open-source developer productivity",
+    publisher: "METR",
+    url: "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/",
+    kind: "research",
+    verifiedOn: VERIFIED_ON,
+  },
+} as const satisfies Record<string, GuideSource>;

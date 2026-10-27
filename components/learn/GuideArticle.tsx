@@ -4,6 +4,9 @@ import {
   GUIDE_KIND_LABELS,
   GUIDE_LAYOUT_LABELS,
   LEVEL_BASE_PATHS,
+  LEVEL_LABELS,
+  LEVEL_NUMBERS,
+  OPINION_NOTE_TEXT,
   PRICE_NOTICE_TEXT,
   SOURCE_KIND_LABELS,
 } from "@/lib/learn/guideConfig";
@@ -38,13 +41,13 @@ export function GuideArticle({ guide, relatedGuides }: GuideArticleProps) {
           <li aria-hidden="true">/</li>
           <li><Link className="underline" href="/learn">Learn</Link></li>
           <li aria-hidden="true">/</li>
-          <li><Link className="underline" href={levelPath}>Foundations</Link></li>
+          <li><Link className="underline" href={levelPath}>{LEVEL_LABELS[guide.level]}</Link></li>
         </ol>
       </nav>
 
       <header className="mt-4">
         <p className="text-sm text-slate-600">
-          Level 1 · {GUIDE_KIND_LABELS[guide.kind]} {guide.number} · {estimateReadMinutes(guide)} min read
+          Level {LEVEL_NUMBERS[guide.level]} · {GUIDE_KIND_LABELS[guide.kind]} {guide.number} · {estimateReadMinutes(guide)} min read
         </p>
         <h1 className="mt-1 text-3xl font-bold text-slate-900">{guide.title}</h1>
         <p className="mt-2 text-sm text-slate-600">
@@ -52,6 +55,12 @@ export function GuideArticle({ guide, relatedGuides }: GuideArticleProps) {
           <time dateTime={guide.lastReviewed}>{formatIsoDate(guide.lastReviewed)}</time>.
         </p>
       </header>
+
+      {guide.kind === "opinion" && (
+        <p className="mt-4 rounded border-l-4 border-slate-500 bg-slate-50 p-3 text-sm text-slate-800">
+          {OPINION_NOTE_TEXT}
+        </p>
+      )}
 
       <section aria-labelledby="summary-heading" className="mt-6 rounded-lg border border-slate-300 bg-slate-50 p-4">
         <h2 id="summary-heading" className="text-lg font-semibold text-slate-900">

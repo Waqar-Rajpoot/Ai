@@ -277,12 +277,12 @@ export const VERIFY_STEPS: readonly string[] = [
 ];
 
 export const GUIDES: readonly GuideCard[] = [
-  { number: 1, title: "What is AI? A plain-English guide", summary: "Machine learning, generative AI, chatbots and where you already meet them.", href: "/learn/foundations/what-is-ai", kind: "Guide", minutes: 6, isPublished: false },
-  { number: 2, title: "How AI chatbots work, without math", summary: "Learning from examples, predicting the next word, and why answers sound sure.", href: "/learn/foundations/how-ai-chatbots-work", kind: "Guide", minutes: 7, isPublished: false },
-  { number: 3, title: "How to write better prompts (20 examples)", summary: "The five-part formula with copy-ready examples for study, work, home and money.", href: "/learn/foundations/write-better-prompts", kind: "Guide", minutes: 8, isPublished: false },
-  { number: 4, title: "Free vs paid AI: what you actually get", summary: "What free plans give, who should upgrade, ads, and avoiding surprise renewals.", href: "/learn/foundations/free-vs-paid-ai", kind: "Guide", minutes: 6, isPublished: false },
-  { number: 5, title: "What you should never share with an AI chatbot", summary: "The never-paste list, how to turn off data sharing, and safer ways to get help.", href: "/learn/foundations/never-share-with-ai-chatbot", kind: "Safety", minutes: 5, isPublished: false },
-  { number: 6, title: "AI scams and deepfakes: how to spot them", summary: "Cloned voices, fake videos, fake reviews, phishing and how to verify.", href: "/learn/foundations/ai-scams-and-deepfakes", kind: "Safety", minutes: 6, isPublished: false },
+  { number: 1, title: "What is AI? A plain-English guide", summary: "Machine learning, generative AI, chatbots and where you already meet them.", href: "/learn/foundations/what-is-ai", kind: "Guide", minutes: 6, isPublished: true },
+  { number: 2, title: "How AI chatbots work, without math", summary: "Learning from examples, predicting the next word, and why answers sound sure.", href: "/learn/foundations/how-ai-chatbots-work", kind: "Guide", minutes: 7, isPublished: true },
+  { number: 3, title: "How to write better prompts (20 examples)", summary: "The five-part formula with copy-ready examples for study, work, home and money.", href: "/learn/foundations/write-better-prompts", kind: "Guide", minutes: 8, isPublished: true },
+  { number: 4, title: "Free vs paid AI: what you actually get", summary: "What free plans give, who should upgrade, ads, and avoiding surprise renewals.", href: "/learn/foundations/free-vs-paid-ai", kind: "Guide", minutes: 6, isPublished: true },
+  { number: 5, title: "What you should never share with an AI chatbot", summary: "The never-paste list, how to turn off data sharing, and safer ways to get help.", href: "/learn/foundations/never-share-with-ai-chatbot", kind: "Safety", minutes: 5, isPublished: true },
+  { number: 6, title: "AI scams and deepfakes: how to spot them", summary: "Cloned voices, fake videos, fake reviews, phishing and how to verify.", href: "/learn/foundations/ai-scams-and-deepfakes", kind: "Safety", minutes: 6, isPublished: true },
 ];
 
 export const SOURCES: readonly SourceEntry[] = [

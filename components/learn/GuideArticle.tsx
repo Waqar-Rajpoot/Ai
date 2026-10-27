@@ -10,6 +10,7 @@ import {
   PRICE_NOTICE_TEXT,
   SOURCE_KIND_LABELS,
 } from "@/lib/learn/guideConfig";
+
 import {
   estimateReadMinutes,
   formatIsoDate,
@@ -32,22 +33,26 @@ interface GuideArticleProps {
 export function GuideArticle({ guide, relatedGuides }: GuideArticleProps) {
   const sourceNumbers = new Map(guide.sources.map((source, index) => [source.id, index + 1]));
   const levelPath = LEVEL_BASE_PATHS[guide.level];
-
+const levelNumber = guide.level === "compare" ? null : LEVEL_NUMBERS[guide.level];
   return (
     <article className="mx-auto max-w-3xl px-4 py-8">
       <nav aria-label="Breadcrumb" className="text-sm text-slate-600">
         <ol className="flex flex-wrap gap-x-2">
-          <li><Link className="underline" href="/">Home</Link></li>
-          <li aria-hidden="true">/</li>
-          <li><Link className="underline" href="/learn">Learn</Link></li>
-          <li aria-hidden="true">/</li>
-          <li><Link className="underline" href={levelPath}>{LEVEL_LABELS[guide.level]}</Link></li>
-        </ol>
+  <li><Link className="underline" href="/">Home</Link></li>
+  <li aria-hidden="true">/</li>
+  {levelNumber !== null && (
+    <>
+      <li><Link className="underline" href="/learn">Learn</Link></li>
+      <li aria-hidden="true">/</li>
+    </>
+  )}
+  <li><Link className="underline" href={levelPath}>{LEVEL_LABELS[guide.level]}</Link></li>
+</ol>
       </nav>
 
       <header className="mt-4">
         <p className="text-sm text-slate-600">
-          Level {LEVEL_NUMBERS[guide.level]} · {GUIDE_KIND_LABELS[guide.kind]} {guide.number} · {estimateReadMinutes(guide)} min read
+          Level {levelNumber} · {GUIDE_KIND_LABELS[guide.kind]} {guide.number} · {estimateReadMinutes(guide)} min read
         </p>
         <h1 className="mt-1 text-3xl font-bold text-slate-900">{guide.title}</h1>
         <p className="mt-2 text-sm text-slate-600">

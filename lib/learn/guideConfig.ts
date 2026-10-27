@@ -1,38 +1,35 @@
 import type { GuideKind, GuideLevel, GuideLink, SourceKind } from "./guideTypes";
 
-/** Route prefix for each learning level. */
+/** Route prefix for each level. "compare" pages live once under /compare. */
 export const LEVEL_BASE_PATHS: Record<GuideLevel, string> = {
   foundations: "/learn/foundations",
   practitioner: "/learn/practitioner",
   "power-user": "/learn/power-user",
   expert: "/learn/expert",
+  compare: "/compare",
 };
 
-/** Reader-facing name of each learning level. */
+/** Reader-facing name of each level. */
 export const LEVEL_LABELS: Record<GuideLevel, string> = {
   foundations: "Foundations",
   practitioner: "Practitioner",
   "power-user": "Power user",
   expert: "Expert",
+  compare: "Compare",
 };
 
-/** Position of each level in the learning path, shown as "Level N". */
-export const LEVEL_NUMBERS: Record<GuideLevel, number> = {
+/** Position of each learning level in the path, shown as "Level N". Comparison pages have none. */
+export const LEVEL_NUMBERS: Record<Exclude<GuideLevel, "compare">, number> = {
   foundations: 1,
   practitioner: 2,
   "power-user": 3,
   expert: 4,
 };
 
-/**
- * Site pages that guides link to but that are not guides. Change a path here
- * once and every guide follows. Paths for the comparison and roundup pages are
- * assumptions: set them to the real routes when those pages exist.
- */
 export const LINKED_PAGES = {
   chatbotComparison: { label: "ChatGPT vs Claude vs Gemini vs Grok", href: "/compare/chatgpt-vs-claude-vs-gemini-vs-grok" },
-  bestModelByJob: { label: "Best AI model right now, by job", href: "/best/ai-model-by-job" },
-  bestToolsForStudents: { label: "Best AI tools for students", href: "/best/ai-tools-for-students" },
+  bestModelByJob: { label: "Best AI model right now, by job", href: "/compare/best-ai-model-by-job" },
+  bestToolsForStudents: { label: "Best AI tools for students", href: "/compare/best-ai-tools-for-students" },
   consumerPlans: { label: "Consumer plan table", href: "/prices/plans" },
   freePlanLimits: { label: "Free-plan limits", href: "/prices/free-limits" },
   costCalculator: { label: "Subscription cost calculator", href: "/tools/subscription-cost-calculator" },

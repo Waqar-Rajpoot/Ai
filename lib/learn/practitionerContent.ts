@@ -248,8 +248,8 @@ export const PRACTITIONER_GUIDES: readonly PractitionerGuideCard[] = [
 /** Articles 13 to 15 are built under Compare and linked here so no page exists twice. */
 export const PRACTITIONER_LINKED_COMPARISONS: readonly PractitionerGuideCard[] = [
   { number: 13, title: "ChatGPT vs Claude vs Gemini vs Grok", summary: "The four consumer apps side by side: plans, limits, features and privacy.", href: "/compare/apps", kind: "Comparison", minutes: 8, isPublished: true },
-  { number: 14, title: "Best AI model right now, by job", summary: "Ranked by task, with the test date and the reasoning shown.", href: "/compare/best/by-job", kind: "Roundup", minutes: 6, isPublished: true },
-  { number: 15, title: "Best AI tools for students", summary: "Study-focused picks, with who should skip each.", href: "/compare/best/students", kind: "Roundup", minutes: 6, isPublished: true },
+  { number: 14, title: "Best AI model right now, by job", summary: "Ranked by task, with the test date and the reasoning shown.", href: "/compare/best-ai-model-by-job", kind: "Roundup", minutes: 6, isPublished: true },
+  { number: 15, title: "Best AI tools for students", summary: "Study-focused picks, with who should skip each.", href: "/compare/best-ai-tools-for-students", kind: "Roundup", minutes: 6, isPublished: true },
 ];
 
 /** Sources already vetted on the Foundations page that also back Level 2 claims. */

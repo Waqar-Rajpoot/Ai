@@ -4,7 +4,7 @@
  */
 
 /** Learning level a guide belongs to. Extend as later levels are published. */
-export type GuideLevel = "foundations" | "practitioner" | "power-user" | "expert";
+export type GuideLevel = "foundations" | "practitioner" | "power-user" | "expert" | "compare";
 
 /** Label shown on cards and at the top of the page. "opinion" guides also show an opinion note. */
 export type GuideKind = "guide" | "safety" | "opinion";

@@ -1,5 +1,6 @@
 import { COMPARE_GUIDES } from "../compare/compareGuides";
 import { HEAD_TO_HEAD_GUIDES } from "../compare/headToHeadGuides";
+import { EXPERT_GUIDES } from "./expert/expertGuides";
 import { FOUNDATIONS_GUIDES } from "./foundations/foundationsGuides";
 import type { GuideRecord } from "./guideTypes";
 import { POWER_USER_GUIDES } from "./power-user/powerUserGuides";
@@ -13,6 +14,7 @@ export const ALL_GUIDES: readonly GuideRecord[] = [
   ...FOUNDATIONS_GUIDES,
   ...PRACTITIONER_GUIDES,
   ...POWER_USER_GUIDES,
+  ...EXPERT_GUIDES,
   ...COMPARE_GUIDES,
   ...HEAD_TO_HEAD_GUIDES,
 ];

@@ -28,7 +28,11 @@ export const LEVEL_NUMBERS: Record<LearningLevel, number> = {
   expert: 4,
 };
 
-
+/**
+ * Site pages that guides link to but that are not guides. Change a path here
+ * once and every guide follows. The three comparison pages (articles 13 to 15)
+ * now live under /compare and are built from `lib/compare/`.
+ */
 export const LINKED_PAGES = {
   chatbotComparison: { label: "ChatGPT vs Claude vs Gemini vs Grok", href: "/compare/chatgpt-vs-claude-vs-gemini-vs-grok" },
   bestModelByJob: { label: "Best AI model right now, by job", href: "/compare/best-ai-model-by-job" },
@@ -39,6 +43,11 @@ export const LINKED_PAGES = {
   modelDirectory: { label: "Model directory", href: "/compare/models" },
   benchmarkChecklist: { label: "Benchmark reading checklist", href: "/tools/benchmark-checklist" },
   powerUserHub: { label: "Level 3: Power user", href: "/learn/power-user" },
+  expertHub: { label: "Level 4: Expert", href: "/learn/expert" },
+  localModelMemory: { label: "Local model memory estimator", href: "/tools/local-model-memory" },
+  benchmarkPrices: { label: "Benchmarks table", href: "/prices/benchmarks" },
+  euAiActTimeline: { label: "EU AI Act timeline", href: "/news/eu-ai-act" },
+  openVsClosed: { label: "Open vs closed models", href: "/compare/open-vs-closed" },
   consumerPlans: { label: "Consumer plan table", href: "/prices/plans" },
   freePlanLimits: { label: "Free-plan limits", href: "/prices/free-limits" },
   costCalculator: { label: "Subscription cost calculator", href: "/tools/subscription-cost-calculator" },

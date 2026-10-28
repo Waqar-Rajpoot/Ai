@@ -1,35 +1,44 @@
-import type { GuideKind, GuideLevel, GuideLink, SourceKind } from "./guideTypes";
+import type { GuideKind, GuideLevel, GuideLink, LearningLevel, SourceKind } from "./guideTypes";
 
-/** Route prefix for each level. "compare" pages live once under /compare. */
+/** Route prefix for each learning level. */
 export const LEVEL_BASE_PATHS: Record<GuideLevel, string> = {
   foundations: "/learn/foundations",
   practitioner: "/learn/practitioner",
   "power-user": "/learn/power-user",
   expert: "/learn/expert",
   compare: "/compare",
+  "head-to-head": "/compare/vs",
 };
 
-/** Reader-facing name of each level. */
+/** Reader-facing name of each learning level. */
 export const LEVEL_LABELS: Record<GuideLevel, string> = {
   foundations: "Foundations",
   practitioner: "Practitioner",
   "power-user": "Power user",
   expert: "Expert",
   compare: "Compare",
+  "head-to-head": "Head-to-head",
 };
 
 /** Position of each learning level in the path, shown as "Level N". Comparison pages have none. */
-export const LEVEL_NUMBERS: Record<Exclude<GuideLevel, "compare">, number> = {
+export const LEVEL_NUMBERS: Record<LearningLevel, number> = {
   foundations: 1,
   practitioner: 2,
   "power-user": 3,
   expert: 4,
 };
 
+
 export const LINKED_PAGES = {
   chatbotComparison: { label: "ChatGPT vs Claude vs Gemini vs Grok", href: "/compare/chatgpt-vs-claude-vs-gemini-vs-grok" },
   bestModelByJob: { label: "Best AI model right now, by job", href: "/compare/best-ai-model-by-job" },
   bestToolsForStudents: { label: "Best AI tools for students", href: "/compare/best-ai-tools-for-students" },
+  apiPrices: { label: "API price table", href: "/prices/api" },
+  apiCostCalculator: { label: "API cost calculator", href: "/tools/api-cost-calculator" },
+  tokenEstimator: { label: "Token and context estimator", href: "/tools/token-estimator" },
+  modelDirectory: { label: "Model directory", href: "/compare/models" },
+  benchmarkChecklist: { label: "Benchmark reading checklist", href: "/tools/benchmark-checklist" },
+  powerUserHub: { label: "Level 3: Power user", href: "/learn/power-user" },
   consumerPlans: { label: "Consumer plan table", href: "/prices/plans" },
   freePlanLimits: { label: "Free-plan limits", href: "/prices/free-limits" },
   costCalculator: { label: "Subscription cost calculator", href: "/tools/subscription-cost-calculator" },
@@ -59,6 +68,8 @@ export const GUIDE_KIND_LABELS: Record<GuideKind, string> = {
   guide: "Guide",
   safety: "Safety",
   opinion: "Opinion",
+  explainer: "Explainer",
+  "head-to-head": "Head-to-head",
 };
 
 /** Shown on opinion guides so readers can tell a judgement from a fact. */

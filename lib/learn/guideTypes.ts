@@ -1,13 +1,10 @@
-/**
- * Shared types for guide articles. Guides are content (data), not code:
- * every article is one typed record, rendered by the same layout.
- */
+export type GuideLevel = "foundations" | "practitioner" | "power-user" | "expert" | "compare" | "head-to-head";
 
-/** Learning level a guide belongs to. Extend as later levels are published. */
-export type GuideLevel = "foundations" | "practitioner" | "power-user" | "expert" | "compare";
+/** The four levels that make up the learning path (comparison and head-to-head pages are not part of it). */
+export type LearningLevel = Exclude<GuideLevel, "compare" | "head-to-head">;
 
 /** Label shown on cards and at the top of the page. "opinion" guides also show an opinion note. */
-export type GuideKind = "guide" | "safety" | "opinion";
+export type GuideKind = "guide" | "safety" | "opinion" | "explainer" | "head-to-head";
 
 /** Who published the source. Vendor-reported claims are labelled as such on the page. */
 export type SourceKind =
@@ -112,3 +109,4 @@ export interface GuideCardData {
   readonly readMinutes: number;
   readonly published: boolean;
 }
+

@@ -1,5 +1,5 @@
 import { GUIDE_RULES, LEVEL_BASE_PATHS, WORDS_PER_MINUTE } from "./guideConfig";
-import type { CopyPrompt, GuideCardData, GuideRecord } from "./guideTypes";
+import type { CopyPrompt, GuideCardData, GuideLevel, GuideRecord, LearningLevel } from "./guideTypes";
 
 const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -31,12 +31,7 @@ const MONTH_NAMES = [
   "December",
 ] as const;
 
-/**
- * Formats an ISO date (YYYY-MM-DD) as "26 October 2026".
- * Parsed by hand so the result never shifts with the reader's time zone.
- * @param isoDate Date in YYYY-MM-DD form.
- * @returns A readable date, or the input unchanged if it is not a valid ISO date.
- */
+
 export function formatIsoDate(isoDate: string): string {
   if (!ISO_DATE_PATTERN.test(isoDate)) return isoDate;
   const [year, month, day] = isoDate.split("-").map(Number);
@@ -45,10 +40,10 @@ export function formatIsoDate(isoDate: string): string {
   return `${day} ${monthName} ${year}`;
 }
 
-/**
- * Builds the page path for a guide.
- * @param guide Any guide record (only `level` and `slug` are used).
- */
+export function isLearningLevel(level: GuideLevel): level is LearningLevel {
+  return level !== "compare" && level !== "head-to-head";
+}
+
 export function guideHref(guide: Pick<GuideRecord, "level" | "slug">): string {
   return `${LEVEL_BASE_PATHS[guide.level]}/${guide.slug}`;
 }
@@ -72,10 +67,6 @@ function collectReadableText(guide: GuideRecord): string[] {
   return texts;
 }
 
-/**
- * Estimates reading time so the "N min read" label can never drift from the text.
- * @returns Whole minutes, never less than 1.
- */
 export function estimateReadMinutes(guide: GuideRecord): number {
   const wordCount = collectReadableText(guide)
     .join(" ")
@@ -107,10 +98,6 @@ export function resolveRelatedGuides(
     .filter((related): related is GuideRecord => related !== undefined);
 }
 
-/**
- * Converts a guide to the data a hub card needs. The "Coming soon" badge
- * comes from `published`, so it cannot disagree with whether the page exists.
- */
 export function toGuideCard(guide: GuideRecord): GuideCardData {
   return {
     slug: guide.slug,
@@ -123,12 +110,6 @@ export function toGuideCard(guide: GuideRecord): GuideCardData {
   };
 }
 
-/**
- * Checks one guide against the site's content rules.
- * @param guide The guide to check.
- * @param knownSlugs Every guide slug that exists, used to catch broken related links.
- * @returns A list of problems. An empty list means the guide passes.
- */
 export function findGuideIssues(
   guide: GuideRecord,
   knownSlugs: ReadonlySet<string>,
@@ -194,17 +175,11 @@ export function findGuideIssues(
   return issues;
 }
 
-/** A run of prompts that share a heading. `heading` is null for ungrouped prompts. */
 export interface PromptGroup {
   readonly heading: string | null;
   readonly prompts: readonly CopyPrompt[];
 }
 
-/**
- * Groups prompts by their `group` label, keeping the order they first appear in.
- * @param prompts The guide's prompts.
- * @returns One group per label. Prompts with no label share a single group with a null heading.
- */
 export function groupPrompts(prompts: readonly CopyPrompt[]): PromptGroup[] {
   const groups = new Map<string | null, CopyPrompt[]>();
   for (const prompt of prompts) {

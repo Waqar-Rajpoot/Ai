@@ -10,14 +10,14 @@ import {
   PRICE_NOTICE_TEXT,
   SOURCE_KIND_LABELS,
 } from "@/lib/learn/guideConfig";
-
 import {
   estimateReadMinutes,
   formatIsoDate,
   groupPrompts,
   guideHref,
+  isLearningLevel,
 } from "@/lib/learn/guideHelpers";
-import type { GuideRecord, GuideSection } from "@/lib/learn/guideTypes";
+import type { GuideLink, GuideRecord, GuideSection } from "@/lib/learn/guideTypes";
 import { CopyPromptButton } from "./CopyPromptButton";
 
 interface GuideArticleProps {
@@ -33,26 +33,28 @@ interface GuideArticleProps {
 export function GuideArticle({ guide, relatedGuides }: GuideArticleProps) {
   const sourceNumbers = new Map(guide.sources.map((source, index) => [source.id, index + 1]));
   const levelPath = LEVEL_BASE_PATHS[guide.level];
-const levelNumber = guide.level === "compare" ? null : LEVEL_NUMBERS[guide.level];
+  // Comparison and head-to-head pages sit under /compare, outside the learning path: no "Learn" crumb and no "Level N".
+  const levelNumber = isLearningLevel(guide.level) ? LEVEL_NUMBERS[guide.level] : null;
+
   return (
     <article className="mx-auto max-w-3xl px-4 py-8">
       <nav aria-label="Breadcrumb" className="text-sm text-slate-600">
         <ol className="flex flex-wrap gap-x-2">
-  <li><Link className="underline" href="/">Home</Link></li>
-  <li aria-hidden="true">/</li>
-  {levelNumber !== null && (
-    <>
-      <li><Link className="underline" href="/learn">Learn</Link></li>
-      <li aria-hidden="true">/</li>
-    </>
-  )}
-  <li><Link className="underline" href={levelPath}>{LEVEL_LABELS[guide.level]}</Link></li>
-</ol>
+          <li><Link className="underline" href="/">Home</Link></li>
+          <li aria-hidden="true">/</li>
+          {levelNumber !== null && (
+            <>
+              <li><Link className="underline" href="/learn">Learn</Link></li>
+              <li aria-hidden="true">/</li>
+            </>
+          )}
+          <li><Link className="underline" href={levelPath}>{LEVEL_LABELS[guide.level]}</Link></li>
+        </ol>
       </nav>
 
       <header className="mt-4">
         <p className="text-sm text-slate-600">
-          Level {levelNumber} · {GUIDE_KIND_LABELS[guide.kind]} {guide.number} · {estimateReadMinutes(guide)} min read
+          {levelNumber !== null && `Level ${levelNumber} · `}{GUIDE_KIND_LABELS[guide.kind]} {guide.number} · {estimateReadMinutes(guide)} min read
         </p>
         <h1 className="mt-1 text-3xl font-bold text-slate-900">{guide.title}</h1>
         <p className="mt-2 text-sm text-slate-600">
@@ -160,11 +162,13 @@ const levelNumber = guide.level === "compare" ? null : LEVEL_NUMBERS[guide.level
               <Link className="underline" href={guideHref(related)}>{related.title}</Link>
             </li>
           ))}
-          {guide.relatedLinks.map((link) => (
-            <li key={link.href}>
-              <Link className="underline" href={link.href}>{link.label}</Link>
-            </li>
-          ))}
+          {guide.relatedLinks
+            .filter((link): link is GuideLink => Boolean(link))
+            .map((link) => (
+              <li key={link.href}>
+                <Link className="underline" href={link.href}>{link.label}</Link>
+              </li>
+            ))}
         </ul>
       </section>
     </article>
@@ -217,15 +221,15 @@ function GuideSectionView({ section, sourceNumbers }: GuideSectionViewProps) {
               </tr>
             </thead>
             <tbody>
-              {section.table.rows.map((row) => (
-                <tr key={row[0]} className="align-top">
+              {section.table.rows.map((row, rowIndex) => (
+                <tr key={`${rowIndex}-${row[0]}`} className="align-top">
                   {row.map((cell, cellIndex) =>
                     cellIndex === 0 ? (
-                      <th key={cell} scope="row" className="border-b border-slate-200 px-3 py-2 font-medium text-slate-900">
+                      <th key={`${rowIndex}-${cellIndex}`} scope="row" className="border-b border-slate-200 px-3 py-2 font-medium text-slate-900">
                         {cell}
                       </th>
                     ) : (
-                      <td key={`${row[0]}-${cellIndex}`} className="border-b border-slate-200 px-3 py-2 text-slate-800">
+                      <td key={`${rowIndex}-${cellIndex}`} className="border-b border-slate-200 px-3 py-2 text-slate-800">
                         {cell}
                       </td>
                     ),

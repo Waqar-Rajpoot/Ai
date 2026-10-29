@@ -18,7 +18,7 @@ export function ModelSnapshot() {
           <caption className="sr-only">Top AI models by BenchLM score, with API price and context window</caption>
           <thead className="bg-[var(--color-bg)] text-xs uppercase tracking-wide text-[var(--color-muted)]">
             <tr>
-              <th scope="col" className="p-3">#</th>
+              <th scope="col" className="p-3">No</th>
               <th scope="col" className="p-3">Model</th>
               <th scope="col" className="p-3">BenchLM score</th>
               <th scope="col" className="p-3">API price (in / out per million tokens)</th>

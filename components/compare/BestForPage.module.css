@@ -1,0 +1,301 @@
+/* Uses the site's CSS variables when present; the fallbacks keep it readable on its own. */
+.page {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+  color: var(--color-text, #1a1a1a);
+  line-height: 1.65;
+}
+
+.breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  list-style: none;
+  font-size: 0.875rem;
+}
+
+.breadcrumb li:not(:last-child)::after {
+  content: "/";
+  margin-left: 0.5rem;
+  color: var(--color-muted, #6b7280);
+}
+
+.header h1 {
+  margin: 0.25rem 0 0.5rem;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.15;
+}
+
+.meta,
+.dates,
+.maker,
+.priceNote {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-muted, #6b7280);
+}
+
+.question {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.lead {
+  max-width: 44rem;
+}
+
+.statusNote {
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  border-left: 4px solid var(--color-accent, #b45309);
+  background: var(--color-surface, #f8f6f1);
+}
+
+.jumpNav {
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0 0;
+  border: 1px solid var(--color-border, #d9d6cf);
+  border-radius: 0.5rem;
+  background: var(--color-surface, #fafaf8);
+}
+
+.jumpTitle {
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+}
+
+.jumpNav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.section {
+  margin-top: 2.75rem;
+  scroll-margin-top: 5rem;
+}
+
+.section h2,
+.related h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.5rem;
+}
+
+.section h3 {
+  margin: 1.5rem 0 0.5rem;
+  font-size: 1.125rem;
+}
+
+.quickAnswer {
+  max-width: 46rem;
+  font-size: 1.125rem;
+}
+
+.cardList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1rem;
+  padding: 0;
+  margin: 1rem 0 0;
+  list-style: none;
+}
+
+.card {
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--color-border, #d9d6cf);
+  border-radius: 0.5rem;
+  background: var(--color-surface, #fff);
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem 1rem;
+  margin: 0.75rem 0;
+}
+
+.facts dt {
+  font-size: 0.8125rem;
+  color: var(--color-muted, #6b7280);
+}
+
+.facts dd {
+  margin: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.highlights {
+  padding-left: 1.1rem;
+  margin: 0.5rem 0 0;
+  font-size: 0.9375rem;
+}
+
+.highlights li + li {
+  margin-top: 0.35rem;
+}
+
+.watchOut {
+  margin: 0.75rem 0 0;
+  font-size: 0.9375rem;
+}
+
+.plainList {
+  padding-left: 1.25rem;
+}
+
+.plainList li + li {
+  margin-top: 0.5rem;
+}
+
+.steps {
+  padding-left: 1.5rem;
+}
+
+.steps li + li {
+  margin-top: 0.6rem;
+}
+
+.empty {
+  padding: 1rem;
+  border: 1px dashed var(--color-border, #d9d6cf);
+  border-radius: 0.5rem;
+  color: var(--color-muted, #4b5563);
+}
+
+.decisionList,
+.glossary {
+  margin: 0;
+}
+
+.decisionRow,
+.glossaryRow {
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--color-border, #e5e2db);
+}
+
+.decisionRow dt,
+.glossaryRow dt {
+  font-weight: 600;
+}
+
+.decisionRow dd,
+.glossaryRow dd {
+  margin: 0.25rem 0 0;
+}
+
+.caution {
+  color: var(--color-muted, #4b5563);
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.table th,
+.table td {
+  padding: 0.625rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--color-border, #d9d6cf);
+}
+
+.label {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.labelIndependent {
+  background: #e3f1e6;
+  color: #1d5a2c;
+}
+
+.labelVendor {
+  background: #fdebd0;
+  color: #8a4b0b;
+}
+
+.labelThirdParty {
+  background: #e6ecf7;
+  color: #2a4a86;
+}
+
+.labelDirectory {
+  background: #ececec;
+  color: #333;
+}
+
+.twoColumns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.5rem;
+}
+
+.faqList {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.faqItem {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border, #d9d6cf);
+  border-radius: 0.5rem;
+}
+
+.faqItem summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.faqItem p {
+  margin: 0.5rem 0 0;
+}
+
+.related {
+  margin-top: 2.75rem;
+}
+
+.related ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.independence {
+  margin-top: 2rem;
+  font-size: 0.875rem;
+  color: var(--color-muted, #6b7280);
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

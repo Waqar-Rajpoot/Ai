@@ -80,7 +80,7 @@ export function BestForView() {
         <Section key={group.id} id={`group-${group.id}`} title={group.title} intro={group.intro}>
           <ul className="m-0 grid list-none gap-4 p-0 md:grid-cols-2">
             {roundups.map((roundup) => (
-              <li key={roundup.id}>
+              <li key={roundup.slug}>
                 <RoundupCard roundup={roundup} />
               </li>
             ))}

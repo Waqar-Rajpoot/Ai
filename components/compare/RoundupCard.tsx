@@ -6,7 +6,7 @@ import { CARD_CLASS, FOCUS_RING } from "../learn/learnStyles";
 const TAG_CLASS = "shrink-0 rounded-full border border-[var(--color-border)] px-2 py-0.5 text-xs text-[var(--color-muted)]";
 
 /** One roundup: the question it answers, starting-point models and whether the page is published. */
-export function RoundupCard({ roundup }: { roundup: Roundup }) {
+export function RoundupCard({ roundup }: any) {
   const candidates = getRoundupCandidates(MODEL_DIRECTORY_ROWS, roundup.candidates);
 
   return (

@@ -18,7 +18,7 @@ export function RoundupGlanceTable() {
           </tr>
         </thead>
         <tbody>
-          {ROUNDUPS.map((roundup) => {
+          {ROUNDUPS.map((roundup:any) => {
             const candidates = getRoundupCandidates(MODEL_DIRECTORY_ROWS, roundup.candidates);
             return (
               <tr key={roundup.id} className="border-t border-[var(--color-border)]">

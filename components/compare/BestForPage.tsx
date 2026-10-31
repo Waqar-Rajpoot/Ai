@@ -15,7 +15,7 @@ import {
   formatPricePair,
   formatTaskCost,
 } from "@/lib/compare/format";
-import type { BestForSlug, FigureLabel } from "@/lib/compare/types";
+import type { BestForSlug, FigureLabel, ReportedFigure } from "@/lib/compare/types";
 import styles from "./BestForPage.module.css";
 
 interface BestForPageProps {
@@ -46,10 +46,29 @@ function SourceLink({ url, name }: { url?: string; name: string }) {
  * Renders content from `lib/compare`; contains no business logic.
  */
 export default function BestForPage({ slug }: BestForPageProps) {
-  const roundup = getBestForRoundup(slug);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const roundup: any = getBestForRoundup(slug);
   const models = getStartingPointModels(slug);
   const sections = getPageSections(slug);
   const hasModels = models.length > 0;
+
+  // Roundups that are still being written can omit list fields.
+  // Defaulting them once here keeps every section below crash-free.
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const whoItIsFor: readonly string[] = roundup.whoItIsFor ?? [];
+  const toolCandidates: readonly any[] = roundup.candidates ?? [];
+  const decisionGuide: readonly any[] = roundup.decisionGuide ?? [];
+  const reportedFigures: readonly ReportedFigure[] = roundup.reportedFigures ?? [];
+  const glossary: readonly any[] = roundup.glossary ?? [];
+  const howWeWillRank: readonly string[] = roundup.howWeWillRank ?? [];
+  const selfTest: readonly any[] = roundup.selfTest ?? [];
+  const tips: readonly string[] = roundup.tips ?? [];
+  const commonMistakes: readonly string[] = roundup.commonMistakes ?? [];
+  const keepInMind: readonly string[] = roundup.keepInMind ?? [];
+  const faq: readonly any[] = roundup.faq ?? [];
+  const sources: readonly any[] = roundup.sources ?? [];
+  const related: readonly any[] = roundup.related ?? [];
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   return (
     <div className={styles.page}>
@@ -101,11 +120,11 @@ export default function BestForPage({ slug }: BestForPageProps) {
         <p className={styles.quickAnswer}>{roundup.quickAnswer}</p>
       </section>
 
-      {roundup.whoItIsFor.length > 0 ? (
+      {whoItIsFor.length > 0 ? (
         <section id="who" aria-labelledby="who-heading" className={styles.section}>
           <h2 id="who-heading">Who this is for</h2>
           <ul className={styles.plainList}>
-            {roundup.whoItIsFor.map((item) => (
+            {whoItIsFor.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
@@ -145,10 +164,10 @@ export default function BestForPage({ slug }: BestForPageProps) {
                 {model.priceNote ? (
                   <p className={styles.priceNote}>{model.priceNote}</p>
                 ) : null}
-                <p>{roundup.modelRoleNotes[model.id] ?? model.bestFor}</p>
-                {model.highlights.length > 0 ? (
+                <p>{roundup.modelRoleNotes?.[model.id] ?? model.bestFor}</p>
+                {(model.highlights ?? []).length > 0 ? (
                   <ul className={styles.highlights}>
-                    {model.highlights.map((highlight) => (
+                    {(model.highlights ?? []).map((highlight) => (
                       <li key={highlight}>{highlight}</li>
                     ))}
                   </ul>
@@ -164,18 +183,18 @@ export default function BestForPage({ slug }: BestForPageProps) {
         )}
       </section>
 
-      {roundup.candidates.length > 0 ? (
+      {toolCandidates.length > 0 ? (
         <section id="candidates" aria-labelledby="candidates-heading" className={styles.section}>
           <h2 id="candidates-heading">Tools to test</h2>
           <p>{roundup.candidatesNote}</p>
           <ul className={styles.cardList}>
-            {roundup.candidates.map((candidate) => (
+            {toolCandidates.map((candidate) => (
               <li key={candidate.name} className={styles.card}>
                 <h3>{candidate.name}</h3>
                 <p className={styles.maker}>{candidate.maker}</p>
                 <p>{candidate.role}</p>
                 <ul className={styles.highlights}>
-                  {candidate.reportedFacts.map((fact) => (
+                  {(candidate.reportedFacts ?? []).map((fact: string) => (
                     <li key={fact}>{fact}</li>
                   ))}
                 </ul>
@@ -188,11 +207,11 @@ export default function BestForPage({ slug }: BestForPageProps) {
         </section>
       ) : null}
 
-      {roundup.decisionGuide.length > 0 ? (
+      {decisionGuide.length > 0 ? (
         <section id="decide" aria-labelledby="decide-heading" className={styles.section}>
           <h2 id="decide-heading">How to decide</h2>
           <dl className={styles.decisionList}>
-            {roundup.decisionGuide.map((rule) => (
+            {decisionGuide.map((rule) => (
               <div key={rule.situation} className={styles.decisionRow}>
                 <dt>{rule.situation}</dt>
                 <dd>{rule.advice}</dd>
@@ -202,7 +221,7 @@ export default function BestForPage({ slug }: BestForPageProps) {
         </section>
       ) : null}
 
-      {roundup.reportedFigures.length > 0 ? (
+      {reportedFigures.length > 0 ? (
         <section id="figures" aria-labelledby="figures-heading" className={styles.section}>
           <h2 id="figures-heading">Reported numbers</h2>
           <p>
@@ -225,7 +244,7 @@ export default function BestForPage({ slug }: BestForPageProps) {
                 </tr>
               </thead>
               <tbody>
-                {roundup.reportedFigures.map((figure) => (
+                {reportedFigures.map((figure) => (
                   <tr key={`${figure.subject}-${figure.measure}-${figure.source}`}>
                     <th scope="row">{figure.subject}</th>
                     <td>{figure.measure}</td>
@@ -246,11 +265,11 @@ export default function BestForPage({ slug }: BestForPageProps) {
         </section>
       ) : null}
 
-      {roundup.glossary.length > 0 ? (
+      {glossary.length > 0 ? (
         <section id="terms" aria-labelledby="terms-heading" className={styles.section}>
           <h2 id="terms-heading">Terms explained</h2>
           <dl className={styles.glossary}>
-            {roundup.glossary.map((item) => (
+            {glossary.map((item) => (
               <div key={item.term} className={styles.glossaryRow}>
                 <dt>{item.term}</dt>
                 <dd>
@@ -266,7 +285,7 @@ export default function BestForPage({ slug }: BestForPageProps) {
       <section id="how-we-rank" aria-labelledby="how-heading" className={styles.section}>
         <h2 id="how-heading">How we will rank</h2>
         <ul className={styles.plainList}>
-          {roundup.howWeWillRank.map((criterion) => (
+          {howWeWillRank.map((criterion) => (
             <li key={criterion}>{criterion}</li>
           ))}
         </ul>
@@ -328,7 +347,7 @@ export default function BestForPage({ slug }: BestForPageProps) {
         </>
       ) : null}
 
-      {roundup.selfTest.length > 0 ? (
+      {selfTest.length > 0 ? (
         <section id="self-test" aria-labelledby="test-heading" className={styles.section}>
           <h2 id="test-heading">Test it yourself</h2>
           <p>
@@ -336,7 +355,7 @@ export default function BestForPage({ slug }: BestForPageProps) {
             tells you more about your own needs than any ranking.
           </p>
           <ol className={styles.steps}>
-            {roundup.selfTest.map((step) => (
+            {selfTest.map((step) => (
               <li key={step.title}>
                 <strong>{step.title}.</strong> {step.detail}
               </li>
@@ -345,25 +364,25 @@ export default function BestForPage({ slug }: BestForPageProps) {
         </section>
       ) : null}
 
-      {roundup.tips.length > 0 || roundup.commonMistakes.length > 0 ? (
+      {tips.length > 0 || commonMistakes.length > 0 ? (
         <section id="tips" aria-labelledby="tips-heading" className={styles.section}>
           <h2 id="tips-heading">Tips and mistakes</h2>
           <div className={styles.twoColumns}>
-            {roundup.tips.length > 0 ? (
+            {tips.length > 0 ? (
               <div>
                 <h3>Do this</h3>
                 <ul className={styles.plainList}>
-                  {roundup.tips.map((tip) => (
+                  {tips.map((tip) => (
                     <li key={tip}>{tip}</li>
                   ))}
                 </ul>
               </div>
             ) : null}
-            {roundup.commonMistakes.length > 0 ? (
+            {commonMistakes.length > 0 ? (
               <div>
                 <h3>Avoid this</h3>
                 <ul className={styles.plainList}>
-                  {roundup.commonMistakes.map((mistake) => (
+                  {commonMistakes.map((mistake) => (
                     <li key={mistake}>{mistake}</li>
                   ))}
                 </ul>
@@ -376,7 +395,7 @@ export default function BestForPage({ slug }: BestForPageProps) {
       <section id="keep-in-mind" aria-labelledby="keep-heading" className={styles.section}>
         <h2 id="keep-heading">Keep in mind</h2>
         <ul className={styles.plainList}>
-          {roundup.keepInMind.map((note) => (
+          {keepInMind.map((note) => (
             <li key={note}>{note}</li>
           ))}
           <li>A ranking is a shortlist. Your own tasks may favour a different model.</li>
@@ -394,11 +413,11 @@ export default function BestForPage({ slug }: BestForPageProps) {
         </p>
       </section>
 
-      {roundup.faq.length > 0 ? (
+      {faq.length > 0 ? (
         <section id="faq" aria-labelledby="faq-heading" className={styles.section}>
           <h2 id="faq-heading">Frequently asked questions</h2>
           <div className={styles.faqList}>
-            {roundup.faq.map((item) => (
+            {faq.map((item) => (
               <details key={item.question} className={styles.faqItem}>
                 <summary>{item.question}</summary>
                 <p>{item.answer}</p>
@@ -408,11 +427,11 @@ export default function BestForPage({ slug }: BestForPageProps) {
         </section>
       ) : null}
 
-      {roundup.sources.length > 0 ? (
+      {sources.length > 0 ? (
         <section id="sources" aria-labelledby="sources-heading" className={styles.section}>
           <h2 id="sources-heading">Sources and labels</h2>
           <ul className={styles.plainList}>
-            {roundup.sources.map((source) => (
+            {sources.map((source) => (
               <li key={source.name}>
                 <SourceLink url={source.url} name={source.name} />. {source.note}
               </li>
@@ -427,7 +446,7 @@ export default function BestForPage({ slug }: BestForPageProps) {
       <nav aria-label="Related pages" className={styles.related}>
         <h2>Keep going</h2>
         <ul>
-          {roundup.related.map((link) => (
+          {related.map((link) => (
             <li key={link.href}>
               <Link href={link.href}>{link.label}</Link>
             </li>

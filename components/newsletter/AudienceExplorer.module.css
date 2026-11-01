@@ -1,0 +1,85 @@
+.explorer {
+  overflow: hidden;
+  background: var(--nl-surface);
+  border: 1px solid var(--nl-border);
+  border-radius: var(--nl-radius);
+  box-shadow: var(--nl-shadow);
+}
+
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  overflow-x: auto;
+  background: var(--nl-surface-strong);
+}
+
+.tab {
+  flex: 1 0 auto;
+  padding: 0.55rem 1rem;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--nl-muted);
+  white-space: nowrap;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  border-radius: 0.65rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+.tab:hover {
+  color: var(--nl-text);
+}
+
+.tab[aria-selected="true"] {
+  font-weight: 600;
+  color: var(--nl-text);
+  background: var(--nl-bg);
+  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.15);
+}
+
+.tab:focus-visible {
+  outline: 3px solid var(--nl-accent);
+  outline-offset: 2px;
+}
+
+.panel {
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.headline {
+  margin: 0 0 1rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.subheading {
+  margin: 0 0 0.4rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--nl-muted);
+}
+
+.list {
+  margin: 0 0 1rem;
+  padding-left: 1.2rem;
+}
+
+.example {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  background: var(--nl-bg);
+  border-left: 4px solid var(--nl-accent);
+  border-radius: 0.5rem;
+}
+
+.exampleLabel {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--nl-muted);
+}

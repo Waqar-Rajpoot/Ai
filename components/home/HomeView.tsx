@@ -81,10 +81,6 @@ export function HomeView({ newsletterActionUrl }: HomeViewProps) {
       <PageSection id="why-trust-us" title="Why trust us" intro="We test models ourselves, label every source, and say so when we are wrong.">
         <WhyTrust />
       </PageSection>
-
-      <section aria-label="Newsletter" className="py-8">
-        <NewsletterBox actionUrl={newsletterActionUrl} />
-      </section>
     </div>
   );
 }

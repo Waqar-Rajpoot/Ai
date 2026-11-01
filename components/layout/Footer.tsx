@@ -90,13 +90,6 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Trust, company, products */}
-        <div className="mt-10 grid gap-8 border-t border-[var(--color-border)] pt-10 sm:grid-cols-2 lg:grid-cols-3">
-          {FOOTER_SITE_GROUPS.map((group) => (
-            <FooterLinkGroup key={group.id} group={group} />
-          ))}
-        </div>
-
         {/* Freshness and legal notes */}
         <div className="mt-10 grid gap-3 border-t border-[var(--color-border)] pt-8 text-sm text-[var(--color-muted)]">
           <p className="m-0">

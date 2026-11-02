@@ -659,3 +659,46 @@ export function getCandidateCaption(candidateIds: readonly string[] | undefined)
   const noun = candidateIds.length === 1 ? "model" : "models";
   return `${candidateIds.length} ${noun} to start from. This is a shortlist, not a final ranking.`;
 }
+
+
+// ADD to lib/compare/bestFor.ts (skip any type that already exists there).
+
+/** One dated change shown in a "what changed" list. */
+export interface ChangeNote {
+  /** ISO date, YYYY-MM-DD. */
+  isoDate: string;
+  title: string;
+  detail: string;
+}
+
+/** A typical job used to turn per-token prices into a cost per task. */
+export interface CostScenario {
+  id: string;
+  label: string;
+  description: string;
+  /** Number of requests in the job. */
+  requests: number;
+  /** Input tokens in each request. */
+  inputPerRequest: number;
+  /** Output tokens in each request. */
+  outputPerRequest: number;
+  /** Share of all input tokens read from cache, 0 to 100. */
+  cachedSharePercent: number;
+}
+
+/** A labelled internal link. */
+export interface RoundupLink {
+  href: string;
+  label: string;
+}
+
+/** Who published a source, which decides how much weight it gets. */
+export type RoundupSourceKind = "Operator or maker page" | "Tracker (secondary)";
+
+/** One cited source on a roundup page. */
+export interface RoundupSource {
+  publisher: string;
+  title: string;
+  href: string;
+  kind: RoundupSourceKind;
+}

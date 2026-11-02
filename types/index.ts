@@ -1,4 +1,3 @@
-/** Learning level carried by every guide, review and tool. */
 export type Level = 1 | 2 | 3 | 4;
 
 export type LevelRangeBadge = `levels-${Level}-${Level}`;

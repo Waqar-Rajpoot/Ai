@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { BrandLogo } from "@/components/layout/BrandLogo";
 import { NAV_LINKS } from "@/lib/config/navLinks";
-import { SITE_CONFIG } from "@/lib/config/siteConfig";
 import type { NavLink } from "@/types";
 
 const SEARCH_ROUTE = "/search";
@@ -15,7 +15,7 @@ const PILL_BASE =
 const PILL_IDLE =
   "text-[var(--color-text)] hover:bg-[color-mix(in_srgb,var(--color-accent)_14%,transparent)]";
 const PILL_ACTIVE =
-  "bg-[image:var(--gradient-accent)] text-white shadow-[0_4px_14px_rgba(124,58,237,0.4)] hover:brightness-110";
+  "bg-[image:var(--gradient-accent)] text-white shadow-[0_4px_14px_color-mix(in_srgb,var(--color-accent)_40%,transparent)] hover:brightness-110";
 const FOCUS_RING =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]";
 
@@ -146,13 +146,7 @@ export function Navbar() {
           href="/"
           className={`group inline-flex min-w-0 items-center gap-2.5 font-bold text-[var(--color-text)] no-underline ${FOCUS_RING}`}
         >
-          <span
-            aria-hidden="true"
-            className="grid h-8 w-8 shrink-0 place-items-center rounded-[0.6rem] bg-[image:var(--gradient-accent)] text-[0.8rem] font-extrabold text-white transition-transform group-hover:-rotate-[8deg] group-hover:scale-110 motion-reduce:transition-none"
-          >
-            AI
-          </span>
-          <span className="max-w-36 truncate sm:max-w-64">{SITE_CONFIG.name}</span>
+          <BrandLogo />
         </Link>
 
         {/* Desktop navigation */}

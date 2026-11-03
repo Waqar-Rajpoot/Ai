@@ -1,13 +1,13 @@
+import { BRAND_DESCRIPTION, BRAND_NAME } from "@/lib/config/brand";
 import { env } from "./env";
 
 /** Site-wide values used by the layout, metadata and footer. */
 export const SITE_CONFIG = {
-  name: env.siteName,
+  name: BRAND_NAME,
   url: env.siteUrl,
   contactEmail: env.contactEmail,
   newsletterActionUrl: env.newsletterActionUrl,
-  description:
-    "Learn AI from first steps to expert topics, compare named models with dated tests, and stay current on prices and rules.",
+  description: BRAND_DESCRIPTION,
 } as const;
 
 /** Alias so files can import `siteConfig`. It is the same object as `SITE_CONFIG`. */

@@ -10,6 +10,10 @@ export const BRAND_NAME = `${BRAND_NAME_LEAD}${BRAND_NAME_ACCENT}`;
 /** Short descriptor used under the logo and in metadata. */
 export const BRAND_TAGLINE = "Clear guidance on AI for everyday people";
 
+/** Default meta description. Keep under about 160 characters and free of prices or promises. */
+export const BRAND_DESCRIPTION =
+  "Plain-English AI guides, dated tests and sourced prices for everyday people. Learn, compare models and stay current, with no hype.";
+
 /** Fixed logo colours. The logo never changes with the site theme. */
 export const BRAND_COLORS = {
   deepGreen: "#17493B",

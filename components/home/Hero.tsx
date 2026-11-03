@@ -12,6 +12,8 @@ interface HeroProps {
   popularSearches: readonly HomeLink[];
 }
 
+const PILLARS: readonly string[] = ["Learn", "Compare", "Stay current"];
+
 const TRUST_BAR: readonly string[] = [
   "Every number dated and sourced",
   "Payment never changes a score",
@@ -22,17 +24,27 @@ const TRUST_BAR: readonly string[] = [
 export function Hero({ stats, popularSearches }: HeroProps) {
   return (
     <header className="relative overflow-hidden rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-12">
-      <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-[image:var(--gradient-accent)] opacity-20 blur-3xl" />
-      <div aria-hidden="true" className="pointer-events-none absolute -bottom-32 -left-16 h-72 w-72 rounded-full bg-[image:var(--gradient-accent)] opacity-10 blur-3xl" />
+      {/* Decorative glows: sunrise top right, leaf bottom left. Never carry text or meaning. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-[var(--color-sunrise)] opacity-25 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-32 -left-16 h-72 w-72 rounded-full bg-[image:var(--gradient-accent)] opacity-15 blur-3xl"
+      />
 
       <p className="relative m-0 flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider">
-        <span className="rounded-full bg-[image:var(--gradient-accent)] px-3 py-1 text-white">Learn</span>
-        <span className="rounded-full bg-[image:var(--gradient-accent)] px-3 py-1 text-white">Compare</span>
-        <span className="rounded-full bg-[image:var(--gradient-accent)] px-3 py-1 text-white">Stay current</span>
+        {PILLARS.map((pillar) => (
+          <span key={pillar} className="rounded-full bg-[image:var(--gradient-accent)] px-3 py-1 text-white">
+            {pillar}
+          </span>
+        ))}
       </p>
 
-      <h1 className="relative mb-4 mt-5 max-w-3xl text-4xl font-extrabold tracking-tight sm:text-5xl">
-        Understand AI. Compare the models. Stay current.
+      <h1 className="relative mb-4 mt-5 max-w-3xl font-serif text-4xl font-semibold tracking-tight sm:text-5xl">
+        Understand AI. Compare the models.{" "}
+        <span className="font-normal italic text-[var(--color-accent)]">Stay current.</span>
       </h1>
       <p className="relative m-0 max-w-2xl text-lg text-[var(--color-muted)]">
         Plain-English guides, dated tests and sourced prices for everyday people, from your first prompt to expert topics. No hype, and nothing that cannot be checked.
@@ -50,7 +62,7 @@ export function Hero({ stats, popularSearches }: HeroProps) {
             <li key={item.href}>
               <Link
                 href={item.href}
-                className={`rounded-full border border-[var(--color-border)] px-3 py-1 text-sm text-[var(--color-text)] no-underline transition hover:border-[var(--color-accent)] motion-reduce:transition-none ${FOCUS_RING}`}
+                className={`rounded-full border border-[var(--color-border)] px-3 py-1 text-sm text-[var(--color-text)] no-underline transition hover:border-[var(--color-accent)] hover:bg-[color-mix(in_srgb,var(--color-accent)_10%,transparent)] motion-reduce:transition-none ${FOCUS_RING}`}
               >
                 {item.label}
               </Link>
@@ -61,9 +73,9 @@ export function Hero({ stats, popularSearches }: HeroProps) {
 
       <dl className="relative m-0 mt-8 grid grid-cols-2 gap-4 border-t border-[var(--color-border)] pt-6 md:grid-cols-4">
         {stats.map((stat) => (
-          <div key={stat.label}>
+          <div key={stat.label} className="border-l-2 border-[var(--color-sunrise)] pl-3">
             <dt className="text-xs text-[var(--color-muted)]">{stat.label}</dt>
-            <dd className="m-0 text-3xl font-extrabold tabular-nums">{stat.value}</dd>
+            <dd className="m-0 font-serif text-3xl font-semibold tabular-nums">{stat.value}</dd>
           </div>
         ))}
       </dl>

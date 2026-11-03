@@ -1,14 +1,25 @@
 @import "tailwindcss";
 
+@theme inline {
+  --font-serif: var(--font-source-serif, Georgia), "Times New Roman", serif;
+}
+
 :root {
-  --color-bg: #f8fafc;
-  --color-surface: #ffffff;
-  --color-text: #111827;
-  --color-muted: #4b5563;
-  --color-border: #e2e8f0;
-  --color-accent: #0f766e;
+  color-scheme: light;
+
+  --color-brand: #17493b;       /* deep green: logo, headings */
+  --color-sunrise: #e9a23b;     /* amber: decoration only, never text */
+
+  --color-bg: #f3eee2;
+  --color-surface: #fbf8f2;
+  --color-text: #1f2a24;
+  --color-heading: #17493b;
+  --color-muted: #4a5568;       /* slate */
+  --color-border: #ddd3bf;
+  --color-accent: #266f58;      /* leaf, deepened so links pass contrast on cream */
   --color-accent-contrast: #ffffff;
-  --gradient-accent: linear-gradient(135deg, #2563eb, #7c3aed);
+  --gradient-accent: linear-gradient(135deg, #17493b, #2e7d62);
+
   --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   --content-width: 46rem;
   --site-width: 72rem;
@@ -17,14 +28,18 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #0b1220;
-    --color-surface: #111a2e;
-    --color-text: #e5e7eb;
-    --color-muted: #9ca3af;
-    --color-border: #1f2a44;
-    --color-accent: #2dd4bf;
-    --color-accent-contrast: #042f2e;
-    --gradient-accent: linear-gradient(135deg, #14b8a6, #6366f1);
+    color-scheme: dark;
+
+    --color-bg: #0e1b16;
+    --color-surface: #13261f;
+    --color-text: #eef2ee;
+    --color-heading: #eef2ee;
+    --color-muted: #a3b3ab;
+    --color-border: #27413a;
+    --color-accent: #5fbf9a;
+    --color-accent-contrast: #0b2a20;
+    /* Stays deep so white text on gradient pills remains readable in dark mode. */
+    --gradient-accent: linear-gradient(135deg, #17493b, #2e7d62);
   }
 }
 
@@ -41,7 +56,13 @@
     background: var(--color-bg);
   }
 
-  h1, h2, h3 { line-height: 1.15; font-weight: 800; letter-spacing: -0.025em; }
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-heading);
+  }
   h1 { margin: 0.75rem 0 0.5rem; font-size: clamp(2rem, 5vw, 2.75rem); }
   h2 { margin: 2.5rem 0 0.75rem; font-size: 1.5rem; }
   h3 { margin: 1.5rem 0 0.25rem; font-size: 1.125rem; }
@@ -55,6 +76,8 @@
     outline: 3px solid var(--color-accent);
     outline-offset: 2px;
   }
+
+  ::selection { background: color-mix(in srgb, var(--color-sunrise) 45%, transparent); }
 
   main { min-height: 60vh; }
 }

@@ -299,5 +299,4 @@ export const NEWSLETTER_RELATED_LINKS: readonly RelatedLink[] = [
   { href: "/news/weekly", label: "Weekly roundup archive", description: "Every issue, newest first." },
   { href: "/news/changelog", label: "Changelog", description: "What changed on this site." },
   { href: "/about/independence", label: "Independence", description: "How we stay independent." },
-  { href: "/sponsored", label: "Sponsored content", description: "How sponsorship is labelled." },
 ];

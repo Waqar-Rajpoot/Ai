@@ -21,12 +21,10 @@ export interface JobRow {
   links: readonly RoundupLink[];
 }
 
-/** A model we have seen evidence for that is not in the model directory yet. */
 export interface Newcomer {
   id: string;
   name: string;
   maker: string;
-  /** ISO date. */
   announced: string;
   access: string;
   price: string;

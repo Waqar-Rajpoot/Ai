@@ -309,7 +309,6 @@ export const RELATED_LINKS: readonly LinkEntry[] = [
   { title: "How we test", href: "/about/how-we-test", note: "The test battery and result labels." },
   { title: "Source policy", href: "/about/source-policy", note: "How we choose sources and resolve conflicts." },
   { title: "Corrections policy and log", href: "/about/corrections", note: "Report an error, including a missing label." },
-  { title: "Sponsored content", href: "/sponsored", note: "Paid content, kept apart from reviews." },
   { title: "Newsletter", href: "/newsletter", note: "The weekly roundup and its sponsor slot." },
   { title: "Terms of use", href: "/terms", note: "Includes the affiliate and sponsor notice." },
   { title: "Contact", href: "/contact", note: "General questions, errors, press and partnerships." },

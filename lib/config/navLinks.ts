@@ -107,10 +107,7 @@ export const FOOTER_GROUPS: readonly FooterGroup[] = [
   {
     title: "Money pages",
     links: [
-      { label: "Courses", href: "/courses" },
-      { label: "Shop", href: "/shop" },
       { label: "Newsletter", href: "/newsletter" },
-      { label: "Sponsored content", href: "/sponsored" },
     ],
   },
   {

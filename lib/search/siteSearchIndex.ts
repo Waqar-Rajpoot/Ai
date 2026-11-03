@@ -137,16 +137,8 @@ const SOCIETY_ENTRIES: readonly SearchEntry[] = [
   makeEntry("society", "Data explainer", "Is AI taking jobs? What current surveys actually say", "/society/is-ai-taking-jobs", "What named surveys say about layoffs, entry-level work and routine tasks.", ["jobs", "layoffs", "employment", "work", "survey"]),
   makeEntry("society", "Explainer", "Which industries are changing most, and which are next", "/society/industries-changing-most", "Industry cards with evidence and what to watch next.", ["industries", "healthcare", "finance", "education", "legal"]),
   makeEntry("society", "Explainer", "The future of AI: six forces to watch to 2030", "/society/future-of-ai", "Model progress, adoption, energy, work, rules and autonomy, with three scenarios.", ["future", "forecast", "scenarios", "2030", "trends"]),
-  makeEntry("society", "Data explainer", "How much power does AI use?", "/society/ai-power-use", "Data-centre electricity figures, grid limits and what efficient use looks like.", ["energy", "electricity", "power", "environment", "data centre"]),
-  makeEntry("society", "Explainer", "AI in healthcare: what it can and cannot do", "/society/ai-in-healthcare", "Where it helps, accuracy limits, privacy and medical-device rules.", ["health", "medical", "doctor", "hospital"]),
   makeEntry("society", "Explainer", "AI in education: tutor, teacher aid or shortcut?", "/society/ai-in-education", "Tutoring, teacher time, integrity and assessment.", ["education", "school", "teachers", "students", "tutoring"]),
-  makeEntry("society", "Explainer", "AI in banking and finance", "/society/ai-in-banking-and-finance", "Fraud detection, customer service, credit decisions and explainability rules.", ["banking", "finance", "credit", "fraud", "loans"]),
-  makeEntry("society", "Data explainer", "How fast is AI spreading? The adoption data explained", "/society/ai-adoption-data", "The adoption tracker series, work versus outside work, and why surveys differ.", ["adoption", "statistics", "usage", "survey", "data"]),
   makeEntry("society", "Explainer", "AI myths and facts", "/society/ai-myths-and-facts", "A myth-or-fact list with evidence links.", ["myths", "facts", "misconceptions", "true or false"]),
-  makeEntry("society", "Tool", "How much AI is in your day? Quiz", "/society/day-quiz", "A short quiz with a shareable result card.", ["quiz", "day", "everyday"]),
-  makeEntry("society", "Tool", "Pros and cons weigh-up", "/society/weigh-up", "Tick what matters to you for a balanced summary.", ["weigh up", "decide", "pros cons"]),
-  makeEntry("society", "Tool", "Industry explorer", "/society/industry-explorer", "Filter industry cards by figure, source and date.", ["industry", "explorer", "figures"]),
-  makeEntry("society", "Tool", "Myth-or-fact flip cards", "/society/myth-or-fact", "Flip cards with an evidence link on each.", ["flashcards", "myths", "facts"]),
 ];
 
 const NEWS_ENTRIES: readonly SearchEntry[] = [
@@ -171,8 +163,6 @@ const ABOUT_ENTRIES: readonly SearchEntry[] = [
   makeEntry("about", "Legal", "Terms of use", "/terms", "Using the site, no professional or legal advice, and affiliate and sponsor notice.", ["terms", "legal", "conditions"]),
   makeEntry("about", "Help", "Sitemap", "/sitemap", "Every section of the site in one list.", ["sitemap", "all pages", "index"]),
   makeEntry("about", "Page", "Newsletter", "/newsletter", "The weekly roundup by email, what you get and past issues.", ["newsletter", "email", "subscribe", "weekly"]),
-  makeEntry("about", "Page", "Courses", "/courses", "Planned courses for teachers, job seekers and builders, with a waitlist.", ["courses", "teachers", "job seekers", "builders", "waitlist"]),
-  makeEntry("about", "Page", "Shop: prompt packs, templates and checklists", "/shop", "Digital products with external checkout.", ["shop", "prompt pack", "templates", "digital products"]),
   makeEntry("about", "Page", "Sponsored content", "/sponsored", "Content labelled Sponsored and kept apart from reviews.", ["sponsored", "advertising", "partners"]),
 ];
 

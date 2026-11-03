@@ -130,7 +130,6 @@ export function MythsAndFactsView() {
       {/* Flip cards */}
       <PageSection id="flip-cards" title="Flip-card feature: test your instincts" intro="Read the claim, pick Myth, Fact or It depends, and see the verdict. Your score stays in your browser.">
         <MythFactCards items={MYTH_FACTS as any} />
-        <p className="mb-0 mt-4 text-sm">Prefer a dedicated page? Open the <Link href="/society/myth-or-fact">myth-or-fact flip cards</Link>.</p>
       </PageSection>
 
       {/* Evidence */}
@@ -200,7 +199,6 @@ export function MythsAndFactsView() {
             </tbody>
           </table>
         </div>
-        <p className="mb-0 mt-3 text-sm">See <Link href="/society/ai-adoption-data">How fast is AI spreading?</Link> for the full series.</p>
       </PageSection>
 
       {/* Why myths stick */}
@@ -307,7 +305,6 @@ export function MythsAndFactsView() {
           <p className="m-0 text-sm font-semibold text-[var(--color-accent)]">Next</p>
           <p className="m-0 font-semibold">See how fast AI is really spreading</p>
         </div>
-        <Link href="/society/ai-adoption-data" className={BUTTON_PRIMARY}>Open the adoption data</Link>
       </footer>
     </div>
   );

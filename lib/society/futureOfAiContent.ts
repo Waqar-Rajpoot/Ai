@@ -173,11 +173,8 @@ export const FUTURE_OF_AI_RELATED: readonly RelatedLink[] = [
   { id: "role", title: "The role of AI in our lives", reason: "Article 32: where people meet AI today.", href: "/society/role-of-ai-in-our-lives" },
   { id: "pros-cons", title: "Pros and cons of AI", reason: "Article 33: an honest scorecard.", href: "/society/pros-and-cons-of-ai" },
   { id: "jobs", title: "Is AI taking jobs?", reason: "Article 34: what current surveys say.", href: "/society/is-ai-taking-jobs" },
-  { id: "power", title: "How much power does AI use?", reason: "Article 37: the energy force in depth.", href: "/society/ai-power-use" },
-  { id: "adoption", title: "How fast is AI spreading?", reason: "Article 41: the adoption data explained.", href: "/society/ai-adoption-data" },
   { id: "myths", title: "AI myths and facts", reason: "Article 42: check common claims.", href: "/society/ai-myths-and-facts" },
   { id: "agents", title: "AI agents explained", reason: "Article 20: what agents can do and how they fail.", href: "/learn/power-user/ai-agents-explained" },
   { id: "eu", title: "EU AI Act timeline", reason: "Dates and a plain-English summary.", href: "/news/eu-ai-act" },
   { id: "benchmarks", title: "Benchmark digest", reason: "Independent scores, updated weekly.", href: "/prices/benchmarks" },
-  { id: "quiz", title: "How much AI is in your day?", reason: "A short quiz with a shareable card.", href: "/society/day-quiz" },
 ];

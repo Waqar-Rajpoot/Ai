@@ -198,7 +198,6 @@ export function FutureOfAiView() {
         </div>
         <div className="flex flex-wrap gap-3">
           <Link href="/society" className={BUTTON_OUTLINE}>Back to AI &amp; Society</Link>
-          <Link href="/society/ai-power-use" className={BUTTON_PRIMARY}>Continue</Link>
         </div>
       </footer>
     </div>

@@ -11,7 +11,6 @@ import {
   findArticle,
   HOW_WE_COVER_LEGEND,
   HOW_WE_COVER_RULES,
-  INTERACTIVE_FEATURES,
   INTERACTIVE_NOTE,
   LATEST_DATA,
   LATEST_DATA_NOTE,
@@ -92,7 +91,6 @@ export function SocietyHubView() {
           <dl className="relative mt-8 grid max-w-xl grid-cols-3 gap-4 text-center">
             {[
               { value: SOCIETY_ARTICLES.length, label: "articles" },
-              { value: INTERACTIVE_FEATURES.length, label: "interactive features" },
               { value: HOW_WE_COVER_RULES.length, label: "rules for every page" },
             ].map((stat) => (
               <div key={stat.label} className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] px-2 py-3">
@@ -171,9 +169,9 @@ export function SocietyHubView() {
           </div>
         </Section>
 
-        <Section id="interactive-features" title="Interactive features" intro="Four short features turn the articles into something you can try. Each one links back to the article it comes from.">
+        {/* <Section id="interactive-features" title="Interactive features" intro="Four short features turn the articles into something you can try. Each one links back to the article it comes from.">
           <ul className="m-0 grid list-none gap-4 p-0 md:grid-cols-2">
-            {INTERACTIVE_FEATURES.map((feature) => {
+            {INTERACTIVE_FEATURES.map((feature: any) => {
               const article = findArticle(feature.articleNumber);
               return (
                 <li key={feature.id} className={`${CARD_CLASS} flex flex-col`}>
@@ -213,7 +211,7 @@ export function SocietyHubView() {
             A preview of the myth-or-fact cards. Six claims, each checked against a named source and date. The full set will live on its own page.
           </p>
           <MythFactCards items={MYTH_FACT_ITEMS} />
-        </Section>
+        </Section> */}
 
         <Section id="latest-data" title="Latest data" intro={`Four anchor figures, each with its source and date. Checked ${SOCIETY_CHECKED_ON}.`}>
           <ul className="m-0 grid list-none gap-4 p-0 sm:grid-cols-2">
@@ -232,7 +230,7 @@ export function SocietyHubView() {
           </ul>
           <p className="mt-4 text-sm text-[var(--color-muted)]">{LATEST_DATA_NOTE}</p>
           <p className="mt-2 text-sm">
-            See the signals behind these numbers in <Link href="/society/future-of-ai#signals">The future of AI</Link>, and how adoption is counted in <Link href="/society/ai-adoption-data">How fast is AI spreading?</Link>.
+            See the signals behind these numbers in <Link href="/society/future-of-ai#signals">The future of AI</Link>
           </p>
         </Section>
 

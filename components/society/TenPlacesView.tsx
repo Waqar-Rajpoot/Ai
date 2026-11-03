@@ -73,7 +73,6 @@ export function TenPlacesView() {
         <p className="relative mb-0 mt-3 text-sm text-[var(--color-muted)]">By {ARTICLE_AUTHOR_LABEL}</p>
         <div className="relative mt-6 flex flex-wrap gap-3">
           <a href="#day" className={BUTTON_PRIMARY}>Follow the day</a>
-          <Link href="/society/day-quiz" className={BUTTON_OUTLINE}>Take the day quiz</Link>
         </div>
       </header>
 
@@ -99,7 +98,6 @@ export function TenPlacesView() {
           <aside className={`${CARD_CLASS} border-[var(--color-accent)]`}>
             <p className="m-0 text-sm font-bold text-[var(--color-accent)]">Try this tomorrow</p>
             <p className="mb-2 mt-1 text-sm">Count how many of the ten you meet, then compare with the quiz result. Many people find the number is higher than they expected.</p>
-            <p className="m-0 text-sm"><Link href="/society/day-quiz">Take the day quiz</Link></p>
           </aside>
         </div>
       </PageSection>
@@ -177,9 +175,6 @@ export function TenPlacesView() {
             {ADOPTION_VERIFIED_ON ? `Verified on ${ADOPTION_VERIFIED_ON}.` : "Check the tracker's own page for the latest figures."}
           </p>
         </div>
-        <div className={`${CARD_CLASS} mt-4 border-amber-500/60`}>
-          <p className="m-0 text-sm"><strong>How to read this.</strong> These numbers count people who say they use <em>generative</em> AI tools. They do not include the AI inside feeds, maps, spam filters and fraud checks, which you meet whether or not you choose to. So this is a count of chosen use, not of total exposure. Full explanation: <Link href="/society/ai-adoption-data">How fast is AI spreading?</Link></p>
-        </div>
       </PageSection>
 
       <PageSection id="balance" title="What it adds up to: both sides" intro="Every convenience in the ten places has a cost. Here they are side by side.">
@@ -228,7 +223,6 @@ export function TenPlacesView() {
             </li>
           ))}
         </ul>
-        <p className="mb-0 mt-3 text-sm">More: <Link href="/society/ai-myths-and-facts">AI myths and facts</Link> or the <Link href="/society/myth-or-fact">flip-card game</Link>.</p>
       </PageSection>
 
       <PageSection id="faq" title="Frequently asked questions">
@@ -306,7 +300,6 @@ export function TenPlacesView() {
           <p className="m-0 text-sm font-semibold text-[var(--color-accent)]">Next</p>
           <p className="m-0 font-semibold">See how your own day compares</p>
         </div>
-        <Link href="/society/day-quiz" className={BUTTON_PRIMARY}>Take the day quiz</Link>
       </footer>
     </div>
   );

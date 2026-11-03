@@ -1,15 +1,8 @@
 import Link from "next/link";
-import { PRICE_DISCLAIMER } from "@/lib/config/disclaimers";
 import {
-  FOOTER_AFFILIATE_NOTE,
   FOOTER_BRAND,
   FOOTER_EXPLORE_GROUPS,
-  FOOTER_FRESHNESS,
-  FOOTER_NEWSLETTER,
-  FOOTER_NOT_ADVICE_NOTE,
-  FOOTER_PROMISES,
   FOOTER_REPORT_ERROR,
-  FOOTER_SITE_GROUPS,
   type FooterGroup,
 } from "@/lib/config/footerLinks";
 import { getCopyrightYears } from "@/lib/shared/copyright";
@@ -17,11 +10,7 @@ import { getCopyrightYears } from "@/lib/shared/copyright";
 const FOCUS_RING =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]";
 
-const LINK_CLASS = `text-[var(--color-muted)] no-underline transition hover:text-[var(--color-text)] hover:underline motion-reduce:transition-none ${FOCUS_RING}`;
-
-const CTA_CLASS = `inline-flex items-center justify-center rounded-full bg-[image:var(--gradient-accent)] px-5 py-2.5 font-semibold text-white no-underline shadow-[0_4px_14px_rgba(124,58,237,0.35)] transition hover:brightness-110 motion-reduce:transition-none ${FOCUS_RING}`;
-
-const CARD_CLASS = "rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] p-5";
+const LINK_CLASS = `group inline-flex items-center rounded-sm text-[var(--color-muted)] no-underline transition-all duration-200 hover:translate-x-1 hover:text-[var(--color-text)] motion-reduce:transform-none motion-reduce:transition-none ${FOCUS_RING}`;
 
 /** One labelled list of links. Links marked `isLive: false` are left out. */
 function FooterLinkGroup({ group }: { group: FooterGroup }) {
@@ -31,13 +20,23 @@ function FooterLinkGroup({ group }: { group: FooterGroup }) {
 
   return (
     <nav aria-labelledby={headingId}>
-      <h2 id={headingId} className="mb-3 mt-0 text-xs font-bold uppercase tracking-wider text-[var(--color-text)]">
+      <h2
+        id={headingId}
+        className="mb-4 mt-0 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--color-text)]"
+      >
+        <span aria-hidden="true" className="h-3 w-1 rounded-full bg-[var(--color-accent)]" />
         {group.title}
       </h2>
-      <ul className="m-0 grid list-none gap-2 p-0 text-sm">
+      <ul className="m-0 grid list-none gap-2.5 p-0 text-sm">
         {links.map((link) => (
           <li key={link.href}>
             <Link href={link.href} className={LINK_CLASS}>
+              <span
+                aria-hidden="true"
+                className="w-0 overflow-hidden text-[var(--color-accent)] opacity-0 transition-all duration-200 group-hover:mr-1.5 group-hover:w-3 group-hover:opacity-100 group-focus-visible:mr-1.5 group-focus-visible:w-3 group-focus-visible:opacity-100 motion-reduce:transition-none"
+              >
+                →
+              </span>
               {link.label}
             </Link>
           </li>
@@ -47,76 +46,36 @@ function FooterLinkGroup({ group }: { group: FooterGroup }) {
   );
 }
 
-/** Site footer: brand and newsletter, promises, navigation columns, trust and company links, and legal notes. */
+/** Site-wide footer: link groups and copyright bar. */
 export function Footer() {
   const copyrightYears = getCopyrightYears(FOOTER_BRAND.foundedYear, new Date().getFullYear());
 
   return (
-    <footer className="mt-16 border-t border-[var(--color-border)] bg-[var(--color-surface)]">
+    <footer className="mt-0 bg-[var(--color-surface)]">
+      {/* Accent line */}
+      <div
+        aria-hidden="true"
+        className="h-1 bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-accent)]/40 to-transparent"
+      />
+
       <div className="mx-auto w-[min(100%-2.5rem,var(--site-width))] py-12">
-        {/* Brand and newsletter */}
-        <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-center">
-          <div>
-            <p className="m-0 text-xl font-extrabold tracking-tight">{FOOTER_BRAND.name}</p>
-            <p className="mb-0 mt-2 max-w-md text-sm text-[var(--color-muted)]">{FOOTER_BRAND.tagline}</p>
-          </div>
-          <div className={CARD_CLASS}>
-            <h2 className="m-0 text-base font-bold">{FOOTER_NEWSLETTER.title}</h2>
-            <p className="mb-4 mt-1 text-sm text-[var(--color-muted)]">{FOOTER_NEWSLETTER.text}</p>
-            <Link href={FOOTER_NEWSLETTER.href} className={CTA_CLASS}>
-              {FOOTER_NEWSLETTER.ctaLabel}
-            </Link>
-          </div>
-        </div>
-
-        {/* Promises */}
-        <ul className="m-0 mt-10 grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-4">
-          {FOOTER_PROMISES.map((promise) => (
-            <li key={promise.id} className={CARD_CLASS}>
-              <p className="m-0 text-sm font-semibold">{promise.text}</p>
-              <p className="mb-0 mt-2 text-sm">
-                <Link href={promise.link.href} className={LINK_CLASS}>
-                  {promise.link.label}
-                </Link>
-              </p>
-            </li>
-          ))}
-        </ul>
-
-        {/* Explore: mirrors the top navigation */}
-        <div className="mt-12 grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(9.5rem,1fr))] gap-x-8 gap-y-10">
           {FOOTER_EXPLORE_GROUPS.map((group) => (
             <FooterLinkGroup key={group.id} group={group} />
           ))}
         </div>
 
-        {/* Freshness and legal notes */}
-        <div className="mt-10 grid gap-3 border-t border-[var(--color-border)] pt-8 text-sm text-[var(--color-muted)]">
-          <p className="m-0">
-            {FOOTER_FRESHNESS.text}{" "}
-            <Link href={FOOTER_FRESHNESS.link.href} className={LINK_CLASS}>
-              {FOOTER_FRESHNESS.link.label}
-            </Link>
-            .
-          </p>
-          <p className="m-0 font-semibold text-[var(--color-text)]">{PRICE_DISCLAIMER}</p>
-          <p className="m-0">{FOOTER_NOT_ADVICE_NOTE}</p>
-          <p className="m-0">{FOOTER_AFFILIATE_NOTE}</p>
-        </div>
-
         {/* Bottom bar */}
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-[var(--color-border)] pt-6 text-sm text-[var(--color-muted)]">
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--color-border)] pt-6 text-sm text-[var(--color-muted)]">
           <p className="m-0">
             © {copyrightYears} {FOOTER_BRAND.name}
           </p>
-          <p className="m-0 flex flex-wrap gap-x-5 gap-y-2">
-            <Link href={FOOTER_REPORT_ERROR.href} className={LINK_CLASS}>
-              {FOOTER_REPORT_ERROR.label}
-            </Link>
-            <a href="#" aria-label="Back to top of page" className={LINK_CLASS}>
-              Back to top
-            </a>
-          </p>
+          <Link
+            href={FOOTER_REPORT_ERROR.href}
+            className={`rounded-full border border-[var(--color-border)] px-4 py-1.5 text-[var(--color-text)] no-underline transition-colors duration-200 hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[var(--color-accent-contrast)] motion-reduce:transition-none ${FOCUS_RING}`}
+          >
+            {FOOTER_REPORT_ERROR.label}
+          </Link>
         </div>
       </div>
     </footer>

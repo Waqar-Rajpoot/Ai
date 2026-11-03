@@ -234,7 +234,7 @@ export function IndependenceView() {
             <RuleList items={SPONSOR_CANNOT} />
           </div>
         </div>
-        <p className="mb-0 mt-3 text-sm">See <Link href="/sponsored">sponsored content</Link> and the <Link href="/newsletter">newsletter</Link>.</p>
+        <p className="mb-0 mt-3 text-sm">See <Link href="/newsletter">newsletter</Link>.</p>
       </PageSection>
 
       {/* Conflicts */}

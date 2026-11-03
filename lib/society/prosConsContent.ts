@@ -121,10 +121,7 @@ export const SOURCES: readonly SourceEntry[] = [
 ];
 
 export const RELATED_LINKS: readonly RelatedLink[] = [
-  { href: "/society/weigh-up", label: "Pros and cons weigh-up", note: "Interactive: tick what matters to you" },
   { href: "/society/is-ai-taking-jobs", label: "Is AI taking jobs? What current surveys actually say", note: "Article 34" },
-  { href: "/society/ai-power-use", label: "How much power does AI use?", note: "Article 37" },
-  { href: "/society/ten-places-you-meet-ai", label: "Ten places you meet AI in a normal day", note: "Article 31" },
   { href: "/society/ai-myths-and-facts", label: "AI myths and facts", note: "Article 42" },
   { href: "/learn/practitioner/fact-check-ai-answers", label: "How to fact-check AI answers", note: "Level 2 guide" },
   { href: "/learn/foundations/ai-scams-and-deepfakes", label: "AI scams and deepfakes", note: "Level 1 safety" },

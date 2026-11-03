@@ -90,7 +90,6 @@ export const SOCIETY_ARTICLES: readonly HubArticle[] = [
   { number: 35, slug: "industries-changing-most", title: "Which industries are changing most, and which are next", plain: "Eight industries, what is changing in each, and where to look next.", technical: "Industry cards with evidence, and 'directional' labels where only weaker evidence exists.", type: "Explainer", minutes: 10, group: "work-money", isPublished: false, shortLabel: "Industries" },
   { number: 40, slug: "ai-in-banking-and-finance", title: "AI in banking and finance", plain: "Fraud detection, customer service and credit decisions, and the risks of each.", technical: "Credit decisions and bias, and the explainability rules.", type: "Explainer", minutes: 8, group: "work-money", isPublished: false },
   { number: 37, slug: "ai-power-use", title: "How much power does AI use?", plain: "Where the electricity goes, and what efficient use looks like.", technical: "Data-centre electricity figures, the AI share of servers, and grid and power limits.", type: "Data explainer", minutes: 8, group: "planet", isPublished: false },
-  { number: 38, slug: "ai-in-healthcare", title: "AI in healthcare: what it can and cannot do", plain: "Where AI helps, where it falls short, and what to keep private.", technical: "Accuracy limits, privacy, and medical-device rules.", type: "Explainer", minutes: 8, group: "health-learning", isPublished: false },
   { number: 39, slug: "ai-in-education", title: "AI in education: tutor, teacher aid or shortcut?", plain: "How AI can help learning and save teacher time, and how it tempts shortcuts.", technical: "Integrity and assessment, plus the EU's high-risk duties for education.", type: "Explainer", minutes: 8, group: "health-learning", isPublished: false },
   { number: 41, slug: "ai-adoption-data", title: "How fast is AI spreading? The adoption data explained", plain: "How many people use AI, and why surveys disagree.", technical: "The Fed-hosted tracker series, work versus outside work, and a source and date for every number.", type: "Data explainer", minutes: 9, group: "numbers", isPublished: false },
 ];
@@ -116,13 +115,6 @@ export const BY_INTEREST_TABLE: ComparisonTableContent = {
     ["Where it is all heading", "Article 36: The future of AI", "Article 41: How fast is AI spreading?"],
   ],
 };
-
-export const INTERACTIVE_FEATURES: readonly InteractiveFeature[] = [
-  { id: "day-quiz", title: "How much AI is in your day?", href: "/society/day-quiz", minutes: 3, whatItDoes: "A short quiz about an ordinary day, from your morning phone check to your evening shows.", youGet: "A score, a plain-English result and a shareable card.", articleNumber: 31, isPublished: false },
-  { id: "weigh-up", title: "Pros and cons weigh-up", href: "/society/weigh-up", minutes: 4, whatItDoes: "Tick what matters to you, such as time, privacy, jobs, fairness or the environment.", youGet: "A balanced summary that shows both sides of the themes you picked.", articleNumber: 33, isPublished: false },
-  { id: "industry-explorer", title: "Industry explorer", href: "/society/industry-explorer", minutes: 5, whatItDoes: "Filter industry cards by their latest figure, source and date.", youGet: "Each card shows where its evidence comes from, and whether that evidence is named or only directional.", articleNumber: 35, isPublished: false },
-  { id: "myth-or-fact", title: "Myth-or-fact flip cards", href: "/society/myth-or-fact", minutes: 5, whatItDoes: "Judge a claim, flip the card and read the evidence.", youGet: "A verdict, a short explanation and a link to the source.", articleNumber: 42, isPublished: false },
-];
 
 export const INTERACTIVE_NOTE =
   "All four run in your browser, use hand-written rules and sources, and do not send or save your answers. Results are a way to think, not advice.";

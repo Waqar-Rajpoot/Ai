@@ -110,7 +110,6 @@ export const CONTACT_REASONS: readonly ContactReason[] = [
     include: ["Your name and organisation", "What you need, and your deadline", "The page or data you mean"],
     checkFirst: [
       { href: "/about/independence", label: "Independence and disclosure" },
-      { href: "/sponsored", label: "Sponsored content" },
       { href: "/about/how-we-test", label: "How we test" },
     ],
   },

@@ -72,10 +72,6 @@ export function ProsConsView() {
           Nine themes, benefits and costs side by side, and a clear label for how strong the evidence is. No hype, no panic, no single score.
         </p>
         <p className="relative mb-0 mt-3 text-sm text-[var(--color-muted)]">By {ARTICLE_AUTHOR_LABEL}</p>
-        <div className="relative mt-6 flex flex-wrap gap-3">
-          <a href="#scorecard" className={BUTTON_PRIMARY}>See the scorecard</a>
-          <Link href="/society/weigh-up" className={BUTTON_OUTLINE}>Weigh it up yourself</Link>
-        </div>
       </header>
 
       <nav aria-label="On this page" className="mt-6 flex flex-wrap gap-2">
@@ -104,7 +100,6 @@ export function ProsConsView() {
                 Among {ADOPTION_GROUP}, use of generative AI rose from {OVERALL_ADOPTION.fromPercent}% ({ADOPTION_FROM_QUARTER}) to {OVERALL_ADOPTION.toPercent}% ({ADOPTION_TO_QUARTER}), per the Fed-hosted tracker.
               </p>
             )}
-            <p className="m-0 text-sm">More people use it, so the trade-offs reach more people. Details: <Link href="/society/ai-adoption-data">the adoption data explained</Link>.</p>
           </aside>
         </div>
       </PageSection>
@@ -195,7 +190,7 @@ export function ProsConsView() {
               ))}
             </div>
             <p className="mb-0 mt-3 text-xs text-[var(--color-muted)]">
-              The 2030 bar is a <strong>forecast</strong> and carries uncertainty. The 2026 figure adds {electricityAddedTwh(ELECTRICITY)} TWh in one year. These figures cover all data-centre use, not only AI. The AI share is covered in <Link href="/society/ai-power-use">How much power does AI use?</Link>
+              The 2030 bar is a <strong>forecast</strong> and carries uncertainty. The 2026 figure adds {electricityAddedTwh(ELECTRICITY)} TWh in one year. These figures cover all data-centre use, not only AI. The AI share is covered
             </p>
           </div>
 
@@ -274,7 +269,7 @@ export function ProsConsView() {
             </article>
           ))}
         </div>
-        <p className="mb-0 mt-3 text-sm">Want a longer list? Use the <Link href="/tools/ai-safety-checklist">AI safety checklist</Link>, or <Link href="/society/weigh-up">weigh up what matters to you</Link>.</p>
+        <p className="mb-0 mt-3 text-sm">Want a longer list? Use the <Link href="/tools/ai-safety-checklist">AI safety checklist</Link></p>
       </PageSection>
 
       <PageSection id="faq" title="Frequently asked questions">
@@ -352,7 +347,6 @@ export function ProsConsView() {
           <p className="m-0 text-sm font-semibold text-[var(--color-accent)]">Next</p>
           <p className="m-0 font-semibold">Tick what matters to you and get a balanced summary</p>
         </div>
-        <Link href="/society/weigh-up" className={BUTTON_PRIMARY}>Open the weigh-up</Link>
       </footer>
     </div>
   );

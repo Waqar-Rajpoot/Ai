@@ -114,7 +114,6 @@ export const SOURCES: readonly SourceEntry[] = [
 ];
 
 export const RELATED_LINKS: readonly RelatedLink[] = [
-  { href: "/society/day-quiz", label: "How much AI is in your day? (quiz)", note: "Interactive, takes two minutes" },
   { href: "/society/role-of-ai-in-our-lives", label: "The role of AI in our lives: home, school and work", note: "Article 32" },
   { href: "/society/pros-and-cons-of-ai", label: "Pros and cons of AI: an honest scorecard", note: "Article 33" },
   { href: "/society/ai-myths-and-facts", label: "AI myths and facts", note: "Article 42" },

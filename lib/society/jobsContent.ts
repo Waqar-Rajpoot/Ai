@@ -179,9 +179,7 @@ export const SOURCES: readonly SourceEntry[] = [
 export const RELATED_LINKS: readonly RelatedLink[] = [
   { href: "/society/pros-and-cons-of-ai", label: "Pros and cons of AI: an honest scorecard", note: "Article 33" },
   { href: "/society/industries-changing-most", label: "Which industries are changing most, and which are next", note: "Article 35" },
-  { href: "/society/ai-adoption-data", label: "How fast is AI spreading? The adoption data explained", note: "Article 41" },
   { href: "/society/future-of-ai", label: "The future of AI: six forces to watch to 2030", note: "Article 36" },
-  { href: "/society/weigh-up", label: "Pros and cons weigh-up", note: "Interactive" },
   { href: "/learn/practitioner/ai-resume-and-interview-prep", label: "Resume and interview prep with AI", note: "Level 2 guide" },
   { href: "/learn/practitioner/ai-for-email-and-writing-at-work", label: "How to use AI for email and writing at work", note: "Level 2 guide" },
   { href: "/tools/cheat-sheets", label: "Cheat sheets and templates", note: "Includes resume prompt templates" },

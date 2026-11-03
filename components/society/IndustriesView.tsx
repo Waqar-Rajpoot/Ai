@@ -104,7 +104,6 @@ export function IndustriesView() {
             </tbody>
           </table>
         </div>
-        <p className="mb-0 mt-3 text-sm">More on the series: <Link href="/society/ai-adoption-data">How fast is AI spreading?</Link></p>
       </PageSection>
 
       <PageSection id="next-chart" title="What firms say they will do next" intro="The best hint of which sectors are next is what firms expect, with the caveat that expectation is not action.">
@@ -113,7 +112,6 @@ export function IndustriesView() {
 
       <PageSection id="industries" title="Eight industries, one honest card each" intro="Cards with a numbers panel are backed by a named survey. Dashed cards are directional and carry no numbers.">
         <IndustryFilterCards />
-        <p className="mb-0 mt-4 text-sm">Prefer to explore by figure? Try the <Link href="/society/industry-explorer">industry explorer</Link>.</p>
       </PageSection>
 
       <PageSection id="jobs" title="The jobs signal: who gets hired" intro="The clearest measured effect is not layoffs. It is who companies stop hiring.">

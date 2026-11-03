@@ -103,10 +103,6 @@ export default function NewsletterView() {
               </li>
             ))}
           </ul>
-          <p className={styles.sponsor}>
-            {SPONSOR_TEXT} Read the <Link href="/about/independence">independence promise</Link> and how{" "}
-            <Link href="/sponsored">sponsored content</Link> is labelled.
-          </p>
         </section>
 
         <section id="faq" aria-labelledby="faq-heading" className={styles.section}>

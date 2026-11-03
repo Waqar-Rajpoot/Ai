@@ -191,10 +191,7 @@ export const METHOD_NOTES: readonly string[] = [
 
 export const RELATED_LINKS: readonly LinkEntry[] = [
   { title: "AI & Society hub", href: "/society", note: "All society articles and tools." },
-  { title: "Myth-or-fact flip cards", href: "/society/myth-or-fact", note: "The card game on its own page." },
-  { title: "How fast is AI spreading?", href: "/society/ai-adoption-data", note: "The adoption data explained." },
   { title: "Is AI taking jobs?", href: "/society/is-ai-taking-jobs", note: "What current surveys actually say." },
-  { title: "How much power does AI use?", href: "/society/ai-power-use", note: "Data-centre electricity figures." },
   { title: "The future of AI", href: "/society/future-of-ai", note: "Six forces and three scenarios." },
   { title: "How to fact-check AI answers", href: "/learn/practitioner/fact-check-ai-answers", note: "A five-step routine." },
   { title: "Source policy", href: "/about/source-policy", note: "How we rank sources." },

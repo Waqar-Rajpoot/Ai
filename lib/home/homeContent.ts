@@ -38,6 +38,13 @@ export interface GuideLink {
   levelLabel: string;
   kind: string;
 }
+export interface SocietyStat {
+  value: string;
+  label: string;
+  context: string;
+  source: string;
+  href: string;
+}
 
 export interface FreeTool {
   id: string;
@@ -171,15 +178,6 @@ export const READER_PATHS: readonly ReaderPath[] = [
 /** Hand-written stories. Replace each with a real post when the news pages exist. */
 export const LATEST_STORIES: readonly Story[] = [
   {
-    id: "gemini-4-argon-public",
-    kind: "Release post",
-    title: "Gemini 4 Argon is now public: what changed and should you care?",
-    summary:
-      "Google opened its new model across the Gemini API, AI Studio and the Gemini app on October 13. It leads the Arena text chart, but the introductory price ends on November 30, and independent tests show it writing far more output tokens per task than some rivals.",
-    publishedOn: "2026-10-13",
-    href: "/news/releases/gemini-4-argon",
-  },
-  {
     id: "weekly-oct-23",
     kind: "Weekly roundup",
     title: "Weekly roundup: OpenAI retires GPT-4 and o1, and Argon tops the Arena",
@@ -272,13 +270,14 @@ export const SOCIETY_CARDS: readonly SocietyCard[] = [
   { title: "The future", description: "Six forces to watch to 2030, framed as scenarios, not forecasts.", href: "/society/future-of-ai" },
 ];
 
-export const SOCIETY_STAT = {
+/** The headline number on the home page. Check it against the FRED series when you update the page. */
+export const SOCIETY_STAT: SocietyStat = {
   value: "61.8%",
   label: "of US adults aged 18 to 64 used generative AI in the second quarter of 2026",
-  context: "Up from 44.6% in the third quarter of 2024. At work the share rose from 33.3% to 45.2%.",
-  source: "Fed-hosted adoption tracker",
+  context: "Up from 44.6% in 2024. Outside work, use reached 54.8%.",
+  source: "St. Louis Fed (FRED), Real-Time Population Survey",
   href: "/society/ai-adoption-data",
-} as const;
+};
 
 export const TRUST_POINTS: readonly TrustPoint[] = [
   { title: "How we test", description: "A seven-point scorecard run on a fixed battery, with the model version, effort setting and test day recorded.", link: { href: "/about/how-we-test", label: "See the method" } },

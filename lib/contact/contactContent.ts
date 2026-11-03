@@ -47,16 +47,6 @@ export const PRESS_AUDIENCES: readonly PressAudience[] = [
     links: [{ href: "/about/how-we-test", label: "How we test" }, { href: "/about/source-policy", label: "Source policy" }],
   },
   {
-    id: "sponsors",
-    title: "Sponsors and partners",
-    points: [
-      "The weekly newsletter has one labelled sponsor slot.",
-      "Sponsored content is labelled Sponsored and kept apart from reviews.",
-      "Payment never changes a score or verdict, and sponsors get no pre-publication access.",
-    ],
-    links: [{ href: "/sponsored", label: "Sponsored content" }, { href: "/newsletter", label: "Newsletter" }, { href: "/about/independence", label: "Independence and disclosure" }],
-  },
-  {
     id: "makers",
     title: "Model makers and providers",
     points: [

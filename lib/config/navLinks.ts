@@ -60,6 +60,8 @@ export const NAV_LINKS: readonly NavLink[] = [
     href: "/society",
     children: [
       { label: "Ten places you meet AI", href: "/society/ten-places-you-meet-ai" },
+      { label: "AI adoption data", href: "/society/ai-adoption-data" },
+      { label: "AI in banking and finance", href: "/society/ai-in-banking-and-finance" },
       { label: "Pros and cons", href: "/society/pros-and-cons-of-ai" },
       { label: "Jobs", href: "/society/is-ai-taking-jobs" },
       { label: "Industries", href: "/society/industries-changing-most" },

@@ -59,7 +59,7 @@ export const NAV_LINKS: readonly NavLink[] = [
     label: "AI & Society",
     href: "/society",
     children: [
-      { label: "Role in life", href: "/society/role-of-ai-in-our-lives" },
+      { label: "Ten places you meet AI", href: "/society/ten-places-you-meet-ai" },
       { label: "Pros and cons", href: "/society/pros-and-cons-of-ai" },
       { label: "Jobs", href: "/society/is-ai-taking-jobs" },
       { label: "Industries", href: "/society/industries-changing-most" },

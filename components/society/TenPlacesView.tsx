@@ -294,13 +294,6 @@ export function TenPlacesView() {
           <Link href="/about/source-policy">Source policy</Link> · <Link href="/about/corrections">Report an error</Link> · <Link href="/news/changelog">Changelog</Link>
         </p>
       </PageSection>
-
-      <footer className={`${CARD_CLASS} mt-4 flex flex-wrap items-center justify-between gap-4`}>
-        <div>
-          <p className="m-0 text-sm font-semibold text-[var(--color-accent)]">Next</p>
-          <p className="m-0 font-semibold">See how your own day compares</p>
-        </div>
-      </footer>
     </div>
   );
 }

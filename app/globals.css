@@ -7,16 +7,16 @@
 :root {
   color-scheme: light;
 
-  --color-brand: #17493b;       /* deep green: logo, headings */
-  --color-sunrise: #e9a23b;     /* amber: decoration only, never text */
+  --color-brand: #17493b;      
+  --color-sunrise: #e9a23b;     
 
   --color-bg: #f3eee2;
   --color-surface: #fbf8f2;
   --color-text: #1f2a24;
   --color-heading: #17493b;
-  --color-muted: #4a5568;       /* slate */
+  --color-muted: #4a5568;       
   --color-border: #ddd3bf;
-  --color-accent: #266f58;      /* leaf, deepened so links pass contrast on cream */
+  --color-accent: #266f58;     
   --color-accent-contrast: #ffffff;
   --gradient-accent: linear-gradient(135deg, #17493b, #2e7d62);
 
@@ -38,12 +38,10 @@
     --color-border: #27413a;
     --color-accent: #5fbf9a;
     --color-accent-contrast: #0b2a20;
-    /* Stays deep so white text on gradient pills remains readable in dark mode. */
     --gradient-accent: linear-gradient(135deg, #17493b, #2e7d62);
   }
 }
 
-/* Base styles go in the base layer so Tailwind utilities (text-white, no-underline) can override them. */
 @layer base {
   *, *::before, *::after { box-sizing: border-box; }
 

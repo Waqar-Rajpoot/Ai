@@ -1,4 +1,4 @@
-import type { Intent, PageGroup, PageLevel, SitePage, SiteSection } from "./sitemapTypes";
+import type { Intent, PageLevel, SitePage, SiteSection } from "./sitemapTypes";
 
 const guide = (level: PageLevel, folder: string, slug: string, title: string, description: string): SitePage => ({
   path: `/learn/${folder}/${slug}`,
@@ -56,7 +56,7 @@ const LEARN: SiteSection = {
       note: "No experience needed.",
       pages: [
         { path: "/learn/foundations", title: "Foundations hub", description: "All beginner guides and a self-check.", kind: "hub", level: 1 },
-        guide(1, "foundations", "what-is-ai", "What is AI, really?", "What AI is, what it is not, and where you already meet it.") ,
+        guide(1, "foundations", "what-is-ai", "What is AI, really?", "What AI is, what it is not, and where you already meet it."),
         guide(1, "foundations", "how-ai-chatbots-work", "How AI chatbots work", "Why a chatbot sounds sure of itself and still gets things wrong."),
         guide(1, "foundations", "write-better-prompts", "Write better prompts", "A simple recipe for asking so the answer is useful the first time."),
         guide(1, "foundations", "free-vs-paid-ai", "Free or paid AI: what you get", "What a subscription changes, and who does not need one."),
@@ -132,15 +132,15 @@ const COMPARE: SiteSection = {
       note: "Each review shows when we tested it and who should skip it.",
       pages: [
         { path: "/compare/reviews", title: "All reviews", description: "Scores side by side, with test dates.", kind: "hub" },
-        review("claude-opus-5-5", "Claude Opus 5.5", "Anthropic's top Opus model."),
-        review("gpt-6-1-sol", "GPT-6.1 Sol", "OpenAI's mid-priced model."),
-        review("gpt-6-astra", "GPT-6 Astra", "OpenAI's top-end model."),
-        review("claude-fable-5-1", "Claude Fable 5.1", "Anthropic's most capable public model."),
+        review("claude-opus-5-5", "Claude Opus 5.5", "From Anthropic."),
+        review("gpt-6-1-sol", "GPT-6.1 Sol", "From OpenAI."),
+        review("gpt-6-astra", "GPT-6 Astra", "From OpenAI."),
+        review("claude-fable-5-1", "Claude Fable 5.1", "From Anthropic."),
         review("claude-sonnet-5-5", "Claude Sonnet 5.5", "Anthropic's everyday model."),
-        review("gemini-4-argon", "Gemini 4 Argon", "Google's newest large model."),
+        review("gemini-4-argon", "Gemini 4 Argon", "From Google."),
         review("gemini-3-8-flash", "Gemini 3.8 Flash", "Google's fast, cheap model."),
         review("claude-haiku-5-5", "Claude Haiku 5.5", "Anthropic's small, fast model."),
-        review("gpt-6-luna", "GPT-6 Luna", "OpenAI's smallest, cheapest model."),
+        review("gpt-6-luna", "GPT-6 Luna", "From OpenAI."),
         review("grok-4-7", "Grok 4.7", "xAI's model."),
         review("mimo-v2-6-pro", "MiMo V2.6 Pro", "An open-weights contender."),
         review("kimi-k3", "Kimi K3", "Moonshot's model."),
@@ -154,7 +154,7 @@ const COMPARE: SiteSection = {
       note: "Ranked lists for one job at a time.",
       pages: [
         { path: "/compare/best", title: "Best for: all lists", description: "Choose your job and see the ranked list.", kind: "hub" },
-        best("overall", "Best overall", "The models we would pick first, and why."),
+        best("overall", "Best overall", "Our overall ranking and the scores behind it."),
         best("by-job", "Best by job", "Writing, studying, coding, research: one pick per job."),
         best("coding", "Best for coding", "Which models write and fix code most reliably."),
         best("writing", "Best for writing", "Drafting, editing and tone."),
@@ -296,7 +296,7 @@ const ABOUT: SiteSection = {
     },
     {
       id: "about-support",
-      title: "Courses, shop and newsletter",
+      title: "Newsletter and sponsorship",
       pages: [
         { path: "/newsletter", title: "Newsletter", description: "One email a week, what changed and what to do.", kind: "money" },
         { path: "/sponsored", title: "Sponsored content", description: "How sponsorship works here, and how it is labeled.", kind: "money" },

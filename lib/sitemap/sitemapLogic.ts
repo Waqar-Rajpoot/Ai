@@ -1,4 +1,4 @@
-import { PUBLISHED_PATHS, RECENT_LIMIT, UPDATED_ON } from "./sitemapConstants";
+import { PUBLISHED_PATHS, RECENT_LIMIT, UPDATED_ON, XML_EXCLUDED_PATHS } from "./sitemapConstants";
 import type { FilteredSection, Intent, PageGroup, PageStatus, SitePage, SiteSection, StatusFilter } from "./sitemapTypes";
 
 const ISO_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
@@ -99,13 +99,16 @@ export function findPage(pages: readonly SitePage[], path: string): SitePage | u
   return pages.find((page) => page.path === path);
 }
 
-/** Entries for sitemap.xml: published pages only. */
+/** Entries for sitemap.xml: published pages only, minus pages that should not be indexed. */
 export function getXmlEntries(
   pages: readonly SitePage[],
   published: ReadonlySet<string> = PUBLISHED_PATHS,
   updatedOn: Readonly<Record<string, string>> = UPDATED_ON,
+  excluded: ReadonlySet<string> = XML_EXCLUDED_PATHS,
 ): { path: string; lastModifiedIso?: string }[] {
-  return pages.filter((page) => published.has(page.path)).map((page) => ({ path: page.path, lastModifiedIso: updatedOn[page.path] }));
+  return pages
+    .filter((page) => published.has(page.path) && !excluded.has(page.path))
+    .map((page) => ({ path: page.path, lastModifiedIso: updatedOn[page.path] }));
 }
 
 /** Problems that would break the page or lie to a reader. Empty means valid. */

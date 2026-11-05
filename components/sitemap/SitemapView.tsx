@@ -17,16 +17,23 @@ const RECENT = getRecentlyUpdated(flattenPages(HOME_PAGE, SECTIONS));
 const PUBLISHED_ARRAY = Array.from(PUBLISHED_PATHS);
 const LEVELS: readonly PageLevel[] = [1, 2, 3, 4];
 
+const STAT_TILES: readonly { value: number; label: string }[] = [
+  { value: COUNTS.total, label: "pages in total" },
+  { value: COUNTS.live, label: "live now" },
+  { value: COUNTS.soon, label: "coming soon" },
+  { value: COUNTS.sections, label: "sections" },
+];
+
 /** "October 25, 2026". UTC so the day never shifts. */
 function formatDate(iso: string): string {
   const [y, m, d] = iso.split("-").map(Number);
   return new Intl.DateTimeFormat("en-US", { dateStyle: "long", timeZone: "UTC" }).format(new Date(Date.UTC(y, m - 1, d)));
 }
 
-/** /sitemap: every page, what is live, what is next, and the fastest way to the one you want. */
+
 export function SitemapView() {
   return (
-    <main className="mx-auto max-w-4xl px-4 py-10">
+    <div className="mx-auto max-w-4xl px-4 py-10">
       <header className="mb-8">
         <p className="m-0 text-xs font-bold uppercase tracking-wide text-[var(--color-accent)]">Sitemap</p>
         <h1 className="mb-2 mt-1">Every page on this site, and the fastest way to the one you need</h1>
@@ -36,22 +43,12 @@ export function SitemapView() {
       </header>
 
       <section aria-label="At a glance" className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <div className={CARD_CLASS}>
-          <p className="m-0 text-2xl font-bold">{COUNTS.total}</p>
-          <p className="m-0 text-sm text-[var(--color-muted)]">pages planned</p>
-        </div>
-        <div className={CARD_CLASS}>
-          <p className="m-0 text-2xl font-bold">{COUNTS.live}</p>
-          <p className="m-0 text-sm text-[var(--color-muted)]">live now</p>
-        </div>
-        <div className={CARD_CLASS}>
-          <p className="m-0 text-2xl font-bold">{COUNTS.soon}</p>
-          <p className="m-0 text-sm text-[var(--color-muted)]">coming soon</p>
-        </div>
-        <div className={CARD_CLASS}>
-          <p className="m-0 text-2xl font-bold">{COUNTS.sections}</p>
-          <p className="m-0 text-sm text-[var(--color-muted)]">sections</p>
-        </div>
+        {STAT_TILES.map((tile) => (
+          <div key={tile.label} className={CARD_CLASS}>
+            <p className="m-0 font-serif text-2xl font-semibold tabular-nums">{tile.value}</p>
+            <p className="m-0 text-sm text-[var(--color-muted)]">{tile.label}</p>
+          </div>
+        ))}
       </section>
 
       <section aria-labelledby="finder" className="mb-10">
@@ -108,6 +105,6 @@ export function SitemapView() {
           <li>Looking for the machine-readable version? It is at <a href={XML_SITEMAP_PATH}>{XML_SITEMAP_PATH}</a> and lists live pages only.</li>
         </ul>
       </section>
-    </main>
+    </div>
   );
 }

@@ -1,13 +1,6 @@
-import type { Metadata } from "next";
-import { LearnView } from "@/components/learn/LearnView";
+import { HubView } from "@/components/hub/HubView";
+import { LEARN_HUB } from "@/lib/hub/hubs";
 
-export const metadata: Metadata = {
-  title: "Learn AI: guides from basic to expert",
-  description:
-    "Four levels of plain-English AI guides, from first steps to expert topics, with a glossary, popular guides and a shortcut to the model directory.",
-  alternates: { canonical: "/learn" },
-};
-
-export default function LearnPage() {
-  return <LearnView />;
+export default function LearnHubPage() {
+  return <HubView hub={LEARN_HUB} />;
 }

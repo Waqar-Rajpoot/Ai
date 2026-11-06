@@ -1,13 +1,6 @@
-import type { Metadata } from "next";
-import { NewsHubView } from "@/components/news/NewsHubView";
+import { HubView } from "@/components/hub/HubView";
+import { NEWS_HUB } from "@/lib/hub/hubs";
 
-export const metadata: Metadata = {
-  title: "AI news: releases, price changes and policy, dated and sourced",
-  description:
-    "Short, dated and sourced AI news: new model releases, price-change notes, safety and policy explainers and a weekly roundup. See upcoming retirements and subscribe by email.",
-  alternates: { canonical: "/news" },
-};
-
-export default function NewsPage() {
-  return <NewsHubView />;
+export default function NewsHubPage() {
+  return <HubView hub={NEWS_HUB} />;
 }

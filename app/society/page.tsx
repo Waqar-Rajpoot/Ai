@@ -1,13 +1,6 @@
-import type { Metadata } from "next";
-import { SocietyHubView } from "@/components/society/SocietyHubView";
-
-export const metadata: Metadata = {
-  title: "AI & Society: how AI is changing daily life, work and the world",
-  description:
-    "Balanced, dated and sourced articles on how AI affects daily life, jobs, health, learning, money and energy, plus interactive features and the latest numbers from named surveys.",
-  alternates: { canonical: "/society" },
-};
+import { HubView } from "@/components/hub/HubView";
+import { SOCIETY_HUB } from "@/lib/hub/hubs";
 
 export default function SocietyHubPage() {
-  return <SocietyHubView />;
+  return <HubView hub={SOCIETY_HUB} />;
 }

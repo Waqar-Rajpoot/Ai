@@ -1,13 +1,6 @@
-import type { Metadata } from "next";
-import { AboutView } from "@/components/about/AboutView";
+import { HubView } from "@/components/hub/HubView";
+import { ABOUT_HUB } from "@/lib/hub/hubs";
 
-export const metadata: Metadata = {
-  title: "About AI Tools for Everyday People: who we are and how we work",
-  description:
-    "Who runs the site, what we cover, how we keep prices and tests current, how the site is funded, and how to reach us. Dated, sourced and independent.",
-  alternates: { canonical: "/about" },
-};
-
-export default function AboutPage() {
-  return <AboutView />;
+export default function AboutHubPage() {
+  return <HubView hub={ABOUT_HUB} />;
 }
